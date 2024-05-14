@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /what
+Sitemap: link_to_sitemap
