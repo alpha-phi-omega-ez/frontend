@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-blue-font {
+  color: #0033ab;
+}
+
+.main-blue-background {
+  background-color: #0033ab;
+}
+
+.main-gold-font {
+  color: #f7b512;
+}
+
+.main-gold-background {
+  background-color: #f7b512;
+}
+
+.alt-blue-font {
+  color: #c2e7ff;
+}
+
+.alt-blue-background {
+  background-color: #c2e7ff;
+}
+
+.alt-gold-font {
+  color: #fde37b;
+}
+
+.alt-gold-background {
+  background-color: #fde37b;
+}
