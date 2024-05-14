@@ -1,62 +1,71 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Alpha Phi Omega - Epsilon Zeta Chapter",
+  description:
+    "Website for the Alpha Phi Omega, Epsilon Zeta Chapter at Rensselaer Polytechnic Institute.",
   navItems: [
     {
-      label: "Home",
-      href: "/",
+      label: "Lost & Found",
+      href: "/laf",
     },
     {
-      label: "Docs",
-      href: "/docs",
+      label: "Backtests",
+      href: "/backtests",
     },
     {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
+      label: "Borrow Tech",
+      href: "/borrowtech",
     },
     {
       label: "About",
       href: "/about",
     },
+    {
+      label: "Leadership",
+      href: "/leadership",
+    },
+    {
+      label: "Fellowship",
+      href: "/fellowship",
+    },
+    {
+      label: "Service",
+      href: "/service",
+    },
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Lost & Found",
+      href: "/laf",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Backtests",
+      href: "/backtests",
     },
     {
-      label: "Projects",
-      href: "/projects",
+      label: "Borrow Tech",
+      href: "/borrowtech",
     },
     {
-      label: "Team",
-      href: "/team",
+      label: "About",
+      href: "/about",
     },
     {
-      label: "Calendar",
-      href: "/calendar",
+      label: "Leadership",
+      href: "/leadership",
     },
     {
-      label: "Settings",
-      href: "/settings",
+      label: "Fellowship",
+      href: "/fellowship",
     },
     {
-      label: "Help & Feedback",
-      href: "/help-feedback",
+      label: "Service",
+      href: "/service",
     },
     {
-      label: "Logout",
-      href: "/logout",
+      label: "Login",
+      href: "/login",
     },
   ],
   links: {
