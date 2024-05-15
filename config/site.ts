@@ -22,6 +22,14 @@ export const siteConfig = {
       href: "/about",
     },
     {
+      label: "Joining",
+      href: "/joining",
+    },
+    {
+      label: "Awards",
+      href: "/awards",
+    },
+    {
       label: "Leadership",
       href: "/leadership",
     },
@@ -50,6 +58,14 @@ export const siteConfig = {
     {
       label: "About",
       href: "/about",
+    },
+    {
+      label: "Joining",
+      href: "/joining",
+    },
+    {
+      label: "Awards",
+      href: "/awards",
     },
     {
       label: "Leadership",
