@@ -72,16 +72,22 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-1">Donate</h3>
             <ul className="list-none">
               <li>
-                <Link href="/">Link 1</Link>
+                <Link
+                  href="https://www.paypal.com/paypalme/apoez"
+                  target="_blank"
+                >
+                  PayPal
+                </Link>
               </li>
               <li>
-                <Link href="/">Link 2</Link>
+                <p>Check</p>
               </li>
             </ul>
           </div>
           <div className="mb-2">
             <h3 className="text-lg font-semibold mb-1">Address</h3>
-            <p>110 8th St, Troy NY, 12180</p>
+            <p>110 8th St</p>
+            <p>Troy NY, 12180</p>
           </div>
           <div className="mb-2">
             <h3 className="text-lg font-semibold mb-1">Find us on Campus!</h3>
