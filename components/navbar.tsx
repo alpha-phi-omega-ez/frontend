@@ -1,8 +1,6 @@
 import {
   Button,
-  Kbd,
   Link,
-  Input,
   Navbar as NextUINavbar,
   NavbarContent,
   NavbarMenu,
