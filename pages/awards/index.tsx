@@ -2,21 +2,21 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Card, CardBody, Link } from "@nextui-org/react";
 
-export default function AwardsPage() {
-  const list = [
-    {
-      title: "Chapter Awards",
-      link: "/awards/chapter",
-      description:
-        "Learn about the history of our chapter and the service we have provided to the RPI and Capital Region communities",
-    },
-    {
-      title: "Individual Awards",
-      link: "/awards/individual",
-      description: "Meet the brothers that lead our chapter programs",
-    },
-  ];
+const pages = [
+  {
+    title: "Chapter Awards",
+    link: "/awards/chapter",
+    description:
+      "Learn about the history of our chapter and the service we have provided to the RPI and Capital Region communities",
+  },
+  {
+    title: "Individual Awards",
+    link: "/awards/individual",
+    description: "Meet the brothers that lead our chapter programs",
+  },
+];
 
+export default function AwardsPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">
@@ -31,7 +31,7 @@ export default function AwardsPage() {
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Learn More</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-5">
-            {list.map((item) => (
+            {pages.map((item) => (
               <Card shadow="sm">
                 <Link href={item.link}>
                   <CardBody>

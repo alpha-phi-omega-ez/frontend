@@ -2,27 +2,27 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Card, CardBody, Link } from "@nextui-org/react";
 
-export default function AboutPage() {
-  const list = [
-    {
-      title: "Chapter History",
-      link: "/about/history",
-      description:
-        "Learn about the history of our chapter and the service we have provided to the RPI and Capital Region communities",
-    },
-    {
-      title: "Officers",
-      link: "/about/officers",
-      description: "Meet the brothers that lead our chapter programs",
-    },
-    {
-      title: "Chapter Policies",
-      link: "/about/policies",
-      description:
-        "View the policies that ensure our chapter delivers on our promise to be a meaninful organization at RPI and to our members",
-    },
-  ];
+const pages = [
+  {
+    title: "Chapter History",
+    link: "/about/history",
+    description:
+      "Learn about the history of our chapter and the service we have provided to the RPI and Capital Region communities",
+  },
+  {
+    title: "Officers",
+    link: "/about/officers",
+    description: "Meet the brothers that lead our chapter programs",
+  },
+  {
+    title: "Chapter Policies",
+    link: "/about/policies",
+    description:
+      "View the policies that ensure our chapter delivers on our promise to be a meaninful organization at RPI and to our members",
+  },
+];
 
+export default function AboutPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">
@@ -59,7 +59,7 @@ export default function AboutPage() {
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Learn More</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-            {list.map((item) => (
+            {pages.map((item) => (
               <Card shadow="sm">
                 <Link href={item.link}>
                   <CardBody>

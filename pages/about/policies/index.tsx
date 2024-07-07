@@ -2,22 +2,22 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Card, Link } from "@nextui-org/react";
 
-export default function PoliciesPage() {
-  const national_policies = [
-    {
-      title: "Risk Management Policy",
-      link: "https://apo.org/resources/risk-management-policy/",
-    },
-    {
-      title: "Bylaws",
-      link: "https://apo.org/resources/national-bylaws/",
-    },
-    {
-      title: "Certificate of Insurance",
-      link: "https://apo.org/resources/apo-certificate-of-insurance/",
-    },
-  ];
+const national_policies = [
+  {
+    title: "Risk Management Policy",
+    link: "https://apo.org/resources/risk-management-policy/",
+  },
+  {
+    title: "Bylaws",
+    link: "https://apo.org/resources/national-bylaws/",
+  },
+  {
+    title: "Certificate of Insurance",
+    link: "https://apo.org/resources/apo-certificate-of-insurance/",
+  },
+];
 
+export default function PoliciesPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">
