@@ -16,54 +16,6 @@ interface Award {
   purpose: string;
 }
 
-const getNextTwoAwards = (awards: Award[]) => {
-  return awards.map((item, index) => {
-    if (index + 1 < awards.length) {
-      return (
-        <div>
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <h3>{item.name}</h3>
-              <p>{item.years}</p>
-              <p>From: {item.from}</p>
-              <p>Purpose: {item.purpose}</p>
-            </TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <h3>{awards[index + 1].name}</h3>
-              <p>{awards[index + 1].years}</p>
-              <p>From: {awards[index + 1].from}</p>
-              <p>Purpose: {awards[index + 1].purpose}</p>
-            </TimelineContent>
-          </TimelineItem>
-        </div>
-      );
-    }
-    return (
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <h3>{item.name}</h3>
-          <p>{item.years}</p>
-          <p>From: {item.from}</p>
-          <p>Purpose: {item.purpose}</p>
-        </TimelineContent>
-      </TimelineItem>
-    );
-  });
-};
 
 export default function AwardsPage() {
   const awards: Award[] = [
