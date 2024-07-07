@@ -61,10 +61,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Button
               as={Link}
-              className={clsx(
-                linkStyles({ color: "foreground" }),
-                "data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color"
-              )}
+              className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color"
               href="/login"
               variant="flat"
             >
