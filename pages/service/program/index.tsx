@@ -3,6 +3,7 @@ import {
   Chart,
   Door,
   Hourglass,
+  Money,
   PersonArmsUp,
   PersonHandRaise,
 } from "@/components/icons";
@@ -23,7 +24,7 @@ const images = [
 export default function ServicePage() {
   return (
     <DefaultLayout>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Service Program</h1>
           <p className="mt-5">
@@ -88,7 +89,7 @@ export default function ServicePage() {
             about our service program, service hours, and events.
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-4 mt-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           {images.map((item) => (
             <Image
               shadow="sm"
@@ -102,73 +103,191 @@ export default function ServicePage() {
       </section>
       <section className="text-center mb-4">
         <h2 className="text-2xl font-bold">Spring 2024 Service Stats</h2>
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
           <div className="mx-auto">
-            <PersonArmsUp />
+            <PersonArmsUp
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">47.7</h3>
             <p>Average Voting Member Hours</p>
           </div>
           <div className="mx-auto">
-            <Hourglass />
+            <Hourglass
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">1717+</h3>
             <p>Service Hours</p>
           </div>
           <div className="mx-auto">
-            <Calendar />
+            <Calendar
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">65</h3>
             <p>Unique Events</p>
           </div>
           <div className="mx-auto">
-            <Door />
+            <Door
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">22+</h3>
             <p>Volunteer Organizations</p>
           </div>
         </div>
         <h2 className="text-2xl font-bold mt-6">Fall 2023 Service Stats</h2>
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
           <div className="mx-auto">
-            <PersonArmsUp />
+            <PersonArmsUp
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">64.8</h3>
             <p>Average Voting Member Hours</p>
           </div>
           <div className="mx-auto">
-            <Hourglass />
+            <Hourglass
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">2182+</h3>
             <p>Service Hours</p>
           </div>
           <div className="mx-auto">
-            <Calendar />
+            <Calendar
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">67</h3>
             <p>Unique Events</p>
           </div>
           <div className="mx-auto">
-            <Door />
+            <Door
+              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">17+</h3>
             <p>Volunteer Organizations</p>
           </div>
         </div>
         <h2 className="text-2xl font-bold mt-6">Community Events</h2>
         <h3 className="text-xl font-bold mt-6">Sept 10, 2023 Service Day</h3>
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
           <div className="mx-auto">
-            <PersonArmsUp />
+            <PersonArmsUp
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">93</h3>
             <p>Atendees</p>
           </div>
           <div className="mx-auto">
-            <Hourglass />
+            <Hourglass
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">349+</h3>
             <p>Service Hours</p>
           </div>
           <div className="mx-auto">
-            <Door />
+            <Door
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">4</h3>
             <p>Organizations</p>
           </div>
           <div className="mx-auto">
-            <Chart />
+            <Chart
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
             <h3 className="text-xl font-bold">40%</h3>
             <p>Increase in Attendance from last year</p>
+          </div>
+        </div>
+        <h3 className="text-xl font-bold mt-6">
+          March 31, 2024 Youth Service Day
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
+          <div className="mx-auto">
+            <PersonArmsUp
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">100+</h3>
+            <p>Atendees</p>
+          </div>
+          <div className="mx-auto">
+            <Hourglass
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">45+</h3>
+            <p>Service Hours</p>
+          </div>
+          <div className="mx-auto">
+            <PersonHandRaise
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">13+</h3>
+            <p>Volunteers</p>
+          </div>
+        </div>
+        <h3 className="text-xl font-bold mt-6">Sept 10, 2023 Service Day</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
+          <div className="mx-auto">
+            <Money
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">$665</h3>
+            <p>Raised</p>
+          </div>
+          <div className="mx-auto">
+            <Hourglass
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">123.75</h3>
+            <p>Service Hours</p>
+          </div>
+          <div className="mx-auto">
+            <Door
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">4</h3>
+            <p>Organizations</p>
+          </div>
+        </div>
+        <h2 className="text-2xl font-bold mt-6">Other Large Events</h2>
+        <h3 className="text-xl font-bold mt-6">
+          Underground Railroad Education Center
+        </h3>
+        <p className="mt-3">
+          Created educational content for their social media to highlight
+          historical artifacts at the education center.
+        </p>
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          <div className="mx-auto">
+            <PersonHandRaise
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">10</h3>
+            <p>Volunteers</p>
+          </div>
+          <div className="mx-auto">
+            <Hourglass
+              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
+              size={70}
+            />
+            <h3 className="text-xl font-bold">50</h3>
+            <p>Service Hours</p>
           </div>
         </div>
       </section>
