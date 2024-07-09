@@ -8,7 +8,7 @@ import {
   TimelineContent,
   TimelineDot,
 } from "@mui/lab";
-import AwardImages from "./gallery";
+import AwardImages from "./carousel";
 import { awards } from "./awards";
 
 export default function AwardsPage() {
@@ -17,7 +17,7 @@ export default function AwardsPage() {
       <section className="justify-centerpb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Chapter Awards</h1>
-          <p className="mt-5">
+          <p className="mt-5 mb-3">
             Throughout 75+ years of existence, the Epsilon Zeta chapter has been
             recognized by a number of local organizations and APO nationals for
             achievement to our community, campus, and country. Our most notable
@@ -27,12 +27,13 @@ export default function AwardsPage() {
         </div>
         <AwardImages />
         <div className="mt-10">
+          <h2 className="text-center text-4xl font-bold mb-4">Highlights</h2>
           {/* I have no idea how to make this part */}
           <Timeline position="alternate-reverse">
             {awards.map(
               (item, index) =>
                 index % 2 === 0 && (
-                  <div>
+                  <div key={index}>
                     <TimelineItem>
                       <TimelineSeparator>
                         <TimelineDot />

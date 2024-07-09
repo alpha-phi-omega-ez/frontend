@@ -17,7 +17,7 @@ const history = [
   },
   {
     title: "Modern-Day EZ",
-    img: "/images/serviceday2023.jpg",
+    img: "/images/service_day/RPI_Service_Day(3).jpg",
     description:
       "In the 1960's, the chapter's office moved from the Clubhouse to the newly-constructed Student Union. A women's auxiliary group was established, allowing on-campus women to participate in the service program. In 1976, women were officially allowed to join Alpha Phi Omega and granted membership. Notable projects included building a ramp outside of the home of a 15-year-old cerebral palsy victim who could not walk, creating punch cards for the Folsom Library's books, raising over $8,000 at a walk for the mentally handicapped, and fixing up the Approach. Today, Epsilon Zeta continues to provide services to the campus, community and country. A scholarship program grants a $650 award to four incoming freshmen who demonstrate outstanding service and leadership skills. For our service, we have earned notable awards and recognition, including the Nowotny Service Award (x6), the Josiah Frank Historian's Award (x2), and the M. R. Disborough Service to Scouting Award.",
   },
@@ -38,8 +38,8 @@ export default function HistoryPage() {
           </p>
         </div>
       </section>
-      {history.map((item) => (
-        <Card className="pb-4 my-4">
+      {history.map((item, index) => (
+        <Card key={index} className="pb-4 my-4">
           <CardBody className="overflow-visible">
             <div className="flex justify-center">
               <Image

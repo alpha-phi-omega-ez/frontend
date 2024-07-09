@@ -61,8 +61,8 @@ export default function PoliciesPage() {
           <h1 className={title()}>National Policies</h1>
         </div>
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-4">
-          {national_policies.map((policy) => (
-            <Card key={policy.title} className="p-4">
+          {national_policies.map((policy, index) => (
+            <Card key={index} className="p-4">
               <Link href={policy.link} target="_blank">
                 {policy.title}
               </Link>

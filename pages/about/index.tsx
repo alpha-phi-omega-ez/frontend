@@ -59,8 +59,8 @@ export default function AboutPage() {
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Learn More</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-            {pages.map((item) => (
-              <Card shadow="sm">
+            {pages.map((item, index) => (
+              <Card key={index} shadow="sm">
                 <Link href={item.link}>
                   <CardBody>
                     <h3 className="text-lg font-semibold">{item.title}</h3>

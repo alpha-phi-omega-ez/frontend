@@ -31,8 +31,8 @@ export default function AwardsPage() {
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Learn More</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-5">
-            {pages.map((item) => (
-              <Card shadow="sm">
+            {pages.map((item, index) => (
+              <Card key={index} shadow="sm">
                 <Link href={item.link}>
                   <CardBody>
                     <h3 className="text-lg font-semibold">{item.title}</h3>

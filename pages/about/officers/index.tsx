@@ -101,8 +101,8 @@ export default function OfficersPage() {
         </div>
       </section>
       <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-5">
-        {officers.map((item) => (
-          <Card shadow="sm">
+        {officers.map((item, index) => (
+          <Card key={index} shadow="sm">
             <Image
               shadow="sm"
               width="100%"
