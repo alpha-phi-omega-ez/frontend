@@ -37,8 +37,8 @@ export default function AwardsPage() {
                 </tr>
               </thead>
               <tbody>
-                {DSKS.map((recipient) => (
-                  <tr className="">
+                {DSKS.map((recipient, index) => (
+                  <tr key={index}>
                     <td className="pr-10 pt-2">{recipient.name}</td>
                     <td>{recipient.year}</td>
                   </tr>
@@ -66,8 +66,8 @@ export default function AwardsPage() {
                 </tr>
               </thead>
               <tbody>
-                {OLAS.map((recipient) => (
-                  <tr className="">
+                {OLAS.map((recipient, index) => (
+                  <tr key={index}>
                     <td className="pr-10 pt-2">{recipient.name}</td>
                     <td>{recipient.year}</td>
                   </tr>

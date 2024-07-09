@@ -90,8 +90,9 @@ export default function ServicePage() {
           </p>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          {images.map((item) => (
+          {images.map((item, index) => (
             <Image
+              key={index}
               shadow="sm"
               width="100%"
               alt={item.alt}

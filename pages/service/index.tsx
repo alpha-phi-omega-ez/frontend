@@ -2,20 +2,20 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Card, CardBody, Link } from "@nextui-org/react";
 
-export default function ServicePage() {
-  const list = [
-    {
-      title: "Community Events",
-      link: "/service/events",
-      description: "Learn about our public events",
-    },
-    {
-      title: "Service Program",
-      link: "/service/program",
-      description: "Learn about of nationally recognized service program",
-    },
-  ];
+const pages = [
+  {
+    title: "Community Events",
+    link: "/service/events",
+    description: "Learn about our public events",
+  },
+  {
+    title: "Service Program",
+    link: "/service/program",
+    description: "Learn about of nationally recognized service program",
+  },
+];
 
+export default function ServicePage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">
@@ -35,8 +35,8 @@ export default function ServicePage() {
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Learn More</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-            {list.map((item) => (
-              <Card shadow="sm">
+            {pages.map((item, index) => (
+              <Card key={index} shadow="sm">
                 <Link href={item.link}>
                   <CardBody>
                     <h3 className="text-lg font-semibold">{item.title}</h3>
