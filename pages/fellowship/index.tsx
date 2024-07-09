@@ -21,7 +21,7 @@ const images = [
   },
 ];
 
-export default function ServicePage() {
+export default function FellowshipPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">

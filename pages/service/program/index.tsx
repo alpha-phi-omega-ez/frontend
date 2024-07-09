@@ -21,7 +21,7 @@ const images = [
   { img: "/images/Northern_Rivers.jpg", alt: "Painting at Northern Rivers" },
 ];
 
-export default function ServicePage() {
+export default function ServiceProgramPage() {
   return (
     <DefaultLayout>
       <section className="justify-center pb-4 md:pb-6">

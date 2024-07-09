@@ -11,7 +11,7 @@ import {
 import AwardImages from "./carousel";
 import { awards } from "./awards";
 
-export default function AwardsPage() {
+export default function ChapterAwardsPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">

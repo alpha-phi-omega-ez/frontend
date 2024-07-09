@@ -3,7 +3,7 @@ import DefaultLayout from "@/layouts/default";
 import DefaultCarousel from "@/components/carousel";
 import { Events } from "./events";
 
-export default function ServicePage() {
+export default function ServiceEventsPage() {
   return (
     <DefaultLayout>
       <section className="justify-centerpb-4 md:pb-6">

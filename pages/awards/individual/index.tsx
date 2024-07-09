@@ -2,7 +2,7 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { DSKS, OLAS } from "./recipients";
 
-export default function AwardsPage() {
+export default function IndividualAwardsPage() {
   return (
     <DefaultLayout>
       <section className="justify-center pb-4 md:pb-6">
