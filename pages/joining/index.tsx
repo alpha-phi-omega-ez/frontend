@@ -2,7 +2,7 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Image } from "@nextui-org/react";
 
-export default function JoiningePage() {
+export default function JoiningPage() {
   return (
     <DefaultLayout>
       <section className="justify-center pb-4 md:pb-6">
@@ -15,7 +15,7 @@ export default function JoiningePage() {
               src="/images/2024_Brothers_Funny.jpg"
               alt="Funny picture with brothers and new members"
             />
-            <h2 className="text-2xl mt-4 mb-4">New Member Process</h2>
+            <h2 className="text-2xl mt-4 mb-4 font-bold">New Member Process</h2>
             <p>
               As an individual who has expressed interest in becoming a brother,
               you must go through a new member process. This process is about 8
@@ -40,7 +40,7 @@ export default function JoiningePage() {
               src="/images/semiformal.jpg"
               alt="Funny picture with brothers and new members"
             />
-            <h2 className="text-2xl mt-4 mb-4">
+            <h2 className="text-2xl mt-4 mb-4 font-bold">
               What Happens During the 8-10 Weeks?
             </h2>
             <p>
