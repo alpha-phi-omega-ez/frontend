@@ -9,7 +9,7 @@ export default function JoiningPage() {
         <div className="text-center">
           <h1 className={title()}>Joining APO</h1>
         </div>
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
+        <div className="grid md:grid-cols-2 gap-6 mt-8 mb-8">
           <div>
             <Image
               src="/images/2024_Brothers_Funny.jpg"
