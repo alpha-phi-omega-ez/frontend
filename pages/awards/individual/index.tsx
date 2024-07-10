@@ -15,36 +15,27 @@ export default function IndividualAwardsPage() {
             tell our members just how much we appreciate their hard work.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4 mt-8">
+        <div className="grid grid-cols-2 gap-8 mt-8">
           <div>
             <h2 className="text-lg font-semibold mb-3">
               Chapter Distinguished Service Key
             </h2>
             <p className="text-justify">
-              This honour is given to brothers who has distinguished themselves
-              through outstanding service to their chapter. These brothers have
-              made significant contributions to the service program and
-              exemplify leadership, friendship, and service. Chapter DSKs are
-              often presented at a chapter banquet or semiformal. Below is a
-              list of past recipients of the DSK from our chapter starting with
-              the most recent:
+              This is the highest honour out chapter gives to brothers who have
+              distinguished themselves through outstanding service to the
+              chapter. These brothers have made significant contributions to the
+              service program and exemplify leadership, friendship, and service.
+              Chapter DSKs are often presented at a chapter banquet or
+              semiformal. Below is a list of past recipients of the DSK from our
+              chapter starting with the most recent:
             </p>
-            <table className="table-auto my-5">
-              <thead>
-                <tr className="text-left">
-                  <th>Name</th>
-                  <th>Year Awarded</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DSKS.map((recipient, index) => (
-                  <tr key={index}>
-                    <td className="pr-10 pt-2">{recipient.name}</td>
-                    <td>{recipient.year}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="mt-4">
+              {DSKS.map((recipient, index) => (
+                <p className="mt-1" key={index}>
+                  {recipient}
+                </p>
+              ))}
+            </div>
           </div>
           <div>
             <h2 className="text-lg font-semibold mb-3">
@@ -58,22 +49,13 @@ export default function IndividualAwardsPage() {
               at large. Below is a list of past recipients of the Outstanding
               Leadership Award from our chapter starting with the most recent:
             </p>
-            <table className="table-auto my-5">
-              <thead>
-                <tr className="text-left">
-                  <th>Name</th>
-                  <th>Year Awarded</th>
-                </tr>
-              </thead>
-              <tbody>
-                {OLAS.map((recipient, index) => (
-                  <tr key={index}>
-                    <td className="pr-10 pt-2">{recipient.name}</td>
-                    <td>{recipient.year}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="mt-4">
+              {OLAS.map((recipient, index) => (
+                <p className="mt-1" key={index}>
+                  {recipient}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </section>
