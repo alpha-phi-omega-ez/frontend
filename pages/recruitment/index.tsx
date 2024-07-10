@@ -2,7 +2,6 @@ import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Image } from "@nextui-org/react";
 import { Events, Semester } from "./recruitment";
-import { Bell } from "@/components/icons";
 
 export default function RecruitmentPage() {
   return (
