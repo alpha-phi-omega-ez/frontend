@@ -8,7 +8,7 @@ const imageBase = "/images/";
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Alpha Phi Omega</h1>
           <h2 className="mt-2 text-4xl font-bold">Epsilon Zeta</h2>
@@ -139,10 +139,47 @@ export default function IndexPage() {
               </Link>
             </div>
           </div>
-          <div className="mt-10">
+          <div className="mt-16">
             <h3 className="text-4xl font-bold py-1 px-4 main-gold-background">
               Be a Leader, Be a Friend, Be of Service
             </h3>
+            <div className="grid sm:grid-cols-3 gap-6 my-8 text-left">
+              <div className="col-span-2">
+                <Image
+                  src="/images/2023_Composite.jpg"
+                  alt="Chapter Composite"
+                />
+              </div>
+              <div>
+                <div>
+                  <h3 className="text-2xl">Recruitment</h3>
+                  <p className="mt-4">
+                    With exception to the summer, we recruit every semester! As
+                    a Professional Fraternity on campus, first-semester freshman
+                    and individuals from social fraternities and sororities on
+                    campus are all eligible to be a part of our New Member
+                    Program. If you are interested in joining us, or are unsure,
+                    feel free to come to some of our events (non-committal).
+                  </p>
+                  <Link href="/recruitment" className="mt-2">
+                    Our Events!
+                  </Link>
+                </div>
+                <div className="mt-6">
+                  <h3 className="text-2xl">Donate</h3>
+                  <p className="mt-4">
+                    We are a 501(c)(3) nonprofit. To continue having larger
+                    service projects like our semesterly Overnighter events, we
+                    thrive off of donations from the alumni and the greater
+                    community. Click below to donate and see more information as
+                    to where your money goes!
+                  </p>
+                  <Link href="/donate" className="mt-2">
+                    Donate Here
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
