@@ -20,7 +20,7 @@ const national_policies = [
 export default function PoliciesPage() {
   return (
     <DefaultLayout>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Chapter Bylaws & Constitution</h1>
         </div>
@@ -43,7 +43,7 @@ export default function PoliciesPage() {
           />
         </Card>
       </div>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Chapter Risk Management</h1>
         </div>
@@ -56,7 +56,7 @@ export default function PoliciesPage() {
           />
         </Card>
       </section>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>National Policies</h1>
         </div>

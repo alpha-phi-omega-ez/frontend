@@ -92,7 +92,7 @@ const officers = [
 export default function OfficersPage() {
   return (
     <DefaultLayout>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Meet our Officers</h1>
           <p className="w-85/100 mx-auto mt-4">

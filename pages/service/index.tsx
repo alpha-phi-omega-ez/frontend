@@ -18,7 +18,7 @@ const pages = [
 export default function ServicePage() {
   return (
     <DefaultLayout>
-      <section className="justify-centerpb-4 md:pb-6">
+      <section className="justify-center pb-4 md:pb-6">
         <div className="text-center">
           <h1 className={title()}>Service</h1>
           <p className="mt-5">
