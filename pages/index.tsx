@@ -140,7 +140,7 @@ export default function IndexPage() {
             </div>
           </div>
           <div className="mt-16">
-            <h3 className="text-4xl font-bold py-1 px-4 main-gold-background">
+            <h3 className="text-4xl font-bold py-5 px-4 main-gold-background">
               Be a Leader, Be a Friend, Be of Service
             </h3>
             <div className="grid sm:grid-cols-3 gap-6 my-8 text-left">
