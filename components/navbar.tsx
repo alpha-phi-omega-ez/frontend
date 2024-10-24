@@ -9,23 +9,30 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/react";
-
 import { link as linkStyles } from "@nextui-org/theme";
-
 import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
-
 import { ThemeSwitch } from "@/components/theme-switch";
-
 import { Logo } from "@/components/icons";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
-      className="main-blue-background"
+      className="main-blue-background main-white-font"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
@@ -40,7 +47,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium main-white-font"
                 )}
                 color="foreground"
                 href={item.href}
@@ -61,7 +68,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Button
               as={Link}
-              className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color"
+              className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
               href="/login"
               variant="flat"
             >
