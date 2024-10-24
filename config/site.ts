@@ -14,8 +14,8 @@ export const siteConfig = {
       href: "/backtests",
     },
     {
-      label: "Borrow Tech",
-      href: "/borrowtech",
+      label: "Loaner Tech",
+      href: "/loanertech",
     },
     {
       label: "About",
