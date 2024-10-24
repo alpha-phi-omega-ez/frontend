@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function LoanerTechPage() {
   const [loanerTech, setLoanerTech] = useState<
-    { description: string; id: number; in_office: boolean }[]
+    false | { description: string; id: number; in_office: boolean }[]
   >([]);
 
   const fetchLoanerTech = async () => {
@@ -25,21 +25,37 @@ export default function LoanerTechPage() {
     fetchLoanerTech();
   }, []);
 
+  const loading = (
+    <div className="flex justify-center">
+      <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+    </div>
+  );
+
+  const error = (
+    <div className="text-red-500 text-center">
+      There was an error fetching the loaner tech data.
+    </div>
+  );
+
   return (
     <DefaultLayout>
       <section className="justify-center pb-4 md:pb-6 text-center">
-        <h1 className={title()}>Loaner Tech</h1>
-        <br />
-        {!loanerTech.length && "Loading..."}
-        {Array.isArray(loanerTech) &&
-          loanerTech.map((item, index) => (
-            <LoanerTech
-              key={index}
-              desc={item.description}
-              id={item.id}
-              inoffice={item.in_office}
-            />
-          ))}
+        <div className="mb-10">
+          <h1 className={title()}>Loaner Tech</h1>
+        </div>
+        <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+          {!loanerTech && loading}
+          {Array.isArray(loanerTech) &&
+            loanerTech.map((item, index) => (
+              <LoanerTech
+                key={index}
+                desc={item.description}
+                id={item.id}
+                inoffice={item.in_office}
+              />
+            ))}
+          {loanerTech && !loanerTech.length && error}
+        </div>
       </section>
     </DefaultLayout>
   );
