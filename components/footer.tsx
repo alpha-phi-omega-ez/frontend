@@ -16,7 +16,7 @@ import {
 // Define the Footer component
 export const Footer = () => {
   return (
-    <footer className="main-blue-background py-8 text-center">
+    <footer className="main-blue-background py-8 text-center main-white-font">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold mb-2">
           Alpha Phi Omega Epsilon Zeta Chapter
