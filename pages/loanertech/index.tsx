@@ -23,6 +23,13 @@ export default function LoanerTechPage() {
 
   useEffect(() => {
     fetchLoanerTech();
+
+    const intervalId = setInterval(() => {
+      fetchLoanerTech();
+    }, 5000); // Poll every 5 seconds
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   const loading = (
