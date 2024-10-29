@@ -1,5 +1,19 @@
 export const awards = [
   {
+    name: "Joseph J. Scanlon National Certificate of Merit",
+    years: "2024",
+    from: "APO National Office",
+    purpose:
+      "Recognition for significant membership growth.",
+  },
+  {
+    name: "Diamond Level Chapter of Excellence",
+    years: "2024",
+    from: "APO National Office",
+    purpose:
+      "Recognition for a chapter with string LFS programs.",
+  },
+  {
     name: "Dean Arno Nowotny",
     years: "2023",
     from: "APO National Office",
@@ -12,6 +26,13 @@ export const awards = [
     from: "APO National Office",
     purpose:
       "Recognize EZ For excellence in compiling and maintaining chapter history, 2022-2023.",
+  },
+  {
+    name: "Dean Arno Nowotny",
+    years: "2010",
+    from: "APO National Office",
+    purpose:
+      "Conducting the most significant service program in the fraternity during 2022-2023.",
   },
   {
     name: "Rensselaer Union Volunteer Recognition Award",
