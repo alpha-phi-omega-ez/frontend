@@ -9,7 +9,7 @@ import {
   RedditIcon,
   TikTokIcon,
   TwitchIcon,
-  TwitterIcon,
+  LinkedinIcon,
   YoutubeIcon,
 } from "./icons";
 
@@ -35,9 +35,6 @@ export const Footer = () => {
               <Link href="https://discord.gg/gdj472abUP" target="_blank">
                 <DiscordIcon />
               </Link>
-              <Link href="https://twitter.com/apoepsilonzeta" target="_blank">
-                <TwitterIcon />
-              </Link>
               <Link href="https://www.twitch.tv/apoez_rpi" target="_blank">
                 <TwitchIcon />
               </Link>
@@ -61,6 +58,12 @@ export const Footer = () => {
               </Link>
               <Link href="https://www.reddit.com/user/apo_ez/" target="_blank">
                 <RedditIcon />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/apoez/"
+                target="_blank"
+              >
+                <LinkedinIcon />
               </Link>
             </div>
           </div>
