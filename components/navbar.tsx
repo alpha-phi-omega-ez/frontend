@@ -15,12 +15,13 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/icons";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
-
+  const router = useRouter();
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -30,6 +31,11 @@ export const Navbar = () => {
   if (!isMounted) {
     return null;
   }
+
+  const handleLogin = () => {
+    const currentPath = encodeURIComponent(router.asPath);
+    router.push(`/login?redirect=${currentPath}`);
+  };
 
   return (
     <NextUINavbar
@@ -72,7 +78,8 @@ export const Navbar = () => {
             <Button
               as={Link}
               className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
-              href={auth.isAuthenticated ? "/logout" : "/login"}
+              href={auth.isAuthenticated ? "/logout" : undefined}
+              onClick={!auth.isAuthenticated ? handleLogin : undefined}
               variant="flat"
             >
               {auth.isAuthenticated ? "Logout" : "Login"}
