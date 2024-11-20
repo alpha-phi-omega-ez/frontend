@@ -16,9 +16,12 @@ import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/icons";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
+
+  const { auth } = useAuth();
 
   useEffect(() => {
     setIsMounted(true);
@@ -69,10 +72,10 @@ export const Navbar = () => {
             <Button
               as={Link}
               className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
-              href="/login"
+              href={auth.isAuthenticated ? "/logout" : "/login"}
               variant="flat"
             >
-              Login
+              {auth.isAuthenticated ? "Logout" : "Login"}
             </Button>
           </NavbarItem>
         </NavbarItem>
