@@ -144,8 +144,6 @@ export default function LoanerTechPage() {
   };
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form Data:", data);
-
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/loanertech/checkout`,
@@ -184,9 +182,12 @@ export default function LoanerTechPage() {
     const cleaned = value.replace(/\D/g, ""); // Remove all non-numeric characters
     const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
     if (match) {
-      return [match[1], match[2], match[3]].filter(Boolean).join("-");
+      const formatted = [match[1], match[2], match[3]]
+        .filter(Boolean)
+        .join("-");
+      return formatted.length > 12 ? formatted.slice(0, 12) : formatted;
     }
-    return value;
+    return value.length > 12 ? value.slice(0, 12) : value;
   };
 
   // Update the field with the formatted value
@@ -195,12 +196,14 @@ export default function LoanerTechPage() {
     setValue("phone", formatted, { shouldValidate: formatted.length === 12 }); // Update and trigger validation
   };
 
-  const now = new Date();
+  const estNow = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
   const loanerTechAvailable =
-    now.getDay() >= 1 &&
-    now.getDay() <= 5 &&
-    now.getHours() >= 9 &&
-    now.getHours() <= 12 + 4;
+    estNow.getDay() >= 1 &&
+    estNow.getDay() <= 5 &&
+    estNow.getHours() >= 9 &&
+    estNow.getHours() <= 12 + 4;
 
   return (
     <DefaultLayout>
