@@ -1,12 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import DefaultLayout from "@/layouts/default";
+import Error from "../../_error";
+import { useAuth } from "@/context/AuthContext";
 
-const CallBackPage = () => {
+export default function CallBackPage() {
   const router = useRouter();
+  const { login } = useAuth();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+    const redirectPath = urlParams.get("redirect") || "/";
 
     if (code) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/token`, {
@@ -14,23 +20,27 @@ const CallBackPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ code }),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          const token = data.access_token;
-          if (token) {
-            localStorage.setItem("access_token", token); // Store the token or handle it as needed
-            router.push("/");
-            return null;
-          }
+        .then((_) => {
+          login();
+          router.push(redirectPath);
+          return null;
         })
-        .catch((error) => console.error("Error fetching token:", error));
+        .catch((error) => {
+          console.error("Error fetching token:", error);
+          setError(true);
+        });
+    } else {
+      setError(true);
     }
-    router.push("/login/error");
   }, [router]);
 
-  return null;
-};
-
-export default CallBackPage;
+  return (
+    <DefaultLayout>
+      {!error && <p>Logging in...</p>}
+      {error && <Error title="Error logging in" />}
+    </DefaultLayout>
+  );
+}
