@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import DefaultLayout from "@/layouts/default";
-import Error from "../_error";
+import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
 
 export default function LogoutPage() {
