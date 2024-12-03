@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
 import { useDisclosure } from "@nextui-org/react";
-import { fetchLoanerTech, isCheckedOut } from "@/utils/loanertech/utils";
+import {
+  fetchLoanerTech,
+  checkLoanerTechAvailablility,
+} from "@/utils/loanertech/utils";
 import LoanerTech from "@/components/loanertech/loanertech";
 import CheckInCheckOutModalContent from "@/components/loanertech/modals";
 import LoanerTechSelector from "@/components/loanertech/selector";
@@ -24,26 +27,20 @@ export default function LoanerTechPage() {
   const { logout } = useAuth();
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [loanerTechAvailable, setLoanerTechAvailable] = useState(true);
 
   useEffect(() => {
     fetchLoanerTech(setLoanerTech, logout);
+    checkLoanerTechAvailablility(setLoanerTechAvailable);
 
     const intervalId = setInterval(() => {
       fetchLoanerTech(setLoanerTech, logout);
+      checkLoanerTechAvailablility(setLoanerTechAvailable);
     }, 5000); // Fetch every 5 seconds
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
-
-  const estNow = new Date(
-    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
-  );
-  const loanerTechAvailable =
-    estNow.getDay() >= 1 &&
-    estNow.getDay() <= 5 &&
-    estNow.getHours() >= 9 &&
-    estNow.getHours() <= 12 + 4;
 
   return (
     <DefaultLayout>

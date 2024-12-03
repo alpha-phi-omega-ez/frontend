@@ -57,3 +57,17 @@ export function isCheckedOut(
       loanerTech.find((item) => item.id === id)?.in_office === false
   );
 }
+
+export function checkLoanerTechAvailablility(
+  setLoanerTechAvailable: Dispatch<SetStateAction<boolean>>
+): void {
+  const estNow = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
+  setLoanerTechAvailable(
+    estNow.getDay() >= 1 &&
+      estNow.getDay() <= 5 &&
+      estNow.getHours() >= 9 &&
+      estNow.getHours() < 12 + 4
+  );
+}
