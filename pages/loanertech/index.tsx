@@ -1,5 +1,4 @@
 import { title } from "@/components/primitives";
-import DefaultLayout from "@/layouts/default";
 import { useEffect, useState } from "react";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
@@ -43,7 +42,7 @@ export default function LoanerTechPage() {
   }, []);
 
   return (
-    <DefaultLayout>
+    <>
       <section className="justify-center pb-4 md:pb-6 text-center">
         <div className="mb-10">
           <h1 className={title()}>Loaner Tech</h1>
@@ -72,6 +71,6 @@ export default function LoanerTechPage() {
       {loanerTech && !loanerTech.length && (
         <Error title="Error Loading Loanertech Data" />
       )}
-    </DefaultLayout>
+    </>
   );
 }

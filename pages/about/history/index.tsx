@@ -1,6 +1,5 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { title } from "@/components/primitives";
-import DefaultLayout from "@/layouts/default";
 
 const history = [
   {
@@ -25,19 +24,18 @@ const history = [
 
 export default function HistoryPage() {
   return (
-    <DefaultLayout>
-      <section className="justify-center pb-4 md:pb-6">
-        <div className="text-center">
-          <h1 className={title()}>About Us</h1>
-          <p className="w-85/100 mx-auto mt-4">
-            The main mission of Alpha Phi Omega is to create inclusive
-            communities for a more peaceful world by developing leaders, uniting
-            members through friendship and rendering service to all. Read about
-            EZ's history as we continue to strive to serve the campus, community
-            and beyond.
-          </p>
-        </div>
-      </section>
+    <section className="justify-center pb-4 md:pb-6">
+      <div className="text-center">
+        <h1 className={title()}>About Us</h1>
+        <p className="w-85/100 mx-auto mt-4">
+          The main mission of Alpha Phi Omega is to create inclusive communities
+          for a more peaceful world by developing leaders, uniting members
+          through friendship and rendering service to all. Read about EZ's
+          history as we continue to strive to serve the campus, community and
+          beyond.
+        </p>
+      </div>
+
       {history.map((item, index) => (
         <Card key={index} className="pb-4 my-4">
           <CardBody className="overflow-visible">
@@ -53,6 +51,6 @@ export default function HistoryPage() {
           </CardBody>
         </Card>
       ))}
-    </DefaultLayout>
+    </section>
   );
 }

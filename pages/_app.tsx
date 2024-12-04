@@ -5,7 +5,8 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { fontSans, fontMono } from "@/config/fonts";
 import { useRouter } from "next/router";
 import "@/styles/globals.css";
-import { AuthProvider } from "../context/AuthContext"; // Adjust the path as necessary
+import { AuthProvider } from "../context/AuthContext";
+import DefaultLayout from "@/layouts/default";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -14,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider>
         <AuthProvider>
-          <Component {...pageProps} />
+          <DefaultLayout>
+            <Component {...pageProps} />
+          </DefaultLayout>
         </AuthProvider>
       </NextThemesProvider>
     </NextUIProvider>
