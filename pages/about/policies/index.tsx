@@ -1,5 +1,4 @@
 import { title } from "@/components/primitives";
-import DefaultLayout from "@/layouts/default";
 import { Card, Link } from "@nextui-org/react";
 
 const national_policies = [
@@ -19,13 +18,11 @@ const national_policies = [
 
 export default function PoliciesPage() {
   return (
-    <DefaultLayout>
-      <section className="justify-center pb-4 md:pb-6">
-        <div className="text-center">
-          <h1 className={title()}>Chapter Bylaws & Constitution</h1>
-        </div>
-      </section>
-      <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 mb-5">
+    <section className="justify-center pb-4 md:pb-6">
+      <div className="text-center">
+        <h1 className={title()}>Chapter Bylaws & Constitution</h1>
+      </div>
+      <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 my-5">
         <Card>
           <iframe
             src="/pdfs/Chapter_Bylaws.pdf"
@@ -70,6 +67,6 @@ export default function PoliciesPage() {
           ))}
         </div>
       </section>
-    </DefaultLayout>
+    </section>
   );
 }

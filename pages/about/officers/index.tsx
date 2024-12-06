@@ -1,6 +1,5 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { title } from "@/components/primitives";
-import DefaultLayout from "@/layouts/default";
 
 const officers = [
   {
@@ -91,15 +90,14 @@ const officers = [
 
 export default function OfficersPage() {
   return (
-    <DefaultLayout>
-      <section className="justify-center pb-4 md:pb-6">
-        <div className="text-center">
-          <h1 className={title()}>Meet our Officers</h1>
-          <p className="w-85/100 mx-auto mt-4">
-            We have 12 positions. Read about them below!
-          </p>
-        </div>
-      </section>
+    <section className="justify-center pb-4 md:pb-6">
+      <div className="text-center">
+        <h1 className={title()}>Meet our Officers</h1>
+        <p className="w-85/100 mx-auto mt-4">
+          We have 12 positions. Read about them below!
+        </p>
+      </div>
+
       <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-5">
         {officers.map((item, index) => (
           <Card key={index} shadow="sm">
@@ -120,6 +118,6 @@ export default function OfficersPage() {
           </Card>
         ))}
       </div>
-    </DefaultLayout>
+    </section>
   );
 }
