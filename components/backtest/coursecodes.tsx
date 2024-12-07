@@ -28,8 +28,12 @@ export default function CourseCodes({
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/courses/${code}`
     );
-    const data = await response.json();
-    setCourses(data["data"]);
+    if (!response.ok) {
+      setView("error");
+    } else {
+      const data = await response.json();
+      setCourses(data["data"]);
+    }
   };
 
   const selectCode = (code: string) => {

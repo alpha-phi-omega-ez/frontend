@@ -33,8 +33,12 @@ export default function Courses({
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/backtest/${id}`
     );
-    const data = await response.json();
-    setBacktests(data["data"]);
+    if (!response.ok) {
+      setView("error");
+    } else {
+      const data = await response.json();
+      setBacktests(data["data"]);
+    }
   };
 
   const selectCourse = (item: { id: string; name: string }) => {

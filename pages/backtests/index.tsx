@@ -4,6 +4,7 @@ import CourseCodes from "@/components/backtest/coursecodes";
 import Courses from "@/components/backtest/courses";
 import Backtests from "@/components/backtest/backtests";
 import { Breadcrumbs, BreadcrumbItem, Button } from "@nextui-org/react";
+import Error from "@/components/error";
 
 interface BacktestPageProps {
   courseCodes: string[];
@@ -11,7 +12,7 @@ interface BacktestPageProps {
 
 export default function BacktestPage({ courseCodes }: BacktestPageProps) {
   const [view, setView] = useState<"codes" | "courses" | "backtests" | "error">(
-    "codes"
+    courseCodes ? "codes" : "error"
   );
   const [currentCourseCode, setCurrentCourseCode] = useState<null | string>(
     null
@@ -102,6 +103,13 @@ export default function BacktestPage({ courseCodes }: BacktestPageProps) {
         }}
       >
         <Backtests backtests={backtests} />
+      </div>
+      <div
+        style={{
+          display: view === "error" ? "block" : "none",
+        }}
+      >
+        <Error title="Failed to load backtests" />
       </div>
     </section>
   );
