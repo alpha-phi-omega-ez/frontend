@@ -13,6 +13,7 @@
 		"@emotion/styled": "^11.13.0",
 		"@mui/lab": "^6.0.0-beta.15",
 		"@mui/material": "^6.1.7",
+		"@nextui-org/alert": "^2.2.7",
 		"@nextui-org/card": "^2.0.34",
 		"@nextui-org/react": "^2.4.8",
 		"@types/node": "22.9.1",
