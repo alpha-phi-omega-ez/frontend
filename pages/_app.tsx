@@ -6,6 +6,7 @@ import { fontSans, fontMono } from "@/config/fonts";
 import { useRouter } from "next/router";
 import "@/styles/globals.css";
 import { AuthProvider } from "../context/AuthContext";
+import { AlertProvider } from "../context/AlertContext";
 import DefaultLayout from "@/layouts/default";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <NextThemesProvider>
         <AuthProvider>
           <DefaultLayout>
-            <Component {...pageProps} />
+            <AlertProvider>
+              <Component {...pageProps} />
+            </AlertProvider>
           </DefaultLayout>
         </AuthProvider>
       </NextThemesProvider>
