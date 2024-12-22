@@ -34,7 +34,7 @@ export default function LoanerTechSelector({
           </Typography>
           <Button
             disabled={!selectedCards.length}
-            onClick={onOpen}
+            onPress={onOpen}
             style={{ width: "120px" }} // Set a fixed width
           >
             {!selectedCards.length

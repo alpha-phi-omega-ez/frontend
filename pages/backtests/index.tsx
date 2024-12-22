@@ -37,7 +37,7 @@ export default function BacktestPage({ courseCodes }: BacktestPageProps) {
         <Breadcrumbs>
           <BreadcrumbItem>
             <Button
-              onClick={() => {
+              onPress={() => {
                 console.log(backtests);
                 setView("codes");
                 setCurrentCourseCode(null);
@@ -53,7 +53,7 @@ export default function BacktestPage({ courseCodes }: BacktestPageProps) {
           {currentCourseCode && (
             <BreadcrumbItem>
               <Button
-                onClick={() => {
+                onPress={() => {
                   console.log(backtests);
                   setView("courses");
                   setCurrentCourse(null);

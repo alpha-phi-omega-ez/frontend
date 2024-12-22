@@ -79,7 +79,7 @@ export const Navbar = () => {
               as={Link}
               className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
               href={auth.isAuthenticated ? "/logout" : undefined}
-              onClick={!auth.isAuthenticated ? handleLogin : undefined}
+              onPress={!auth.isAuthenticated ? handleLogin : undefined}
               variant="flat"
             >
               {auth.isAuthenticated ? "Logout" : "Login"}
