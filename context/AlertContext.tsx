@@ -3,7 +3,7 @@ import AlertManager from "@/components/alert-manager";
 
 // Create a context for the alerts
 const AlertContext = createContext({
-  newAlert: (alert: string) => {},
+  newAlert: (alert: string, type: string) => {},
 });
 
 interface AlertProviderrProps {
@@ -11,10 +11,10 @@ interface AlertProviderrProps {
 }
 
 export function AlertProvider({ children }: AlertProviderrProps) {
-  const [alerts, setAlerts] = useState<string[]>([]);
+  const [alerts, setAlerts] = useState<{ message: string; type: string }[]>([]);
 
-  const newAlert = (alert: string) => {
-    setAlerts((prev) => [...prev, alert]);
+  const newAlert = (alert: string, type: string) => {
+    setAlerts((prev) => [...prev, { message: alert, type: type }]);
   };
 
   return (
