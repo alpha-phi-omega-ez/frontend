@@ -7,7 +7,12 @@ import {
   DatePicker,
 } from "@nextui-org/react";
 import { parseDate } from "@internationalized/date";
-import { useEffect } from "react";
+import { useAlert } from "@/context/AlertContext";
+import { useAuth } from "@/context/AuthContext";
+import { useState, useEffect } from "react";
+import { LostReportItem } from "@/types/laf";
+import LostReportItems from "./lost-report-items";
+import { fetchLostReportItems } from "@/utils/laf/utils";
 
 interface FoundItemFormData {
   type: string;
@@ -19,102 +24,194 @@ interface FoundItemFormData {
 interface FoundItemFormProps {
   lafTypes: string[];
   lafLocations: string[];
+  view: string;
 }
 
 export default function FoundItemForm({
   lafTypes,
   lafLocations,
+  view,
 }: FoundItemFormProps) {
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
+    clearErrors,
     formState: { errors },
   } = useForm<FoundItemFormData>();
 
-  const onSubmit = (data: FoundItemFormData) => {
-    console.log(data);
+  const { newAlert } = useAlert();
+  const { logout } = useAuth();
+
+  const onSubmit = async (data: FoundItemFormData) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        newAlert(
+          "New LAF Item created with ID: " +
+            data.data.type.charAt(0) +
+            data.data.id,
+          "success"
+        );
+        reset();
+        setValue(
+          "date",
+          parseDate(new Date().toISOString().split("T")[0]).toString()
+        );
+      } else if (response.status === 401) {
+        newAlert("Please log in and try again.", "danger");
+        logout();
+      } else {
+        newAlert("Failed to create new LAF Item.", "warning");
+      }
+    } catch (error) {
+      console.error("Checkin operation failed:", error);
+    }
   };
 
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
+  setValue("date", todaysDate.toString());
+
+  const [items, setItems] = useState<LostReportItem[]>([]);
+  const [formData, setFormData] = useState({
+    type: "",
+    location: "",
+    date: todaysDate.toString(),
+    dateFilter: "Before",
+    description: "",
+  });
 
   useEffect(() => {
-    setValue("date", todaysDate.toString()); // Set the default date in form state
-  }, [setValue, todaysDate]);
+    if (view !== "Found Item") {
+      reset();
+      setValue("date", todaysDate.toString());
+      clearErrors();
+      setFormData({
+        type: "",
+        location: "",
+        date: todaysDate.toString(),
+        dateFilter: "Before",
+        description: "",
+      });
+    }
+  }, [view]);
+
+  const handleChange = (name: keyof FoundItemFormData, value: any) => {
+    const updatedFormData = {
+      ...formData,
+      [name]: value,
+    };
+
+    setFormData(updatedFormData);
+
+    // Check if the form is reset to the initial state
+    if (
+      updatedFormData.type === "" &&
+      updatedFormData.location === "" &&
+      updatedFormData.date === todaysDate.toString() &&
+      updatedFormData.dateFilter === "Before" &&
+      updatedFormData.description === ""
+    ) {
+      setItems([]);
+    } else {
+      // Trigger the fetch when form data changes
+      fetchLostReportItems(updatedFormData, setItems, logout);
+    }
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-1 flex-col gap-3 px-6 py-2"
-    >
-      {/* Type Field */}
-      <div className="flex flex-row gap-3">
-        <Select
-          label="Type"
-          variant="bordered"
-          placeholder="Select a Type"
-          isRequired
-          {...register("type", { required: "Type is required" })}
-          errorMessage={errors.type?.message}
-          isInvalid={!!errors.type}
-        >
-          {lafTypes.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
-          ))}
-        </Select>
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-1 flex-col gap-3 px-6 py-2"
+      >
+        {/* Type Field */}
+        <div className="flex flex-row gap-3">
+          <Select
+            label="Type"
+            variant="bordered"
+            placeholder="Select a Type"
+            isRequired
+            {...register("type", { required: "Type is required" })}
+            errorMessage={errors.type?.message}
+            isInvalid={!!errors.type}
+            onChange={(e) => handleChange("type", e.target.value)}
+          >
+            {lafTypes.map((type) => (
+              <SelectItem key={type} value={type}>
+                {type}
+              </SelectItem>
+            ))}
+          </Select>
 
-        {/* Location Field */}
-        <Select
-          label="Location"
+          {/* Location Field */}
+          <Select
+            label="Location"
+            variant="bordered"
+            isRequired
+            placeholder="Select a Location"
+            {...register("location", { required: "Location is required" })}
+            errorMessage={errors.location?.message}
+            isInvalid={!!errors.location}
+            onChange={(e) => handleChange("location", e.target.value)}
+          >
+            {lafLocations.map((type) => (
+              <SelectItem key={type} value={type}>
+                {type}
+              </SelectItem>
+            ))}
+          </Select>
+          {/* Date Field */}
+          <DatePicker
+            label="Date"
+            variant="bordered"
+            isRequired
+            onChange={(value) => {
+              const event = {
+                target: {
+                  name: "date",
+                  value: value?.toString() || "",
+                },
+              };
+              register("date").onChange(event);
+              handleChange("date", value?.toString() || "");
+            }}
+            errorMessage={errors.date?.message}
+            isInvalid={!!errors.date}
+            defaultValue={todaysDate}
+            maxValue={todaysDate}
+          />
+        </div>
+
+        {/* Description Field */}
+        <Textarea
+          label="Description"
           variant="bordered"
           isRequired
-          placeholder="Select a Location"
-          {...register("location", { required: "Location is required" })}
-          errorMessage={errors.location?.message}
-          isInvalid={!!errors.location}
-        >
-          {lafLocations.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
-          ))}
-        </Select>
-        {/* Date Field */}
-        <DatePicker
-          label="Date"
-          variant="bordered"
-          isRequired
-          onChange={(value) => {
-            const event = {
-              target: {
-                name: "date",
-                value: value?.toString() || "",
-              },
-            };
-            register("date").onChange(event);
-          }}
-          errorMessage={errors.date?.message}
-          isInvalid={!!errors.date}
-          defaultValue={todaysDate}
-          maxValue={todaysDate}
+          {...register("description", { required: "Description is required" })}
+          errorMessage={errors.description?.message}
+          isInvalid={!!errors.description}
+          onChange={(e) => handleChange("description", e.target.value)}
         />
-      </div>
 
-      {/* Description Field */}
-      <Textarea
-        label="Description"
-        variant="bordered"
-        isRequired
-        {...register("description", { required: "Description is required" })}
-        errorMessage={errors.description?.message}
-        isInvalid={!!errors.description}
-      />
-
-      <Button color="primary" type="submit">
-        Submit
-      </Button>
-    </form>
+        <Button color="primary" type="submit">
+          Submit
+        </Button>
+      </form>
+      {items && items.length > 0 && <LostReportItems items={items} />}
+    </>
   );
 }
