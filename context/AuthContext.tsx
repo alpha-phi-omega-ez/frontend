@@ -6,10 +6,18 @@ import React, {
   useEffect,
 } from "react";
 
-const AuthContext = createContext({
+interface AuthContextType {
+  auth: { isAuthenticated: boolean };
+  login: () => void;
+  logout: () => void;
+  checkAuthStatus: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType>({
   auth: { isAuthenticated: false },
   login: () => {},
   logout: () => {},
+  checkAuthStatus: async () => {},
 });
 
 interface AuthProviderProps {
@@ -21,28 +29,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isAuthenticated: false,
   });
 
-  useEffect(() => {
-    const checkAuthStatus = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/auth/check`,
-          {
-            method: "GET",
-            credentials: "include", // Include the HTTP-only cookie
-          }
-        );
-
-        if (response.ok) {
-          setAuth({ isAuthenticated: true });
-        } else {
-          setAuth({ isAuthenticated: false });
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/auth/check`,
+        {
+          method: "GET",
+          credentials: "include", // Include the HTTP-only cookie
         }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
+      );
+
+      if (response.ok) {
+        setAuth({ isAuthenticated: true });
+      } else {
         setAuth({ isAuthenticated: false });
       }
-    };
+    } catch (error) {
+      console.error("Error checking authentication:", error);
+      setAuth({ isAuthenticated: false });
+    }
+  };
 
+  useEffect(() => {
     checkAuthStatus();
   }, []);
 
@@ -55,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, checkAuthStatus }}>
       {children}
     </AuthContext.Provider>
   );
