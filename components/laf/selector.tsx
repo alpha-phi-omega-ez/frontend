@@ -4,16 +4,15 @@ import { ViewState } from "@/types/laf";
 interface LAFSelectorProps {
   setView: React.Dispatch<React.SetStateAction<ViewState>>;
   views: ViewState[];
+  view: ViewState;
 }
 
-export default function LAFSelector({ setView, views }: LAFSelectorProps) {
-  const [active, setActive] = useState<number>(0);
-
-  const changeSelector = (
-    index: number,
-    view: LAFSelectorProps["views"][number]
-  ) => {
-    setActive(index);
+export default function LAFSelector({
+  setView,
+  views,
+  view,
+}: LAFSelectorProps) {
+  const changeSelector = (view: ViewState) => {
     setView(view);
   };
 
@@ -23,10 +22,10 @@ export default function LAFSelector({ setView, views }: LAFSelectorProps) {
         {views.map((item, index) => (
           <button
             key={index}
-            onClick={() => changeSelector(index, item)}
+            onClick={() => changeSelector(item)}
             className={`flex-1 mx-1 py-2 rounded-full text-center transition-all duration-300 
             ${
-              active === index
+              view === item
                 ? "bg-blue-500 shadow-md text-black"
                 : "bg-transparent text-gray-700"
             }`}
