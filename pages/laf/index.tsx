@@ -1,10 +1,11 @@
 import { title } from "@/components/primitives";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Error from "@/components/error";
-import { Badge } from "@nextui-org/badge";
 import LAFSelector from "@/components/laf/selector";
 import FoundItemForm from "@/components/laf/found-item";
 import NewLostReport from "@/components/laf/create-lost-report";
+import LostItems from "@/components/laf/lost-items";
+import LostReports from "@/components/laf/lost-reports";
 import { useAuth } from "@/context/AuthContext";
 import { ViewState } from "@/types/laf";
 
@@ -14,7 +15,11 @@ interface LAFPageProps {
 }
 
 export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
-  const { auth } = useAuth();
+  const { auth, checkAuthStatus } = useAuth();
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
   const isAuthenticated = auth.isAuthenticated;
 
   const [view, setView] = useState<ViewState>("Found Item");
@@ -24,10 +29,15 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
     "Lost Items",
     "Submit Lost Report",
     "Find Lost Report",
-    "Matching Lost Reports",
-    "Expired Items",
-    "Archive",
+    // "Matching Lost Reports",
+    // "Expired Items",
+    // "Archive",
   ];
+
+  const [switchToLostReport, setSwitchToLostReport] = useState<Record<
+    string,
+    string
+  > | null>(null);
 
   return (
     <section className="justify-center pb-4 md:pb-6">
@@ -36,34 +46,54 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       </div>
       {isAuthenticated && (
         <>
-          <LAFSelector setView={setView} views={views} />
+          <LAFSelector view={view} setView={setView} views={views} />
           <div
             style={{
               display: view === "Found Item" ? "block" : "none",
             }}
           >
-            <FoundItemForm lafTypes={lafTypes} lafLocations={lafLocations} />
+            <FoundItemForm
+              lafTypes={lafTypes}
+              lafLocations={lafLocations}
+              view={view}
+            />
           </div>
           <div
             style={{
               display: view === "Lost Items" ? "block" : "none",
             }}
           >
-            <p>Lost items in progress</p>
+            <LostItems
+              lafTypes={lafTypes}
+              lafLocations={lafLocations}
+              view={view}
+              setSwitchToLostReport={setSwitchToLostReport}
+              setView={setView}
+            />
           </div>
           <div
             style={{
               display: view === "Submit Lost Report" ? "block" : "none",
             }}
           >
-            <NewLostReport lafTypes={lafTypes} lafLocations={lafLocations} />
+            <NewLostReport
+              lafTypes={lafTypes}
+              lafLocations={lafLocations}
+              view={view}
+              switchToLostReport={switchToLostReport}
+              setSwitchToLostReport={setSwitchToLostReport}
+            />
           </div>
           <div
             style={{
               display: view === "Find Lost Report" ? "block" : "none",
             }}
           >
-            <p>Find Lost report in progress</p>
+            <LostReports
+              lafTypes={lafTypes}
+              lafLocations={lafLocations}
+              view={view}
+            />
           </div>
           <div
             style={{
@@ -90,7 +120,13 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       )}
       {!isAuthenticated && (
         <div className="text-center">
-          <NewLostReport lafTypes={lafTypes} lafLocations={lafLocations} />
+          <NewLostReport
+            lafTypes={lafTypes}
+            lafLocations={lafLocations}
+            view={view}
+            switchToLostReport={switchToLostReport}
+            setSwitchToLostReport={setSwitchToLostReport}
+          />
         </div>
       )}
       <div
