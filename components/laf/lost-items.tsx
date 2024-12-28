@@ -61,6 +61,7 @@ export default function LostItems({
     dateFilter: "Before",
     description: "",
   });
+  const [emptyForm, setEmptyForm] = useState(true);
 
   useEffect(() => {
     fetchLAFItems({ ...formData }, setItems, logout);
@@ -80,17 +81,31 @@ export default function LostItems({
   }, [view]);
 
   const handleChange = (name: keyof LostItemsFormData, value: any) => {
-    setFormData((prevData) => ({
-      ...prevData,
+    const updatedFormData = {
+      ...formData,
       [name]: value,
-    }));
+    };
+
+    setFormData(updatedFormData);
     // Trigger the fetch when form data changes
     fetchLAFItems({ ...formData, [name]: value }, setItems, logout);
+
+    if (
+      updatedFormData.type === "" &&
+      updatedFormData.location === "" &&
+      updatedFormData.date === todaysDate.toString() &&
+      updatedFormData.dateFilter === "Before" &&
+      updatedFormData.description === ""
+    ) {
+      setEmptyForm(true);
+    } else {
+      setEmptyForm(false);
+    }
   };
 
   const onSubmit = async (_: LostItemsFormData) => {
-    setSwitchToLostReport({ ...formData });
     setView("Submit Lost Report");
+    setSwitchToLostReport({ ...formData });
   };
 
   return (
@@ -198,9 +213,11 @@ export default function LostItems({
           onChange={(e) => handleChange("description", e.target.value)}
         />
 
-        <Button color="primary" type="submit">
-          Create Lost Report
-        </Button>
+        {!emptyForm && (
+          <Button color="primary" type="submit">
+            Create Lost Report
+          </Button>
+        )}
       </form>
       <LAFItems items={items} />
     </>
