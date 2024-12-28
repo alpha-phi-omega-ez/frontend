@@ -7,6 +7,7 @@ import {
   TableRow,
   TableCell,
   getKeyValue,
+  Chip,
 } from "@nextui-org/react";
 
 interface LostReportsItemsProps {
@@ -52,7 +53,11 @@ export default function LostReportItems({ items }: LostReportsItemsProps) {
             {(columnKey) => (
               <TableCell>
                 {columnKey === "location"
-                  ? item.location.join(", ")
+                  ? item.location.map((loc, index) => (
+                      <Chip key={index} className="mr-1">
+                        {loc}
+                      </Chip>
+                    ))
                   : getKeyValue(item, columnKey)}
               </TableCell>
             )}
