@@ -29,3 +29,12 @@ export type LostReportItem = {
     found: string;
     archived: string;
 }
+
+export type NewLostReportFormData = {
+    type: string;
+    location: string;
+    date: string;
+    name: string;
+    email: string;
+    description: string;
+}
