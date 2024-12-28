@@ -16,14 +16,9 @@ interface LAFPageProps {
 
 export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   const { auth, checkAuthStatus } = useAuth();
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
   const isAuthenticated = auth.isAuthenticated;
 
   const [view, setView] = useState<ViewState>("Found Item");
-
   const views: ViewState[] = [
     "Found Item",
     "Lost Items",
@@ -33,6 +28,10 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
     // "Expired Items",
     // "Archive",
   ];
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [view]);
 
   const [switchToLostReport, setSwitchToLostReport] = useState<Record<
     string,
