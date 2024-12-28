@@ -15,10 +15,18 @@ interface LAFPageProps {
 }
 
 export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
-  const { auth, checkAuthStatus } = useAuth();
+  const { auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
   const [view, setView] = useState<ViewState>("Found Item");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (lafTypes && lafLocations) {
+      setLoading(false);
+    }
+  }, [lafTypes, lafLocations]);
+
   const views: ViewState[] = [
     "Found Item",
     "Lost Items",
@@ -28,10 +36,6 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
     // "Expired Items",
     // "Archive",
   ];
-
-  useEffect(() => {
-    checkAuthStatus();
-  }, [view]);
 
   const [switchToLostReport, setSwitchToLostReport] = useState<Record<
     string,
@@ -43,7 +47,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       <div className="text-center mb-6">
         <h1 className={title()}>Lost & Found</h1>
       </div>
-      {isAuthenticated && (
+      {!loading && isAuthenticated && (
         <>
           <LAFSelector view={view} setView={setView} views={views} />
           <div
@@ -117,7 +121,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
           </div>
         </>
       )}
-      {!isAuthenticated && (
+      {!loading && !isAuthenticated && (
         <div className="text-center">
           <NewLostReport
             lafTypes={lafTypes}

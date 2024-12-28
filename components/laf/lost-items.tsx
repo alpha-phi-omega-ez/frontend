@@ -39,7 +39,8 @@ export default function LostItems({
   setSwitchToLostReport,
   setView,
 }: LostItemstFormProps) {
-  const { logout } = useAuth();
+  const { logout, auth } = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
 
   const {
     register,
@@ -64,19 +65,21 @@ export default function LostItems({
   const [emptyForm, setEmptyForm] = useState(true);
 
   useEffect(() => {
-    fetchLAFItems({ ...formData }, setItems, logout);
-    if (view !== "Lost Items") {
-      reset();
-      setValue("date", todaysDate.toString());
-      setValue("dateFilter", "Before");
-      clearErrors();
-      setFormData({
-        type: "",
-        location: "",
-        date: todaysDate.toString(),
-        dateFilter: "Before",
-        description: "",
-      });
+    if (isAuthenticated) {
+      fetchLAFItems({ ...formData }, setItems, logout);
+      if (view !== "Lost Items") {
+        reset();
+        setValue("date", todaysDate.toString());
+        setValue("dateFilter", "Before");
+        clearErrors();
+        setFormData({
+          type: "",
+          location: "",
+          date: todaysDate.toString(),
+          dateFilter: "Before",
+          description: "",
+        });
+      }
     }
   }, [view]);
 

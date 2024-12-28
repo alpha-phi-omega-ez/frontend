@@ -42,7 +42,7 @@ export default function LAFItems({ items }: LAFItemsProps) {
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={items} emptyContent={"No LAf items found."}>
+      <TableBody items={items} emptyContent={"No LAF items found."}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (

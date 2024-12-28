@@ -42,7 +42,8 @@ export default function LostReports({
     clearErrors,
     formState: { errors },
   } = useForm<LostReportsFormData>();
-  const { logout } = useAuth();
+  const { logout, auth } = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
 
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
   setValue("date", todaysDate.toString());
@@ -59,21 +60,23 @@ export default function LostReports({
   });
 
   useEffect(() => {
-    fetchLostReportItems({ ...formData }, setItems, logout);
-    if (view !== "Find Lost Report") {
-      reset();
-      setValue("date", todaysDate.toString());
-      setValue("dateFilter", "Before");
-      clearErrors();
-      setFormData({
-        type: "",
-        location: "",
-        date: todaysDate.toString(),
-        dateFilter: "Before",
-        description: "",
-        name: "",
-        email: "",
-      });
+    if (isAuthenticated) {
+      fetchLostReportItems({ ...formData }, setItems, logout);
+      if (view !== "Find Lost Report") {
+        reset();
+        setValue("date", todaysDate.toString());
+        setValue("dateFilter", "Before");
+        clearErrors();
+        setFormData({
+          type: "",
+          location: "",
+          date: todaysDate.toString(),
+          dateFilter: "Before",
+          description: "",
+          name: "",
+          email: "",
+        });
+      }
     }
   }, [view]);
 
