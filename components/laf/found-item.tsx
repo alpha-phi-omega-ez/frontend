@@ -211,7 +211,14 @@ export default function FoundItemForm({
           Submit
         </Button>
       </form>
-      {items && items.length > 0 && <LostReportItems items={items} />}
+      {items && items.length > 0 && (
+        <>
+          <h2 className="text-center mt-5 text-3xl">
+            Potential Matching Lost Reports
+          </h2>
+          <LostReportItems items={items} />
+        </>
+      )}
     </>
   );
 }
