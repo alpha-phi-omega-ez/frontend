@@ -16,7 +16,7 @@ interface LAFPageProps {
 }
 
 export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
-  const { auth } = useAuth();
+  const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
   const [view, setView] = useState<ViewState>("Found Item");
@@ -27,6 +27,10 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       setLoading(false);
     }
   }, [lafTypes, lafLocations]);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [view]);
 
   const views: ViewState[] = [
     "Found Item",
