@@ -66,7 +66,6 @@ export default function LostItems({
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchLAFItems({ ...formData }, setItems, logout);
       if (view !== "Lost Items") {
         reset();
         setValue("date", todaysDate.toString());
@@ -79,6 +78,8 @@ export default function LostItems({
           dateFilter: "Before",
           description: "",
         });
+      } else {
+        fetchLAFItems({ ...formData }, setItems, logout);
       }
     }
   }, [view]);

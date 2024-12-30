@@ -61,7 +61,6 @@ export default function LostReports({
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchLostReportItems({ ...formData }, setItems, logout);
       if (view !== "Find Lost Report") {
         reset();
         setValue("date", todaysDate.toString());
@@ -76,6 +75,8 @@ export default function LostReports({
           name: "",
           email: "",
         });
+      } else {
+        fetchLostReportItems({ ...formData }, setItems, logout);
       }
     }
   }, [view]);

@@ -12,6 +12,7 @@ import { NewLostReportFormData } from "@/types/laf";
 import { useAlert } from "@/context/AlertContext";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { parseDate } from "@internationalized/date";
+import { useState } from "react";
 
 interface CreateLostReportFormSwitchProps {
   lafTypes: string[];
@@ -54,8 +55,11 @@ export default function CreateLostReportFormSwitch({
     }
   }, [view]);
 
+  const [date, setDate] = useState<string>(todaysDate.toString());
+
   const onSubmit = async (data: NewLostReportFormData) => {
     try {
+      data.date = date;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/`,
         {
@@ -125,6 +129,7 @@ export default function CreateLostReportFormSwitch({
               },
             };
             register("date").onChange(event);
+            setDate(value?.toString() || "");
           }}
           errorMessage={errors.date?.message}
           isInvalid={!!errors.date}

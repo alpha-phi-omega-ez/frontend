@@ -77,11 +77,13 @@ export default function CreateLostReportForm({
         description: "",
       });
       setSwitchToLostReport(null);
+      setItems([]);
     }
   }, [view, isAuthenticated]);
 
   const onSubmit = async (data: NewLostReportFormData) => {
     try {
+      data.date = formData.date;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/`,
         {
@@ -200,7 +202,10 @@ export default function CreateLostReportForm({
             {...register("type", { required: "Type is required" })}
             errorMessage={errors.type?.message}
             isInvalid={!!errors.type}
-            onChange={(e) => handleChange("type", e.target.value)}
+            onChange={(e) => {
+              setValue("type", e.target.value);
+              handleChange("type", e.target.value);
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -237,7 +242,10 @@ export default function CreateLostReportForm({
               );
             }}
             selectionMode="multiple"
-            onChange={(e) => handleChange("location", e.target.value)}
+            onChange={(e) => {
+              setValue("location", e.target.value);
+              handleChange("location", e.target.value);
+            }}
           >
             {lafLocations.map((type) => (
               <SelectItem key={type} value={type}>
