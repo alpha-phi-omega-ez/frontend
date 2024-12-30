@@ -13,7 +13,7 @@ export function LoanerTechModalHeader({
   return (
     <ModalHeader>
       <Typography id="modal-title" variant="h6">
-        {title}
+        {title}{" "}
         {selectedCards
           .sort()
           .map((id) => `#${id}`)
