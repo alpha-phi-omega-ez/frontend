@@ -6,6 +6,7 @@ import FoundItemForm from "@/components/laf/found-item";
 import NewLostReport from "@/components/laf/create-lost-report";
 import LostItems from "@/components/laf/lost-items";
 import LostReports from "@/components/laf/lost-reports";
+import ExpiredItems from "@/components/laf/expired-items";
 import { useAuth } from "@/context/AuthContext";
 import { ViewState } from "@/types/laf";
 
@@ -33,7 +34,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
     "Submit Lost Report",
     "Find Lost Report",
     // "Matching Lost Reports",
-    // "Expired Items",
+    "Expired Items",
     // "Archive",
   ];
 
@@ -110,7 +111,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
               display: view === "Expired Items" ? "block" : "none",
             }}
           >
-            <p>Expired items in progress</p>
+            <ExpiredItems lafTypes={lafTypes} view={view} />
           </div>
           <div
             style={{
@@ -122,15 +123,13 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
         </>
       )}
       {!loading && !isAuthenticated && (
-        <div className="text-center">
-          <NewLostReport
-            lafTypes={lafTypes}
-            lafLocations={lafLocations}
-            view={view}
-            switchToLostReport={switchToLostReport}
-            setSwitchToLostReport={setSwitchToLostReport}
-          />
-        </div>
+        <NewLostReport
+          lafTypes={lafTypes}
+          lafLocations={lafLocations}
+          view={view}
+          switchToLostReport={switchToLostReport}
+          setSwitchToLostReport={setSwitchToLostReport}
+        />
       )}
       <div
         style={{
