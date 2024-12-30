@@ -2,7 +2,16 @@ import { Alert } from "@nextui-org/react";
 
 // AlertManager component
 interface AlertManagerProps {
-  alerts: { message: string; type: string }[];
+  alerts: {
+    message: string;
+    type:
+      | "success"
+      | "danger"
+      | "default"
+      | "primary"
+      | "secondary"
+      | "warning";
+  }[];
   setAlerts: React.Dispatch<
     React.SetStateAction<{ message: string; type: string }[]>
   >;
@@ -20,8 +29,10 @@ export default function AlertManager({ alerts, setAlerts }: AlertManagerProps) {
           key={index}
           variant="flat"
           color={alert.type}
-          closable
+          isClosable
           onClose={() => removeAlert(index)}
+          description=""
+          className="flex items-center"
         >
           {alert.message}
         </Alert>
