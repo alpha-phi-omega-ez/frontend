@@ -277,7 +277,13 @@ export default function CreateLostReportForm({
           <h2 className="text-center mt-5 text-3xl">
             Potential Matching LAF items
           </h2>
-          <LAFItems items={items} />
+          <LAFItems
+            items={items}
+            lafTypes={[]}
+            lafLocations={[]}
+            updateTable={() => {}}
+            edit={false}
+          />
         </>
       )}
     </>
