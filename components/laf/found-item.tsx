@@ -39,13 +39,31 @@ export default function FoundItemForm({
     reset,
     clearErrors,
     formState: { errors },
-  } = useForm<FoundItemFormData>();
+  } = useForm<FoundItemFormData>({
+    defaultValues: {
+      type: "",
+      location: "",
+      date: "",
+      description: "",
+    },
+  });
+
+  const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
+  const [items, setItems] = useState<LostReportItem[]>([]);
+  const [formData, setFormData] = useState({
+    type: "",
+    location: "",
+    date: todaysDate.toString(),
+    dateFilter: "Before",
+    description: "",
+  });
 
   const { newAlert } = useAlert();
   const { logout } = useAuth();
 
   const onSubmit = async (data: FoundItemFormData) => {
     try {
+      data.date = formData.date;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/`,
         {
@@ -82,21 +100,16 @@ export default function FoundItemForm({
     }
   };
 
-  const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
   setValue("date", todaysDate.toString());
-
-  const [items, setItems] = useState<LostReportItem[]>([]);
-  const [formData, setFormData] = useState({
-    type: "",
-    location: "",
-    date: todaysDate.toString(),
-    dateFilter: "Before",
-    description: "",
-  });
 
   useEffect(() => {
     if (view !== "Found Item") {
-      reset();
+      reset({
+        type: "",
+        location: "",
+        date: todaysDate.toString(),
+        description: "",
+      });
       setValue("date", todaysDate.toString());
       clearErrors();
       setFormData({
@@ -106,6 +119,7 @@ export default function FoundItemForm({
         dateFilter: "Before",
         description: "",
       });
+      setItems([]);
     }
   }, [view]);
 
@@ -148,7 +162,10 @@ export default function FoundItemForm({
             {...register("type", { required: "Type is required" })}
             errorMessage={errors.type?.message}
             isInvalid={!!errors.type}
-            onChange={(e) => handleChange("type", e.target.value)}
+            onChange={(e) => {
+              setValue("type", e.target.value);
+              handleChange("type", e.target.value);
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -161,12 +178,15 @@ export default function FoundItemForm({
           <Select
             label="Location"
             variant="bordered"
-            isRequired
             placeholder="Select a Location"
+            isRequired
             {...register("location", { required: "Location is required" })}
             errorMessage={errors.location?.message}
             isInvalid={!!errors.location}
-            onChange={(e) => handleChange("location", e.target.value)}
+            onChange={(e) => {
+              setValue("location", e.target.value);
+              handleChange("location", e.target.value);
+            }}
           >
             {lafLocations.map((type) => (
               <SelectItem key={type} value={type}>
