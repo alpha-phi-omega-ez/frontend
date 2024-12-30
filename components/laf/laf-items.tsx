@@ -50,10 +50,14 @@ export default function LAFItems({
       key: "date",
       label: "Date",
     },
-    {
-      key: "actions",
-      label: "Actions",
-    },
+    ...(edit
+      ? [
+          {
+            key: "actions",
+            label: "Actions",
+          },
+        ]
+      : []),
   ];
   const {
     isOpen: isEditOpen,
@@ -84,7 +88,7 @@ export default function LAFItems({
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey === "actions" && edit ? (
+                  {columnKey === "actions" ? (
                     <div className="flex items-center space-x-2">
                       <button
                         aria-label="Edit"
