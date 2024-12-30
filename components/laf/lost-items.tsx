@@ -107,6 +107,10 @@ export default function LostItems({
     }
   };
 
+  const updateTable = () => {
+    fetchLAFItems({ ...formData }, setItems, logout);
+  };
+
   const onSubmit = async (_: LostItemsFormData) => {
     setView("Submit Lost Report");
     setSwitchToLostReport({ ...formData });
@@ -223,7 +227,13 @@ export default function LostItems({
           </Button>
         )}
       </form>
-      <LAFItems items={items} />
+      <LAFItems
+        items={items}
+        lafTypes={lafTypes}
+        lafLocations={lafLocations}
+        updateTable={updateTable}
+        edit={true}
+      />
     </>
   );
 }
