@@ -51,6 +51,7 @@ export default function CheckOutModalContent({
     handleSubmit,
     setValue,
     watch,
+    clearErrors,
     formState: { errors },
     reset,
   } = useForm<CheckOutFormData>();
@@ -103,6 +104,7 @@ export default function CheckOutModalContent({
       console.error("Checkout operation failed:", error);
     }
     reset();
+    clearErrors();
     setValue("phone", "", { shouldValidate: false });
     onOpenChange(); // Close modal after submission
   };
