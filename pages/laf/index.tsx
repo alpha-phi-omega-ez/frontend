@@ -30,6 +30,10 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
 
   useEffect(() => {
     checkAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    checkAuthStatus();
   }, [view]);
 
   const views: ViewState[] = [
