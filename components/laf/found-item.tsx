@@ -13,13 +13,7 @@ import { useState, useEffect } from "react";
 import { LostReportItem } from "@/types/laf";
 import LostReportItems from "./lost-report-items";
 import { fetchLostReportItems } from "@/utils/laf/utils";
-
-interface FoundItemFormData {
-  type: string;
-  location: string;
-  date: string;
-  description: string;
-}
+import { FoundItemFormData } from "@/types/laf";
 
 interface FoundItemFormProps {
   lafTypes: string[];
@@ -152,8 +146,8 @@ export default function FoundItemForm({
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-1 flex-col gap-3 px-6 py-2"
       >
-        {/* Type Field */}
         <div className="flex flex-row gap-3">
+          {/* Type Field */}
           <Select
             label="Type"
             variant="bordered"
