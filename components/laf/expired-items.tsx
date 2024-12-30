@@ -10,9 +10,12 @@ import {
   Select,
   SelectItem,
   Input,
+  Button,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { Selection } from "@react-types/shared";
 import { useAuth } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 interface ExpiredItemsProps {
   lafTypes: string[];
@@ -22,6 +25,7 @@ interface ExpiredItemsProps {
 export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   const { auth, logout } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
+  const { newAlert } = useAlert();
   const columns = [
     {
       key: "id",
@@ -57,6 +61,9 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     inexpensive: "180",
     expensive: "365",
   });
+  const [expiredSelectedKeys, setExpiredSelectedKeys] = useState<string[]>([]);
+  const [potentiallyExpiredSelectedKeys, setPotentiallyExpiredSelectedKeys] =
+    useState<string[]>([]);
 
   const fetchExpiredItems = async () => {
     const params = new URLSearchParams(searchData);
@@ -81,6 +88,10 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   };
 
   useEffect(() => {
+    if (isAuthenticated && view !== "Expired Items") {
+      setExpiredSelectedKeys([]);
+      setPotentiallyExpiredSelectedKeys([]);
+    }
     if (isAuthenticated && view === "Expired Items") {
       fetchExpiredItems();
     }
@@ -93,6 +104,50 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
         ...prevData,
         [name]: value === "" ? "0" : value,
       }));
+    }
+  };
+
+  const handleExpiredTableSelectionChange = (keys: Selection) => {
+    const selectedKeysArray = Array.from(keys) as string[];
+    setExpiredSelectedKeys(selectedKeysArray);
+  };
+
+  const handlePotentiallyExpiredTableSelectionChange = (keys: Selection) => {
+    const selectedKeysArray = Array.from(keys) as string[];
+    setPotentiallyExpiredSelectedKeys(selectedKeysArray);
+  };
+
+  const archiveItems = async (table: string) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ids:
+            table === "expired"
+              ? expiredSelectedKeys
+              : potentiallyExpiredSelectedKeys,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      fetchExpiredItems();
+      if (table === "expired") {
+        setExpiredSelectedKeys([]);
+      } else {
+        setPotentiallyExpiredSelectedKeys([]);
+      }
+      newAlert("Successfully archived items", "success");
+    } else if (response.status === 401) {
+      logout();
+    } else {
+      console.error("Failed to archive expired LAF items", response);
+      newAlert("Failed to archive expired LAF items", "danger");
     }
   };
 
@@ -171,13 +226,24 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
           }}
         />
       </div>
-      <h2 className="text-center mt-5 text-3xl">Expired Items</h2>
+      <div className="text-center mt-10 flex justify-center gap-5">
+        <h2 className="text-3xl">Expired Items</h2>
+        <Button
+          color="primary"
+          isDisabled={expiredSelectedKeys.length === 0}
+          onPress={() => archiveItems("expired")}
+        >
+          Archive Item{expiredSelectedKeys.length > 1 ? "s" : ""}
+        </Button>
+      </div>
       <Table
         aria-label="Expired LAF Items"
         className="my-5"
         isStriped
         color="primary"
         selectionMode="multiple"
+        selectedKeys={expiredSelectedKeys}
+        onSelectionChange={handleExpiredTableSelectionChange}
       >
         <TableHeader columns={columns}>
           {(column) => (
@@ -201,13 +267,24 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
           )}
         </TableBody>
       </Table>
-      <h2 className="text-center mt-5 text-3xl">Potentially Expired Items</h2>
+      <div className="text-center mt-10 flex justify-center gap-5">
+        <h2 className="text-3xl">Potentially Expired Items</h2>
+        <Button
+          color="primary"
+          isDisabled={potentiallyExpiredSelectedKeys.length === 0}
+          onPress={() => archiveItems("potentially-expired")}
+        >
+          Archive Item{potentiallyExpiredSelectedKeys.length > 1 ? "s" : ""}
+        </Button>
+      </div>
       <Table
-        aria-label="Expired LAF Items"
+        aria-label="Potentially Expired LAF Items"
         className="my-5"
         isStriped
         color="primary"
         selectionMode="multiple"
+        selectedKeys={potentiallyExpiredSelectedKeys}
+        onSelectionChange={handlePotentiallyExpiredTableSelectionChange}
       >
         <TableHeader columns={columns}>
           {(column) => (
@@ -216,7 +293,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
         </TableHeader>
         <TableBody
           items={potentiallyExpiredItems}
-          emptyContent={"No expired LAF items found."}
+          emptyContent={"No potentially expired LAF items found."}
         >
           {(item) => (
             <TableRow key={item.id}>
