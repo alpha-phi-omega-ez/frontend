@@ -38,3 +38,10 @@ export type NewLostReportFormData = {
     email: string;
     description: string;
 }
+
+export type FoundItemFormData = {
+    type: string;
+    location: string;
+    date: string;
+    description: string;
+}
