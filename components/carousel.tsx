@@ -24,7 +24,13 @@ const DefaultCarousel: React.FC<{ images: ImageType[] }> = ({ images }) => {
     <Slider {...deafultSettings}>
       {images.map((item, index) => (
         <div key={index}>
-          <Image className="w-full" src={item.img} alt={item.alt} />
+          <Image
+            src={item.img}
+            alt={item.alt}
+            width="100%"
+            height="100%"
+            className="object-cover"
+          />
         </div>
       ))}
     </Slider>
