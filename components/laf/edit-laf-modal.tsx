@@ -65,7 +65,6 @@ export default function EditLAFModal({
   const onSubmit = async (data: FoundItemFormData) => {
     try {
       data.date = date;
-      console.log(data);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/${given_id}`,
         {
@@ -98,6 +97,7 @@ export default function EditLAFModal({
     setValue("location", given_location);
     setValue("date", given_date);
     setValue("description", given_description);
+    setDate(given_date);
   }, [given_type, given_location, given_date, given_description]);
 
   return (
