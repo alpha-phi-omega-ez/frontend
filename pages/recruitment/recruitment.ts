@@ -1,39 +1,72 @@
-export const Semester = "Fall 2024"
+export const Semester = "Spring 2025";
 
-export const Events = [
-    {
-        title: "Apple Cider and Cookie Decorating",
-        description: "Socialize and get to know the members of Alpha Phi Omega, the gender-inclusive service fraternity at RPI, while eating deserts and fall treats!",
-        date: "Sat, Sept 2nd, 2023",
-        time: "4 pm to 6 pm",
-        location: "Union Third Floor Room Ellsworth",
-    },
-    {
-        title: "Scouting Information Party",
-        description: "Alpha Phi Omega is an organization affiliated with the Boy Scouts! Our scouting roots attract a number of Eagle Scouts around campus. Join us for a meet and greet with past scouts and learn why they joined APO!",
-        date: "Tues, Sept 5th, 2023",
-        time: "6 pm to 8 pm",
-        location: "Union Third Floor Room Phalanx (3502 behind the elevator)",
-    },
-    {
-        title: "Bob Ross Painting",
-        description: "Join the brothers for a good time while painting like Bob Ross!",
-        date: "Wed, Sept 6th, 2023",
-        time: "6 pm to 8 pm",
-        location: "Union First Floor Room Mothers (1515)",
-    },
-    {
-        title: "Bowling",
-        description: "Join the members of Alpha Phi Omega for a night of bowling fun! We will be bowling at Uncle Sam's Lanes.",
-        date: "Fri, Sept 8th, 2023",
-        time: "6 pm to 9 pm",
-        location: "Meet at Union Third Floor 3420",
-    },
-    {
-        title: "Welcome Dinner",
-        description: "Join the Members of Alpha Phi Omega, a national service fraternity in welcoming the potential new members with a delicious meal!",
-        date: "Fri, Sept 15th, 2023",
-        time: "6 pm to 8 pm",
-        location: "Union Third Floor 3202",
-    },
-]
+interface Event {
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+}
+
+export const Events: Event[] = [
+  {
+    title: "Presentation Blunders 101",
+    description: "Learn how to present in a professional setting!",
+    date: "Monday, January 13th, 2025",
+    time: "5 pm to 6:30 pm",
+    location: "Union Shellnut Gallery",
+  },
+  {
+    title: "Team Trivia",
+    description:
+      "Test your knowledge and help raise funds for food for the UN World Food Program through Free Rice",
+    date: "Wednesday January 15th, 2025",
+    time: "4 pm to 5:30 pm",
+    location: "Union Shellnut Gallery",
+  },
+  {
+    title: "USS Slater",
+    description: "Learn about and clean the USS Slater in Albany",
+    date: "Saturday, January 18th, 2025",
+    time: "TBA",
+    location: "USS Slater, Meet at the APO Office Union 3420",
+  },
+  {
+    title: "Game Night, Hot Cocoa, and Cookie Decorating",
+    description: "Join us for a night of fun and relaxation!",
+    date: "Tuesday, January 21st, 2025",
+    time: "4 pm to 6:30 pm",
+    location: "Union Shellnut Gallery",
+  },
+  {
+    title: "Card Making",
+    description:
+      "Make cards for soldiers overseas to send back to their families",
+    date: "Thursday, January 23rd, 2025",
+    time: "5:30 pm to 7 pm",
+    location: "Union Shellnut Gallery",
+  },
+  {
+    title: "Bob Ross Night",
+    description: "Paint along with Bob Ross and meet APO brothers",
+    date: "Friday, January 24th, 2025",
+    time: "6 pm to 9 pm",
+    location: "Union McNeil Room",
+  },
+  {
+    title: "Resume Review",
+    description:
+      "Get your resume reviewed by APO brothers with internship/REU experience",
+    date: "Monday, January 27th, 2025",
+    time: "6:30 pm to 7:30 pm",
+    location: "Union Shellnut Gallery",
+  },
+  {
+    title: "Welcome Dinner",
+    description:
+      "Join the Members of Alpha Phi Omega, a national service fraternity in welcoming the potential new members with a delicious meal!",
+    date: "Friday, January 31st, 2025",
+    time: "6 pm to 9 pm",
+    location: "Union Shellnut Gallery",
+  },
+];

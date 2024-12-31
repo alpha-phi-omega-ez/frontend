@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Image } from "@nextui-org/react";
+import { Image, Card } from "@nextui-org/react";
 import { Events, Semester } from "./recruitment";
 
 export default function RecruitmentPage() {
@@ -13,15 +13,15 @@ export default function RecruitmentPage() {
       <div className="text-center mt-8">
         <h1 className={title()}>{Semester} Recruitment Events</h1>
       </div>
-      <div className="mt-10 mb-4 md:w-9/12 mx-auto mb-8">
+      <div className="mt-10 mb-4 md:w-9/12 mx-auto mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         {Events.map((item, index) => (
-          <div key={index} className="mt-8">
+          <Card key={index} className="p-4">
             <h2 className="text-2xl font-bold">{item.title}</h2>
             <p className="mt-4">{item.description}</p>
             <p className="mt-4">{item.date}</p>
             <p>{item.time}</p>
             <p>{item.location}</p>
-          </div>
+          </Card>
         ))}
       </div>
     </section>
