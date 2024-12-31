@@ -55,7 +55,6 @@ export default function FoundLAFModal({
 
   const onSubmit = async (data: SubmitFoundItemFormData) => {
     try {
-      console.log(data);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/found/${given_id}`,
         {
@@ -141,7 +140,7 @@ export default function FoundLAFModal({
                 Cancel
               </Button>
               <Button color="success" type="submit">
-                Save
+                Submit
               </Button>
             </ModalFooter>
           </form>
