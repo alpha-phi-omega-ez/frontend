@@ -6,7 +6,7 @@ export default function ServiceEventsPage() {
   return (
     <section className="justify-center pb-4 md:pb-6">
       <div className="text-center">
-        <h1 className={title()}>Community Events</h1>
+        <h1 className={title()}>Large Service Events</h1>
         <p className="mt-5">
           Every semester, APO hosts a number of large-scale events to help the
           local community.

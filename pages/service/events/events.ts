@@ -1,5 +1,9 @@
-import Link from "next/link";
-import { BMOCImages, OvernighterImages, ServiceDayImages, YSDImages } from "./images";
+import {
+  BMOCImages,
+  OvernighterImages,
+  ServiceDayImages,
+  YSDImages,
+} from "./images";
 
 export const Events = [
   {
@@ -32,7 +36,7 @@ export const Events = [
   {
     title: "Overnighter",
     description:
-      "Every semester, the APOEZ chapter picks a weekend and stays \"overnight\" at a local camp to assist in facilities maintenance. Common activities include painting, picking up trash alongside trails, drilling, putting together beds, and cleaning.",
+      'Every semester, the APOEZ chapter picks a weekend and stays "overnight" at a local camp to assist in facilities maintenance. Common activities include painting, picking up trash alongside trails, drilling, putting together beds, and cleaning.',
     date: "Each Fall and Spring Semesters",
     timing: "Typically the Friday to Sunday",
     location: "YMCA or Scout Camp",
