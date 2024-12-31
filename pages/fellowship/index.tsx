@@ -54,6 +54,7 @@ export default function FellowshipPage() {
             key={index}
             shadow="sm"
             width="100%"
+            height="100%"
             alt={item.alt}
             className="w-full object-cover rounded-t-lg"
             src={item.img}

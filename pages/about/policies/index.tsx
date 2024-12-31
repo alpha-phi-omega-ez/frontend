@@ -25,7 +25,7 @@ export default function PoliciesPage() {
       <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 my-5">
         <Card>
           <iframe
-            src="/pdfs/Chapter_Bylaws.pdf"
+            src="/pdfs/Chapter_Bylaws.pdf#toolbar=0"
             width="100%"
             height="550px"
             className="rounded-lg"
@@ -33,7 +33,7 @@ export default function PoliciesPage() {
         </Card>
         <Card>
           <iframe
-            src="/pdfs/Chapter_Constitution.pdf"
+            src="/pdfs/Chapter_Constitution.pdf#toolbar=0"
             width="100%"
             height="550px"
             className="rounded-lg"
@@ -41,12 +41,12 @@ export default function PoliciesPage() {
         </Card>
       </div>
       <section className="justify-center pb-4 md:pb-6">
-        <div className="text-center">
+        <div className="text-center mt-5">
           <h1 className={title()}>Chapter Risk Management</h1>
         </div>
         <Card className="mt-4">
           <iframe
-            src="/pdfs/Risk_Managament.pdf"
+            src="/pdfs/Risk_Managament.pdf#toolbar=0"
             width="100%"
             height="550px"
             className="rounded-lg"
@@ -54,7 +54,7 @@ export default function PoliciesPage() {
         </Card>
       </section>
       <section className="justify-center pb-4 md:pb-6">
-        <div className="text-center">
+        <div className="text-center mt-5">
           <h1 className={title()}>National Policies</h1>
         </div>
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-4">

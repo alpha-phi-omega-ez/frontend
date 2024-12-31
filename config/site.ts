@@ -6,89 +6,90 @@ export const siteConfig = {
     "Website for the Alpha Phi Omega, Epsilon Zeta Chapter at Rensselaer Polytechnic Institute.",
   navItems: [
     {
-      label: "Lost & Found",
-      href: "/laf",
+      item: "About Us",
+      sublinks: [
+        {
+          label: "History",
+          href: "/about/history",
+        },
+        {
+          label: "Officers",
+          href: "/about/officers",
+        },
+        {
+          label: "Policies",
+          href: "/about/policies",
+        },
+      ],
     },
     {
-      label: "Backtests",
-      href: "/backtests",
+      item: "Awards",
+      sublinks: [
+        {
+          label: "Chapter Awards",
+          href: "/awards/chapter",
+        },
+        {
+          label: "Individual Awards",
+          href: "/awards/individual",
+        },
+      ],
     },
     {
-      label: "Loaner Tech",
-      href: "/loanertech",
+      item: "Service",
+      sublinks: [
+        {
+          label: "Large Service Events",
+          href: "/service/events",
+        },
+        {
+          label: "Service Program",
+          href: "/service/program",
+        },
+        {
+          label: "Freshman Service Scholarship",
+          href: "/service/scholarship",
+        },
+      ],
     },
     {
-      label: "About",
-      href: "/about",
+      item: "Fellowship",
+      sublinks: [
+        {
+          label: "Fellowship Overview",
+          href: "/fellowship",
+        },
+      ],
     },
     {
-      label: "Joining",
-      href: "/joining",
+      item: "Office",
+      sublinks: [
+        {
+          label: "Lost & Found",
+          href: "/laf",
+        },
+        {
+          label: "Backtests",
+          href: "/backtests",
+        },
+        {
+          label: "Loaner Tech",
+          href: "/loanertech",
+        },
+      ],
     },
     {
-      label: "Awards",
-      href: "/awards",
-    },
-    {
-      label: "Leadership",
-      href: "/leadership",
-    },
-    {
-      label: "Fellowship",
-      href: "/fellowship",
-    },
-    {
-      label: "Service",
-      href: "/service",
+      item: "Recruitment",
+      sublinks: [
+        {
+          label: "Joining",
+          href: "/joining",
+        },
+        {
+          label: "Events",
+          href: "/recruitment",
+        },
+      ],
     },
   ],
-  navMenuItems: [
-    {
-      label: "Lost & Found",
-      href: "/laf",
-    },
-    {
-      label: "Backtests",
-      href: "/backtests",
-    },
-    {
-      label: "Borrow Tech",
-      href: "/borrowtech",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
-    {
-      label: "Joining",
-      href: "/joining",
-    },
-    {
-      label: "Awards",
-      href: "/awards",
-    },
-    {
-      label: "Leadership",
-      href: "/leadership",
-    },
-    {
-      label: "Fellowship",
-      href: "/fellowship",
-    },
-    {
-      label: "Service",
-      href: "/service",
-    },
-    {
-      label: "Login",
-      href: "/login",
-    },
-  ],
-  links: {
-    github: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
-    docs: "https://nextui-docs-v2.vercel.app",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
 };
