@@ -76,7 +76,7 @@ export default function AuthorizedLoanerTech({
               className={`p-2 border ${
                 isSelected ? "border-blue-500" : "border-transparent"
               }`}
-              onClick={() => {
+              onPress={() => {
                 const operationMode = isCheckedOut(selectedCards, loanerTech)
                   ? "check-in"
                   : "check-out";

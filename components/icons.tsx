@@ -488,3 +488,80 @@ export const Money = ({ size = 24, width, height, ...props }: IconSvgProps) => (
     </g>
   </svg>
 );
+
+export const EditIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 24 24"
+      width={size || width}
+      {...props}
+    >
+      <path
+        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+
+      <polygon
+        fill="none"
+        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+};
+
+export const LeaveIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 24 24"
+      width={size || width}
+      {...props}
+    >
+      <g clipPath="url(#clip0_105_1815)">
+        <path
+          d="M15 4.00098H5V18.001C5 19.1055 5.89543 20.001 7 20.001H15"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          d="M16 15.001L19 12.001M19 12.001L16 9.00098M19 12.001H9"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_105_1815">
+          <rect
+            fill="currentColor"
+            height="24"
+            transform="translate(0 0.000976562)"
+            width="24"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
