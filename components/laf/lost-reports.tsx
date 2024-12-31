@@ -90,6 +90,10 @@ export default function LostReports({
     fetchLostReportItems({ ...formData, [name]: value }, setItems, logout);
   };
 
+  const updateTable = () => {
+    fetchLostReportItems({ ...formData }, setItems, logout);
+  };
+
   return (
     <>
       <form className="flex flex-1 flex-col gap-3 px-6 py-2">
@@ -218,7 +222,13 @@ export default function LostReports({
           onChange={(e) => handleChange("description", e.target.value)}
         />
       </form>
-      <LostReportItems items={items} />
+      <LostReportItems
+        items={items}
+        lafTypes={lafTypes}
+        lafLocations={lafLocations}
+        updateTable={updateTable}
+        edit={true}
+      />
     </>
   );
 }
