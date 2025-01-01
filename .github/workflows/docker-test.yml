@@ -18,7 +18,7 @@ jobs:
 
       - name: Build React App
         run: |
-          npm ci
+          npm install
           NEXT_PUBLIC_BACKEND_SERVER="https://api.apoez.org"
           npm run build
 
