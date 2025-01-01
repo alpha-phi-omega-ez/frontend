@@ -7,8 +7,8 @@ WORKDIR /usr/share/nginx/html
 # Remove the default Nginx static files
 RUN rm -rf ./*
 
-# Copy the build files from your React app into the container
-COPY ./build/ .
+# Copy the build files from your Next app into the container
+COPY build/ .
 
 # Copy a custom Nginx configuration file
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
