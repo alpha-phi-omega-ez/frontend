@@ -8,7 +8,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copy the build files from your Next app into the container
-COPY build/ .
+COPY .next/ .
 
 # Copy a custom Nginx configuration file
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
