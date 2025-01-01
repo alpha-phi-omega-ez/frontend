@@ -152,10 +152,10 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
 
 export async function getServerSideProps() {
   const lafTypes = await fetch(
-    `${process.env.NEXT_INTERNAL_BACKEND_SERVER}/laf/types/`
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/types/`
   ).then((res) => res.json());
   const lafLocations = await fetch(
-    `${process.env.NEXT_INTERNAL_BACKEND_SERVER}/laf/locations/`
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/locations/`
   ).then((res) => res.json());
   return {
     props: { lafTypes: lafTypes["data"], lafLocations: lafLocations["data"] },

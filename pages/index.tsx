@@ -140,7 +140,7 @@ export default function IndexPage() {
           </h3>
           <div className="grid sm:grid-cols-3 gap-6 my-8 text-left">
             <div className="col-span-2">
-              <Image src="/images/2023_Composite.jpg" alt="Chapter Composite" />
+              <Image src="/images/2024_Composite.jpg" alt="Chapter Composite" />
             </div>
             <div>
               <div>

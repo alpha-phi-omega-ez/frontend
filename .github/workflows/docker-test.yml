@@ -1,0 +1,35 @@
+name: Docker Build Test
+
+on:
+  pull_request:
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "**.ts"
+      - "**.tsx"
+      - "package.json"
+      - "package-lock.json"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build React App
+        run: |
+          npm install
+          NEXT_PUBLIC_BACKEND_SERVER="https://api.apoez.org"
+          npm run build
+
+      - name: "Build Docker Image"
+        run: |
+          docker build -t apoez-frontend .
+
+      - name: "Run Docker Container"
+        run: |
+          docker run -d --name apoez-frontend-container apoez-frontend
+          sleep 30
+          docker logs apoez-frontend-container
+          docker stop apoez-frontend-container
+          docker rm apoez-frontend-container

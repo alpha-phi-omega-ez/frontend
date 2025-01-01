@@ -1,6 +1,6 @@
 import { title } from "@/components/primitives";
 import DefaultCarousel from "@/components/carousel";
-import { Events } from "./events";
+import { Events } from "@/data/service_events";
 
 export default function ServiceEventsPage() {
   return (

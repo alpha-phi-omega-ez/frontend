@@ -230,7 +230,13 @@ export default function FoundItemForm({
           <h2 className="text-center mt-5 text-3xl">
             Potential Matching Lost Reports
           </h2>
-          <LostReportItems items={items} />
+          <LostReportItems
+            items={items}
+            lafTypes={[]}
+            lafLocations={[]}
+            updateTable={() => {}}
+            edit={false}
+          />
         </>
       )}
     </>

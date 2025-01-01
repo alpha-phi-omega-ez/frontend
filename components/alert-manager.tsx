@@ -1,19 +1,14 @@
 import { Alert } from "@nextui-org/react";
+import { AlertType } from "@/types";
 
 // AlertManager component
 interface AlertManagerProps {
   alerts: {
     message: string;
-    type:
-      | "success"
-      | "danger"
-      | "default"
-      | "primary"
-      | "secondary"
-      | "warning";
+    type: AlertType;
   }[];
   setAlerts: React.Dispatch<
-    React.SetStateAction<{ message: string; type: string }[]>
+    React.SetStateAction<{ message: string; type: AlertType }[]>
   >;
 }
 

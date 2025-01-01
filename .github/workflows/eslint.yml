@@ -1,0 +1,27 @@
+name: Lint
+
+on:
+  pull_request:
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "**.ts"
+      - "**.tsx"
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run EsLint
+        uses: sibiraj-s/action-eslint@v3
+        with:
+          eslint-args: "./**/*.{ts,tsx} --max-warnings=0"
+          annotations: true

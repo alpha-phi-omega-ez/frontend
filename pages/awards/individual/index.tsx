@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { DSKS, OLAS } from "./recipients";
+import { DSKS, OLAS } from "@/data/individual_awards";
 
 export default function IndividualAwardsPage() {
   return (
