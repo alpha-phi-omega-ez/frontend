@@ -1,17 +1,27 @@
-export const awards = [
+interface Award {
+  name: string;
+  years: string;
+  from: string;
+  purpose: string;
+}
+
+interface AwardImage {
+  img: string;
+  alt: string;
+}
+
+export const awards: Award[] = [
   {
     name: "Joseph J. Scanlon National Certificate of Merit",
     years: "2024",
     from: "APO National Office",
-    purpose:
-      "Recognition for significant membership growth.",
+    purpose: "Recognition for significant membership growth.",
   },
   {
     name: "Diamond Level Chapter of Excellence",
     years: "2024",
     from: "APO National Office",
-    purpose:
-      "Recognition for a chapter with string LFS programs.",
+    purpose: "Recognition for a chapter with string LFS programs.",
   },
   {
     name: "Dean Arno Nowotny",
@@ -154,4 +164,9 @@ export const awards = [
     from: "APO National Office",
     purpose: "Outstanding achievement in chapter administration and program.",
   },
+];
+
+export const award_images: AwardImage[] = [
+  { img: "/images/APO_Awards.jpg", alt: "2023 Awards" },
+  { img: "/images/2004_awards.jpg", alt: "2004 Awards" },
 ];

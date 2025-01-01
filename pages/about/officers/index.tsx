@@ -1,6 +1,6 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { title } from "@/components/primitives";
-import { officers } from "./officers";
+import { officers } from "@/data/officers";
 
 export default function OfficersPage() {
   return (

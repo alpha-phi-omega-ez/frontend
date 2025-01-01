@@ -113,7 +113,7 @@ export default function BacktestPage({ courseCodes }: BacktestPageProps) {
 
 export async function getServerSideProps() {
   const courseCodes = await fetch(
-    `${process.env.NEXT_INTERNAL_BACKEND_SERVER}/coursecodes/`
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/coursecodes/`
   ).then((res) => res.json());
   return { props: { courseCodes: courseCodes["data"] } };
 }

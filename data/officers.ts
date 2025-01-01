@@ -1,4 +1,11 @@
-export const officers = [
+interface Officer {
+  position: string;
+  img: string;
+  description: string;
+  name: string;
+}
+
+export const officers: Officer[] = [
   {
     position: "President",
     img: "/images/officers/president.jpg",

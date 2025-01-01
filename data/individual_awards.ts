@@ -1,4 +1,4 @@
-export const DSKS = [
+export const DSKS: string[] = [
   "Kedaar Iyer",
   "Christopher Dostilio",
   "Samael Collins",
@@ -101,7 +101,7 @@ export const DSKS = [
   "Richard Fuhrman",
 ];
 
-export const OLAS = [
+export const OLAS: string[] = [
   "Kedaar Iyer",
   "Jetta McPhee",
   "Daegan Fuss",

@@ -1,6 +1,6 @@
 import { title } from "@/components/primitives";
 import { Image } from "@nextui-org/react";
-import { recipients } from "./recipients";
+import { recipients } from "@/data/scholarship_recipients";
 
 export default function ServiceProgramPage() {
   return (

@@ -1,4 +1,14 @@
-export const recipients = [
+interface Recipient {
+  name: string;
+  img?: string;
+}
+
+interface Year {
+  year: number;
+  recipients: Recipient[];
+}
+
+export const recipients: Year[] = [
   {
     year: 2024,
     recipients: [

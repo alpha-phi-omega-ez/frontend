@@ -1,3 +1,5 @@
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { title } from "@/components/primitives";
 import {
   Timeline,
@@ -7,8 +9,32 @@ import {
   TimelineContent,
   TimelineDot,
 } from "@mui/lab";
-import AwardImages from "./carousel";
-import { awards } from "./awards";
+import Slider from "react-slick";
+import { Image } from "@nextui-org/react";
+import { awards, award_images } from "@/data/chapter_awards";
+
+const AwardImages = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    accessibility: true,
+    autoplay: true,
+    arrows: false,
+    autoplaySpeed: 5500,
+  };
+  return (
+    <Slider {...settings}>
+      {award_images.map((item, index) => (
+        <div key={index}>
+          <Image className="w-full" src={item.img} alt={item.alt} />
+        </div>
+      ))}
+    </Slider>
+  );
+};
 
 export default function ChapterAwardsPage() {
   return (
