@@ -25,7 +25,7 @@ export default function BacktestPage({ courseCodes }: BacktestPageProps) {
     null
   );
   const [backtests, setBacktests] = useState<
-    null | { type: string; tests: string[] }[]
+    null | { type: string; backtests: string[] }[]
   >(null);
 
   return (
