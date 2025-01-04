@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# Googlebot
+User-agent: Googlebot
+Disallow: /admin
+
+# Host
+Host: https://apoez.org
+
+# Sitemaps
+Sitemap: https://apoez.org/sitemap.xml

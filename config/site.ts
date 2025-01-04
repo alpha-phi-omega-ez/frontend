@@ -4,6 +4,8 @@ export const siteConfig = {
   name: "Alpha Phi Omega - Epsilon Zeta Chapter",
   description:
     "Website for the Alpha Phi Omega, Epsilon Zeta Chapter at Rensselaer Polytechnic Institute.",
+  keywords:
+    "APOEZ APO Alpha Phi Omega Epsilon Zeta RPI Rensselaer Polytechnic Institute Lost and Found Backtests Loaner Tech Community Service Fellowship Leadership Friendship Professional Development Student Organization",
   navItems: [
     {
       item: "About Us",

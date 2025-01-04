@@ -10,6 +10,9 @@ RUN rm -rf ./*
 # Copy the build files from your Next app into the container
 COPY .next/ .
 
+# Copy the public folder to include static files
+COPY public/ ./public/
+
 # Copy a custom Nginx configuration file
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
