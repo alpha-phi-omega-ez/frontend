@@ -16,7 +16,7 @@ interface CoursesProps {
     SetStateAction<
       | {
           type: string;
-          tests: string[];
+          backtests: string[];
         }[]
       | null
     >

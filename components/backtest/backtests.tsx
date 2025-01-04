@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 interface BacktestsProps {
-  backtests: null | { type: string; tests: string[] }[];
+  backtests: null | { type: string; backtests: string[] }[];
 }
 
 export default function Backtests({ backtests }: BacktestsProps) {
@@ -13,7 +13,7 @@ export default function Backtests({ backtests }: BacktestsProps) {
             <Card key={item.type}>
               <CardHeader>{item.type}</CardHeader>
               <CardBody>
-                {item.tests.map((test) => {
+                {item.backtests.map((test) => {
                   return <p key={test}>{test}</p>;
                 })}
               </CardBody>
