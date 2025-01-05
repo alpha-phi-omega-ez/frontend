@@ -21,6 +21,7 @@ export const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const { auth } = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
@@ -83,6 +84,41 @@ export const Navbar = () => {
             )}
           </div>
         ))}
+        {isAuthenticated && (
+          <div
+            key="admin"
+            className="relative group"
+            onMouseEnter={() => setOpenDropdown("admin")}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <NavbarItem>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent main-white-font text-lg"
+                endContent={<ChevronDown fill="currentColor" size={16} />}
+                radius="sm"
+                variant="light"
+              >
+                Admin
+              </Button>
+            </NavbarItem>
+
+            {/* Dropdown menu */}
+            {openDropdown === "admin" && (
+              <Card className="absolute top-full left-0 py-2 shadow-lg z-50 rounded-md w-max min-w-[200px]">
+                {siteConfig.adminNavItems.map((sublink) => (
+                  <a
+                    key={sublink.href}
+                    href={sublink.href}
+                    className="py-2 px-4 text-base hover:bg-gray-600 whitespace-nowrap"
+                  >
+                    {sublink.label}
+                  </a>
+                ))}
+              </Card>
+            )}
+          </div>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -91,7 +127,7 @@ export const Navbar = () => {
           <Button
             className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
             onPress={() => {
-              if (auth.isAuthenticated) {
+              if (isAuthenticated) {
                 router.push("/logout");
               } else {
                 handleLogin();
@@ -99,7 +135,7 @@ export const Navbar = () => {
             }}
             variant="flat"
           >
-            {auth.isAuthenticated ? "Logout" : "Login"}
+            {isAuthenticated ? "Logout" : "Login"}
           </Button>
         </NavbarItem>
         <NavbarMenuToggle />
@@ -111,21 +147,19 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
-          <NavbarItem>
-            <Button
-              className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
-              onPress={() => {
-                if (auth.isAuthenticated) {
-                  router.push("/logout");
-                } else {
-                  handleLogin();
-                }
-              }}
-              variant="flat"
-            >
-              {auth.isAuthenticated ? "Logout" : "Login"}
-            </Button>
-          </NavbarItem>
+          <Button
+            className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
+            onPress={() => {
+              if (isAuthenticated) {
+                router.push("/logout");
+              } else {
+                handleLogin();
+              }
+            }}
+            variant="flat"
+          >
+            {isAuthenticated ? "Logout" : "Login"}
+          </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
