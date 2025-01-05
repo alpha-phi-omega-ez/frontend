@@ -4,7 +4,7 @@ module.exports = {
   changefreq: "weekly",
   priority: 0.7,
   sitemapSize: 5000,
-  exclude: ["/admin/*"],
+  exclude: ["/admin/*", "/wiki/*"],
   robotsTxtOptions: {
     policies: [
       {
@@ -14,6 +14,7 @@ module.exports = {
       {
         userAgent: "Googlebot",
         disallow: "/admin",
+        disallow: "/wiki",
       },
     ],
   },
