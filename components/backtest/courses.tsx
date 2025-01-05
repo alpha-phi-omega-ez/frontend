@@ -16,7 +16,7 @@ interface CoursesProps {
     SetStateAction<
       | {
           type: string;
-          backtests: string[];
+          tests: string[];
         }[]
       | null
     >
@@ -42,7 +42,7 @@ export default function Courses({
   };
 
   const selectCourse = (item: { id: string; name: string }) => {
-    fetchBacktests(item.id);
+    fetchBacktests(item.id); // TODO: update to wait for request to be complete
     setCurrentCourse(item);
     setView("backtests");
   };
