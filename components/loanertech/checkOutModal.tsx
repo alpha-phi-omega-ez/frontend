@@ -8,6 +8,7 @@ import {
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 interface CheckOutModalContentProps {
   isOpen: boolean;
@@ -45,6 +46,7 @@ export default function CheckOutModalContent({
   setLoanerTech,
 }: CheckOutModalContentProps) {
   const { logout } = useAuth();
+  const { newAlert } = useAlert();
 
   const {
     register,
@@ -102,6 +104,7 @@ export default function CheckOutModalContent({
       }
     } catch (error) {
       console.error("Checkout operation failed:", error);
+      newAlert("Failed to check out loanertech items", "danger");
     }
     reset();
     clearErrors();

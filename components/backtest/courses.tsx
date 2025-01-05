@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { SelectableCard } from "@/components/selectable-card";
+import { useAlert } from "@/context/AlertContext";
 
 interface CoursesProps {
   courses: null | { id: string; name: string }[];
@@ -29,15 +30,22 @@ export default function Courses({
   setView,
   setBacktests,
 }: CoursesProps) {
+  const { newAlert } = useAlert();
   const fetchBacktests = async (id: string) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/backtest/${id}`
-    );
-    if (!response.ok) {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/backtest/${id}`
+      );
+      if (!response.ok) {
+        setView("error");
+      } else {
+        const data = await response.json();
+        setBacktests(data["data"]);
+      }
+    } catch (error) {
+      console.error(error);
+      newAlert("Failed to update Lost Report", "danger");
       setView("error");
-    } else {
-      const data = await response.json();
-      setBacktests(data["data"]);
     }
   };
 

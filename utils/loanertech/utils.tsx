@@ -34,6 +34,7 @@ export async function fetchLoanerTech(
       }
     }
   } catch (error) {
+    console.error(error);
     setLoanerTech([]);
   }
 }

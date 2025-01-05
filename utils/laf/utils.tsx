@@ -33,22 +33,27 @@ export async function fetchLAFItems(
   // Prepare params based on form data
   const params = await convertFormToParams(formData);
 
-  // Make the fetch request
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/?${params}`,
-    {
-      method: "GET",
-      credentials: "include",
-    }
-  );
+  try {
+    // Make the fetch request
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/?${params}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
 
-  if (response.ok) {
-    const response_data = await response.json();
-    setLafItems(response_data.data);
-  } else if (response.status === 401) {
-    logout();
-  } else {
-    console.error("Failed to fetch LAF items", response);
+    if (response.ok) {
+      const response_data = await response.json();
+      setLafItems(response_data.data);
+    } else if (response.status === 401) {
+      logout();
+    } else {
+      console.error("Failed to fetch LAF items", response);
+    }
+  } catch (error) {
+    console.error(error);
+    setLafItems([]);
   }
 }
 
@@ -60,21 +65,26 @@ export async function fetchLostReportItems(
   // Prepare params based on form data
   const params = await convertFormToParams(formData);
 
-  // Make the fetch request
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/?${params}`,
-    {
-      method: "GET",
-      credentials: "include",
-    }
-  );
+  try {
+    // Make the fetch request
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/?${params}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
 
-  if (response.ok) {
-    const response_data = await response.json();
-    setLostReportItems(response_data.data);
-  } else if (response.status === 401) {
-    logout();
-  } else {
-    console.error("Failed to fetch Lost Reports", response);
+    if (response.ok) {
+      const response_data = await response.json();
+      setLostReportItems(response_data.data);
+    } else if (response.status === 401) {
+      logout();
+    } else {
+      console.error("Failed to fetch Lost Reports", response);
+    }
+  } catch (error) {
+    console.error(error);
+    setLostReportItems([]);
   }
 }

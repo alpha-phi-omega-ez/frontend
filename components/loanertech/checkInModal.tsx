@@ -7,6 +7,7 @@ import {
 } from "./modalComponents";
 import { Dispatch, SetStateAction } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 interface CheckInModalContentProps {
   isOpen: boolean;
@@ -36,6 +37,7 @@ export default function CheckInModalContent({
   setLoanerTech,
 }: CheckInModalContentProps) {
   const { logout } = useAuth();
+  const { newAlert } = useAlert();
 
   const checkIn = async () => {
     try {
@@ -60,6 +62,7 @@ export default function CheckInModalContent({
       }
     } catch (error) {
       console.error("Checkin operation failed:", error);
+      newAlert("Failed to check in loanertech items", "danger");
     }
   };
 

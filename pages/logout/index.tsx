@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 export default function LogoutPage() {
   const router = useRouter();
   const { auth, logout } = useAuth();
   const [error, setError] = useState(false);
+  const { newAlert } = useAlert();
 
   useEffect(() => {
     if (auth.isAuthenticated) {
@@ -28,6 +30,7 @@ export default function LogoutPage() {
         })
         .catch((error) => {
           console.error("Error fetching token:", error);
+          newAlert("Failed to logout", "danger");
           setError(true);
         });
     } else {

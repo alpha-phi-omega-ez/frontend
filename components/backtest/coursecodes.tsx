@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { SelectableCard } from "@/components/selectable-card";
+import { useAlert } from "@/context/AlertContext";
 
 interface CourseCodesProps {
   courseCodes: null | string[];
@@ -24,15 +25,23 @@ export default function CourseCodes({
   setView,
   setCourses,
 }: CourseCodesProps) {
+  const { newAlert } = useAlert();
+
   const fetchCourses = async (code: string) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/courses/${code}`
-    );
-    if (!response.ok) {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/courses/${code}`
+      );
+      if (!response.ok) {
+        setView("error");
+      } else {
+        const data = await response.json();
+        setCourses(data["data"]);
+      }
+    } catch (error) {
+      console.error(error);
+      newAlert(`Failed to fetch courses for ${code}`, "danger");
       setView("error");
-    } else {
-      const data = await response.json();
-      setCourses(data["data"]);
     }
   };
 
