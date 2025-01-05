@@ -58,7 +58,7 @@ export default function CourseCodes({
           return (
             <SelectableCard
               key={item}
-              onClick={() => {
+              onPress={() => {
                 selectCode(item);
               }}
               title={item}

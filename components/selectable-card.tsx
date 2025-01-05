@@ -2,15 +2,15 @@ import { Card, CardBody } from "@nextui-org/react";
 
 interface SelectableCardProps {
   title: string;
-  onClick: () => void;
+  onPress: () => void;
 }
 
-export function SelectableCard({ title, onClick }: SelectableCardProps) {
+export function SelectableCard({ title, onPress }: SelectableCardProps) {
   return (
     <Card
       isPressable
       isHoverable
-      onPress={onClick}
+      onPress={onPress}
       style={{ cursor: "pointer", width: "100%" }}
     >
       <CardBody>

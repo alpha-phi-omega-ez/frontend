@@ -62,7 +62,7 @@ export default function Courses({
           return (
             <SelectableCard
               key={item.id}
-              onClick={() => {
+              onPress={() => {
                 selectCourse(item);
               }}
               title={item.name}
