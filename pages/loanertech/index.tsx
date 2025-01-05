@@ -43,7 +43,7 @@ export default function LoanerTechPage() {
 
   return (
     <>
-      <section className="justify-center pb-4 md:pb-6 text-center">
+      <section className="justify-center pb-4 md:pb-6 text-center mb-5">
         <div className="mb-10">
           <h1 className={title()}>Loaner Tech</h1>
         </div>
