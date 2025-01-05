@@ -28,7 +28,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   const { newAlert } = useAlert();
   const columns = [
     {
-      key: "id",
+      key: "display_id",
       label: "ID",
     },
     {
