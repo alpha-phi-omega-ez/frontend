@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build React App
+      - name: Build Next App
         run: |
           npm install
           NEXT_PUBLIC_BACKEND_SERVER="https://api.apoez.org"
