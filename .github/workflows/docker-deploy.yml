@@ -23,11 +23,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Set Environment Variables
+        # run: echo "NEXT_PUBLIC_BACKEND_SERVER=https://api.apoez.org" > .env
+        run: echo "NEXT_PUBLIC_BACKEND_SERVER=http://apo-srv1.union.rpi.edu/api" > .env
 
       - name: Build Next App
-        env:
-          # NEXT_PUBLIC_BACKEND_SERVER="https://api.apoez.org" # Production
-          NEXT_PUBLIC_BACKEND_SERVER="http://apo-srv1.union.rpi.edu/api" # TEMP
         run: |
           npm install
           npm run build
