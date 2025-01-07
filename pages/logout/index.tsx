@@ -22,10 +22,14 @@ export default function LogoutPage() {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            console.log("Logged out successfully");
-            logout();
-            router.push("/");
-            return null;
+            Promise.resolve(logout()).then(() => {
+              console.log("Logged out successfully");
+              router.push("/");
+              return null;
+            });
+          } else {
+            newAlert("Failed to logout", "danger");
+            setError(true);
           }
         })
         .catch((error) => {
@@ -34,7 +38,9 @@ export default function LogoutPage() {
           setError(true);
         });
     } else {
-      router.push("/");
+      Promise.resolve(logout()).then(() => {
+        router.push("/");
+      });
     }
   }, [router]);
 
