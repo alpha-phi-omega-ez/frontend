@@ -36,7 +36,6 @@ export default function CheckInModalContent({
   setSelectedCards,
   setLoanerTech,
 }: CheckInModalContentProps) {
-  const { logout } = useAuth();
   const { newAlert } = useAlert();
 
   const checkIn = async () => {
@@ -56,7 +55,7 @@ export default function CheckInModalContent({
       );
 
       if (response.ok) {
-        fetchLoanerTech(setLoanerTech, logout); // Refresh data
+        fetchLoanerTech(setLoanerTech); // Refresh data
         setSelectedCards([]);
         onOpenChange(); // Close modal after submission
       }

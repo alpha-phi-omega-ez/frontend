@@ -45,7 +45,6 @@ export default function CheckOutModalContent({
   setSelectedCards,
   setLoanerTech,
 }: CheckOutModalContentProps) {
-  const { logout } = useAuth();
   const { newAlert } = useAlert();
 
   const {
@@ -99,7 +98,7 @@ export default function CheckOutModalContent({
       );
 
       if (response.ok) {
-        fetchLoanerTech(setLoanerTech, logout); // Refresh data
+        fetchLoanerTech(setLoanerTech); // Refresh data
         setSelectedCards([]);
       }
     } catch (error) {
