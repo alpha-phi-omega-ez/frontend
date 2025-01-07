@@ -40,7 +40,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       );
 
       if (response.ok) {
-        setAuth({ isAuthenticated: true });
+        const data = await response.json();
+        setAuth({ isAuthenticated: data.authenticated });
       } else {
         setAuth({ isAuthenticated: false });
       }
