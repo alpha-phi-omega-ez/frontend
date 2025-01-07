@@ -18,7 +18,7 @@ export default function Error({ title }: { title: string }) {
       <div className="flex justify-center mt-12 mb-8">
         <Button
           onPress={() => {
-            router.push("/logout");
+            router.push("/");
           }}
           className="p-8 text-xl main-blue-background main-gold-color"
           variant="flat"
