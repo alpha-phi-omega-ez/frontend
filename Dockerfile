@@ -1,27 +1,32 @@
-# Use the official Nginx image
-FROM nginx:stable-alpine
+FROM node:20-alpine
 
 # Set the working directory inside the container
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
 
-# Remove the default Nginx static files
-RUN rm -rf ./*
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Set correct permissions for nextjs user and don't run as root
+RUN addgroup nodejs
+RUN adduser -SDH nextjs
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
 
 # Copy the build files from your Next app into the container
-COPY .next/ .
-
-# Copy the public folder to include static files
+COPY .next/standalone ./
+COPY .next/static ./.next/static
 COPY public/ ./public/
 
-# Copy a custom Nginx configuration file
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-# Healthcheck for status of docker container
-HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://0.0.0.0:3000/api/health || exit 1
+USER nextjs
 
 # Expose port 3000
 EXPOSE 3000
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Healthcheck for status of docker container
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://0.0.0.0:3000/api/health || exit 1
+
+# Run the nextjs app
+CMD ["node", "server.js"]
