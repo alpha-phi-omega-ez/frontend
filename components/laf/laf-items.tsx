@@ -31,7 +31,7 @@ export default function LAFItems({
 }: LAFItemsProps) {
   const columns = [
     {
-      key: "id",
+      key: "display_id",
       label: "ID",
     },
     {

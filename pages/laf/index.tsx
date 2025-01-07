@@ -131,13 +131,21 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
         </>
       )}
       {!loading && !isAuthenticated && (
-        <NewLostReport
-          lafTypes={lafTypes}
-          lafLocations={lafLocations}
-          view={view}
-          switchToLostReport={switchToLostReport}
-          setSwitchToLostReport={setSwitchToLostReport}
-        />
+        <>
+          <p className="w-2/3 mx-auto mb-8 text-justify">
+            Submit a lost report for any items you have lost and provide contact
+            information so we can contact you if we find your item. You can also
+            visit our office in Union 3420 we are open every day class is in
+            session 10am-5pm.
+          </p>
+          <NewLostReport
+            lafTypes={lafTypes}
+            lafLocations={lafLocations}
+            view={view}
+            switchToLostReport={switchToLostReport}
+            setSwitchToLostReport={setSwitchToLostReport}
+          />
+        </>
       )}
       <div
         style={{

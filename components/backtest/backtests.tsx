@@ -10,9 +10,9 @@ export default function Backtests({ backtests }: BacktestsProps) {
       {Array.isArray(backtests) &&
         backtests.map((item) => {
           return (
-            <Card key={item.type}>
-              <CardHeader>{item.type}</CardHeader>
+            <Card key={item.type} className="p-2">
               <CardBody>
+                <h2 className="text-2xl mb-2 font-bold">{item.type}</h2>
                 {item.tests.map((test) => {
                   return <p key={test}>{test}</p>;
                 })}

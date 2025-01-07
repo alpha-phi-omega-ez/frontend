@@ -117,6 +117,15 @@ export default function FoundItemForm({
     }
   }, [view]);
 
+  const [descriptionChange, setDescriptionChange] = useState("");
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("description", descriptionChange);
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [descriptionChange]);
+
   const handleChange = (name: keyof FoundItemFormData, value: any) => {
     const updatedFormData = {
       ...formData,
@@ -218,7 +227,7 @@ export default function FoundItemForm({
           {...register("description", { required: "Description is required" })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => handleChange("description", e.target.value)}
+          onChange={(e) => setDescriptionChange(e.target.value)}
         />
 
         <Button color="primary" type="submit">

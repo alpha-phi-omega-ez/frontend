@@ -81,6 +81,15 @@ export default function LostReports({
     }
   }, [view]);
 
+  const [descriptionChange, setDescriptionChange] = useState("");
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("description", descriptionChange);
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [descriptionChange]);
+
   const handleChange = (name: keyof LostReportsFormData, value: any) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -219,7 +228,7 @@ export default function LostReports({
           {...register("description", { required: "Description is required" })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => handleChange("description", e.target.value)}
+          onChange={(e) => setDescriptionChange(e.target.value)}
         />
       </form>
       <LostReportItems

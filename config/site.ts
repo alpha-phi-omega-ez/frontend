@@ -94,4 +94,10 @@ export const siteConfig = {
       ],
     },
   ],
+  adminNavItems: [
+    {
+      label: "Wiki",
+      href: "/wiki",
+    },
+  ],
 };

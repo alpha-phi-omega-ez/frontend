@@ -28,7 +28,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   const { newAlert } = useAlert();
   const columns = [
     {
-      key: "id",
+      key: "display_id",
       label: "ID",
     },
     {
@@ -68,22 +68,27 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   const fetchExpiredItems = async () => {
     const params = new URLSearchParams(searchData);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/expired/?${params}`,
-      {
-        method: "GET",
-        credentials: "include",
-      }
-    );
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/expired/?${params}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
-    if (response.ok) {
-      const response_data = await response.json();
-      setExpiredItems(response_data.data.expired);
-      setPotentiallyExpiredItems(response_data.data.potential);
-    } else if (response.status === 401) {
-      logout();
-    } else {
-      console.error("Failed to fetch expired LAF items", response);
+      if (response.ok) {
+        const response_data = await response.json();
+        setExpiredItems(response_data.data.expired);
+        setPotentiallyExpiredItems(response_data.data.potential);
+      } else if (response.status === 401) {
+        logout();
+      } else {
+        console.error("Failed to fetch expired LAF items", response);
+      }
+    } catch (error) {
+      console.error(error);
+      newAlert(`Failed to fetch expired items`, "danger");
     }
   };
 
@@ -118,35 +123,40 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   };
 
   const archiveItems = async (table: string) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ids:
-            table === "expired"
-              ? expiredSelectedKeys
-              : potentiallyExpiredSelectedKeys,
-        }),
-      }
-    );
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ids:
+              table === "expired"
+                ? expiredSelectedKeys
+                : potentiallyExpiredSelectedKeys,
+          }),
+        }
+      );
 
-    if (response.ok) {
-      fetchExpiredItems();
-      if (table === "expired") {
-        setExpiredSelectedKeys([]);
+      if (response.ok) {
+        fetchExpiredItems();
+        if (table === "expired") {
+          setExpiredSelectedKeys([]);
+        } else {
+          setPotentiallyExpiredSelectedKeys([]);
+        }
+        newAlert("Successfully archived items", "success");
+      } else if (response.status === 401) {
+        logout();
       } else {
-        setPotentiallyExpiredSelectedKeys([]);
+        console.error("Failed to archive expired LAF items", response);
+        newAlert("Failed to archive expired LAF items", "danger");
       }
-      newAlert("Successfully archived items", "success");
-    } else if (response.status === 401) {
-      logout();
-    } else {
-      console.error("Failed to archive expired LAF items", response);
+    } catch (error) {
+      console.error(error);
       newAlert("Failed to archive expired LAF items", "danger");
     }
   };

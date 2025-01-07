@@ -13,8 +13,7 @@ export async function fetchLoanerTech(
           email?: string;
         }[]
     >
-  >,
-  logout: () => void
+  >
 ): Promise<void> {
   try {
     const response = await fetch(
@@ -29,11 +28,9 @@ export async function fetchLoanerTech(
     } else {
       const data = await response.json();
       setLoanerTech(data["data"]);
-      if (!data["loggedIn"]) {
-        logout();
-      }
     }
   } catch (error) {
+    console.error(error);
     setLoanerTech([]);
   }
 }

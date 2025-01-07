@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
 import { useDisclosure } from "@nextui-org/react";
@@ -23,18 +23,27 @@ export default function LoanerTechPage() {
         email?: string;
       }[]
   >([]);
-  const { logout } = useAuth();
+  const { auth, checkAuthStatus } = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [loanerTechAvailable, setLoanerTechAvailable] = useState(true);
+  const [loanerTechAvailable, setLoanerTechAvailable] = useState<boolean>(true);
+  const loanerTechAvailableRef = useRef<boolean>(loanerTechAvailable);
 
   useEffect(() => {
-    fetchLoanerTech(setLoanerTech, logout);
+    checkAuthStatus();
+    fetchLoanerTech(setLoanerTech);
     checkLoanerTechAvailablility(setLoanerTechAvailable);
 
     const intervalId = setInterval(() => {
-      fetchLoanerTech(setLoanerTech, logout);
-      checkLoanerTechAvailablility(setLoanerTechAvailable);
+      if (
+        isAuthenticated ||
+        (!isAuthenticated && loanerTechAvailableRef.current)
+      ) {
+        checkAuthStatus();
+        fetchLoanerTech(setLoanerTech);
+        checkLoanerTechAvailablility(setLoanerTechAvailable);
+      }
     }, 5000); // Fetch every 5 seconds
 
     // Clean up the interval on component unmount
@@ -43,15 +52,24 @@ export default function LoanerTechPage() {
 
   return (
     <>
-      <section className="justify-center pb-4 md:pb-6 text-center">
+      <section className="justify-center pb-4 md:pb-6 text-center mb-5">
         <div className="mb-10">
           <h1 className={title()}>Loaner Tech</h1>
         </div>
-        <LoanerTechSelector
-          selectedCards={selectedCards}
-          onOpen={onOpen}
-          loanerTech={loanerTech}
-        />
+        {isAuthenticated && (
+          <LoanerTechSelector
+            selectedCards={selectedCards}
+            onOpen={onOpen}
+            loanerTech={loanerTech}
+          />
+        )}
+        {!isAuthenticated && (
+          <p className="w-2/3 mx-auto text-center mb-8">
+            APO offers calculators and chargers at no cost to be borrowed during
+            the hours of 10 am and 4 pm. You can pick up items at the APO office
+            in Union room 3420 and return them by 4 pm the same day.
+          </p>
+        )}
         <LoanerTech
           loanerTech={loanerTech}
           loanerTechAvailable={loanerTechAvailable}

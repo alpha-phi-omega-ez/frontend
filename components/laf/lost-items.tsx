@@ -8,7 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { parseDate } from "@internationalized/date";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction, use } from "react";
 import LAFItems from "./laf-items";
 import { LAFItem, ViewState } from "@/types/laf";
 import { fetchLAFItems } from "@/utils/laf/utils";
@@ -63,6 +63,14 @@ export default function LostItems({
     description: "",
   });
   const [emptyForm, setEmptyForm] = useState(true);
+  const [descriptionChange, setDescriptionChange] = useState("");
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("description", descriptionChange);
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [descriptionChange]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -218,7 +226,7 @@ export default function LostItems({
           {...register("description")}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => handleChange("description", e.target.value)}
+          onChange={(e) => setDescriptionChange(e.target.value)}
         />
 
         {!emptyForm && (

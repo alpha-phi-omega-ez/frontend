@@ -1,6 +1,9 @@
-import { Image, Button, Link } from "@nextui-org/react";
+import { Image, Button } from "@nextui-org/react";
+import { useRouter } from "next/router";
 
 export default function Error({ title }: { title: string }) {
+  const router = useRouter();
+
   return (
     <div className="mb-10">
       <div className="text-center mb-10">
@@ -14,9 +17,10 @@ export default function Error({ title }: { title: string }) {
       />
       <div className="flex justify-center mt-12 mb-8">
         <Button
-          as={Link}
+          onPress={() => {
+            router.push("/");
+          }}
           className="p-8 text-xl main-blue-background main-gold-color"
-          href="/"
           variant="flat"
         >
           Home

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
+import { useAlert } from "@/context/AlertContext";
 
 export default function CallBackPage() {
   const router = useRouter();
   const { login } = useAuth();
   const [error, setError] = useState(false);
+  const { newAlert } = useAlert();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -29,6 +31,7 @@ export default function CallBackPage() {
         })
         .catch((error) => {
           console.error("Error fetching token:", error);
+          newAlert("Failed to login", "danger");
           setError(true);
         });
     } else {

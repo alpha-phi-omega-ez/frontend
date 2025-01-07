@@ -55,6 +55,15 @@ export default function CreateLostReportForm({
     },
   });
 
+  const [descriptionChange, setDescriptionChange] = useState("");
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("description", descriptionChange);
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [descriptionChange]);
+
   const [items, setItems] = useState<LAFItem[]>([]);
   const [formData, setFormData] = useState({
     type: "",
@@ -265,7 +274,7 @@ export default function CreateLostReportForm({
           })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => handleChange("description", e.target.value)}
+          onChange={(e) => setDescriptionChange(e.target.value)}
         />
 
         <Button color="primary" type="submit">

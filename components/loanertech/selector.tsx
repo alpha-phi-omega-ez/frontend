@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import { Button } from "@nextui-org/react";
 import { isCheckedOut } from "@/utils/loanertech/utils";
-import { useAuth } from "@/context/AuthContext";
 
 interface LoanerTechSelectorProps {
   selectedCards: number[];
@@ -23,28 +22,20 @@ export default function LoanerTechSelector({
   onOpen,
   loanerTech,
 }: LoanerTechSelectorProps) {
-  const { auth } = useAuth();
-
   return (
-    <>
-      {auth.isAuthenticated && (
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <Typography variant="body1">
-            Selected: {selectedCards.length}
-          </Typography>
-          <Button
-            disabled={!selectedCards.length}
-            onPress={onOpen}
-            style={{ width: "120px" }} // Set a fixed width
-          >
-            {!selectedCards.length
-              ? "Select Items"
-              : isCheckedOut(selectedCards, loanerTech)
-              ? "Check In"
-              : "Check Out"}
-          </Button>
-        </div>
-      )}
-    </>
+    <div className="flex items-center justify-center gap-4 mb-6">
+      <Typography variant="body1">Selected: {selectedCards.length}</Typography>
+      <Button
+        isDisabled={selectedCards.length === 0}
+        onPress={onOpen}
+        style={{ width: "120px" }} // Set a fixed width
+      >
+        {!selectedCards.length
+          ? "Select Items"
+          : isCheckedOut(selectedCards, loanerTech)
+          ? "Check In"
+          : "Check Out"}
+      </Button>
+    </div>
   );
 }
