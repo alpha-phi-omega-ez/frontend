@@ -25,8 +25,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Set Environment Variables
-        # run: echo "NEXT_PUBLIC_BACKEND_SERVER=https://api.apoez.org" > .env
-        run: echo "NEXT_PUBLIC_BACKEND_SERVER=http://apo-srv1.union.rpi.edu/api" > .env
+        run: echo "NEXT_PUBLIC_BACKEND_SERVER=https://apoez.org/api" > .env
 
       - name: Build Next App
         run: |
