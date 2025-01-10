@@ -672,7 +672,7 @@ export const PersonArmsUp = ({
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -694,7 +694,7 @@ export const Hourglass = ({
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -715,7 +715,7 @@ export const Calendar = ({
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -732,7 +732,7 @@ export const Door = ({ size = 24, width, height, ...props }: IconSvgProps) => (
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -748,7 +748,7 @@ export const Chart = ({ size = 24, width, height, ...props }: IconSvgProps) => (
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -772,7 +772,7 @@ export const PersonHandRaise = ({
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
@@ -789,7 +789,7 @@ export const Money = ({ size = 24, width, height, ...props }: IconSvgProps) => (
     focusable="false"
     height={size || height}
     role="presentation"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     width={size || width}
     {...props}
   >
