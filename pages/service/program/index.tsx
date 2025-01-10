@@ -9,16 +9,36 @@ import {
 } from "@/components/icons";
 import { title } from "@/components/primitives";
 import { Link, Image } from "@nextui-org/react";
+import {
+  images,
+  service_stats,
+  community_events,
+  other_events,
+} from "@/data/service_program";
 
-const images = [
-  {
-    img: "/images/Food_Bank.jpg",
-    alt: "Produce Sorting at Captial Region Food Bank",
-  },
-  { img: "/images/can_sorting.jpg", alt: "Bottle and Can Sorting" },
-  { img: "/images/Glump_Creation.jpg", alt: "Creating Glump" },
-  { img: "/images/Northern_Rivers.jpg", alt: "Painting at Northern Rivers" },
-];
+const IconWithText = ({
+  Icon,
+  label,
+  value,
+  color,
+}: {
+  Icon: any;
+  value: string;
+  label: string;
+  color?: "blue" | "yellow";
+}) => (
+  <div className="flex flex-col items-center">
+    <div
+      className={`flex items-center justify-center w-16 h-16 ${
+        color === "blue" ? "main-blue-background" : "main-gold-background"
+      } rounded-full`}
+    >
+      <Icon size={40} />
+    </div>
+    <h3 className="text-xl font-bold mt-2">{value}</h3>
+    <p>{label}</p>
+  </div>
+);
 
 export default function ServiceProgramPage() {
   return (
@@ -100,195 +120,114 @@ export default function ServiceProgramPage() {
         ))}
       </div>
 
-      <section className="text-center mb-4">
-        <h2 className="text-2xl font-bold">Spring 2024 Service Stats</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-          <div className="mx-auto">
-            <PersonArmsUp
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">47.7</h3>
-            <p>Average Voting Member Hours</p>
+      <section className="text-center mb-4 mt-6">
+        <h2 className="text-4xl font-bold my-6">Service Stats</h2>
+        {service_stats.map((item, index) => (
+          <div key={index}>
+            <h2 className="text-2xl font-bold mt-2">{item.title}</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6">
+              <IconWithText
+                color="blue"
+                Icon={PersonArmsUp}
+                value={item.average}
+                label="Average Active Member Hours"
+              />
+              <IconWithText
+                color="blue"
+                Icon={Hourglass}
+                value={item.hours}
+                label="Service Hours"
+              />
+              <IconWithText
+                color="blue"
+                Icon={Calendar}
+                value={item.events}
+                label="Unique Events"
+              />
+              <IconWithText
+                color="blue"
+                Icon={Door}
+                value={item.organizations}
+                label="Volunteer Organizations"
+              />
+            </div>
           </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">1717+</h3>
-            <p>Service Hours</p>
+        ))}
+        <h2 className="text-4xl font-bold mt-6">Community Events</h2>
+        {community_events.map((event, index) => (
+          <div key={index}>
+            <h3 className="text-xl font-bold mt-6">{event.title}</h3>
+            <div
+              className={`grid gap-4 mt-8 ${
+                event.stats.length === 1
+                  ? "grid-cols-1"
+                  : event.stats.length === 2
+                  ? "grid-cols-2"
+                  : event.stats.length === 3
+                  ? "grid-cols-3"
+                  : "grid-cols-2 sm:grid-cols-4"
+              } justify-center`}
+            >
+              {event.stats.map((stat, statIndex) => {
+                const IconComponent = {
+                  PersonArmsUp,
+                  Hourglass,
+                  Door,
+                  Chart,
+                  Money,
+                  PersonHandRaise,
+                }[stat.icon];
+                return (
+                  <IconWithText
+                    key={statIndex}
+                    color="yellow"
+                    Icon={IconComponent}
+                    value={stat.value}
+                    label={stat.label}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div className="mx-auto">
-            <Calendar
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">65</h3>
-            <p>Unique Events</p>
-          </div>
-          <div className="mx-auto">
-            <Door
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">22+</h3>
-            <p>Volunteer Organizations</p>
-          </div>
-        </div>
-        <h2 className="text-2xl font-bold mt-6">Fall 2023 Service Stats</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-          <div className="mx-auto">
-            <PersonArmsUp
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">64.8</h3>
-            <p>Average Voting Member Hours</p>
-          </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">2182+</h3>
-            <p>Service Hours</p>
-          </div>
-          <div className="mx-auto">
-            <Calendar
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">67</h3>
-            <p>Unique Events</p>
-          </div>
-          <div className="mx-auto">
-            <Door
-              className="mx-auto justify-center main-blue-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">17+</h3>
-            <p>Volunteer Organizations</p>
-          </div>
-        </div>
-        <h2 className="text-2xl font-bold mt-6">Community Events</h2>
-        <h3 className="text-xl font-bold mt-6">Sept 10, 2023 Service Day</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-          <div className="mx-auto">
-            <PersonArmsUp
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">93</h3>
-            <p>Atendees</p>
-          </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">349+</h3>
-            <p>Service Hours</p>
-          </div>
-          <div className="mx-auto">
-            <Door
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">4</h3>
-            <p>Organizations</p>
-          </div>
-          <div className="mx-auto">
-            <Chart
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">40%</h3>
-            <p>Increase in Attendance from last year</p>
-          </div>
-        </div>
-        <h3 className="text-xl font-bold mt-6">
-          March 31, 2024 Youth Service Day
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
-          <div className="mx-auto">
-            <PersonArmsUp
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">100+</h3>
-            <p>Atendees</p>
-          </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">45+</h3>
-            <p>Service Hours</p>
-          </div>
-          <div className="mx-auto">
-            <PersonHandRaise
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">13+</h3>
-            <p>Volunteers</p>
-          </div>
-        </div>
-        <h3 className="text-xl font-bold mt-6">Sept 10, 2023 Service Day</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8">
-          <div className="mx-auto">
-            <Money
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">$665</h3>
-            <p>Raised</p>
-          </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">123.75</h3>
-            <p>Service Hours</p>
-          </div>
-          <div className="mx-auto">
-            <Door
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">4</h3>
-            <p>Organizations</p>
-          </div>
-        </div>
+        ))}
         <h2 className="text-2xl font-bold mt-6">Other Large Events</h2>
-        <h3 className="text-xl font-bold mt-6">
-          Underground Railroad Education Center
-        </h3>
-        <p className="mt-3">
-          Created educational content for their social media to highlight
-          historical artifacts at the education center.
-        </p>
-        <div className="grid grid-cols-2 gap-4 mt-8">
-          <div className="mx-auto">
-            <PersonHandRaise
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">10</h3>
-            <p>Volunteers</p>
+        {other_events.map((event, index) => (
+          <div key={index}>
+            <h3 className="text-xl font-bold mt-6">{event.title}</h3>
+            <p className="mt-3">{event.description}</p>
+            <div
+              className={`grid gap-4 mt-8 ${
+                event.stats.length === 1
+                  ? "grid-cols-1"
+                  : event.stats.length === 2
+                  ? "grid-cols-2"
+                  : event.stats.length === 3
+                  ? "grid-cols-3"
+                  : "grid-cols-2 sm:grid-cols-4"
+              } justify-center`}
+            >
+              {event.stats.map((stat, statIndex) => {
+                const IconComponent = {
+                  PersonArmsUp,
+                  Hourglass,
+                  Door,
+                  Chart,
+                  Money,
+                  PersonHandRaise,
+                }[stat.icon];
+                return (
+                  <IconWithText
+                    key={statIndex}
+                    color="yellow"
+                    Icon={IconComponent}
+                    value={stat.value}
+                    label={stat.label}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div className="mx-auto">
-            <Hourglass
-              className="mx-auto justify-center main-gold-background rounded-full p-2 mb-2"
-              size={70}
-            />
-            <h3 className="text-xl font-bold">50</h3>
-            <p>Service Hours</p>
-          </div>
-        </div>
+        ))}
       </section>
     </section>
   );
