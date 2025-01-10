@@ -79,6 +79,12 @@ export const recipients: Year[] = [
         name: "Rafael Cenzano",
         img: "/images/scholarship/2021/rafael_cenzano.jpg",
       },
+      {
+        name: "Kyus Spencer",
+      },
+      {
+        name: "Julian Scarpa",
+      },
     ],
   },
 ];
