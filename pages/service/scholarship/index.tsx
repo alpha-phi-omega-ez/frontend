@@ -31,11 +31,11 @@ export default function ServiceProgramPage() {
         </h2>
         {recipients.map((year) => (
           <div key={year.year} className="my-5">
-            <h3 className="text-xl font-bold mt-5 text-center">{year.year}</h3>
+            <h3 className="text-3xl font-bold my-5 text-center">{year.year}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {year.recipients.map((recipient) => (
                 <div key={recipient.name} className="text-center my-3">
-                  {"img" in recipient && (
+                  {"img" in recipient ? (
                     <div className="flex justify-center">
                       <Image
                         src={recipient.img}
@@ -45,8 +45,14 @@ export default function ServiceProgramPage() {
                         className="object-cover"
                       />
                     </div>
+                  ) : (
+                    <div className="flex items-center justify-center h-48">
+                      <p className="mt-2 font-bold">{recipient.name}</p>
+                    </div>
                   )}
-                  <p className="mt-2 font-bold">{recipient.name}</p>
+                  {"img" in recipient && (
+                    <p className="mt-2 font-bold">{recipient.name}</p>
+                  )}
                 </div>
               ))}
             </div>
