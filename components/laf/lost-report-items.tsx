@@ -131,7 +131,7 @@ export default function LostReportItems({
                     </div>
                   ) : columnKey === "location" ? (
                     item.location.map((loc, index) => (
-                      <Chip key={index} className="mr-1">
+                      <Chip key={index} className="mr-1 my-1">
                         {loc}
                       </Chip>
                     ))
