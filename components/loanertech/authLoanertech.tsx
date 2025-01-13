@@ -1,18 +1,10 @@
 import { Card, CardBody } from "@nextui-org/card";
 import { isCheckedOut } from "@/utils/loanertech/utils";
 import { Dispatch, SetStateAction } from "react";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface AuthorizedLoanerTechProps {
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[];
+  loanerTech: false | LoanerTechType[];
   selectedCards: number[];
   setSelectedCards: Dispatch<SetStateAction<number[]>>;
 }

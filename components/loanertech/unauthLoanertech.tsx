@@ -1,16 +1,8 @@
 import { Card, CardBody } from "@nextui-org/card";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface UnAuthorizedLoanerTechProps {
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[];
+  loanerTech: false | LoanerTechType[];
   loanerTechAvailable: boolean;
 }
 

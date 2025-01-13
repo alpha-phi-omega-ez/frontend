@@ -1,19 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
+import { LoanerTechType } from "@/types/loanertech";
 
 export async function fetchLoanerTech(
-  setLoanerTech: Dispatch<
-    SetStateAction<
-      | false
-      | {
-          description: string;
-          id: number;
-          in_office: boolean;
-          name?: string;
-          phone?: string;
-          email?: string;
-        }[]
-    >
-  >
+  setLoanerTech: Dispatch<SetStateAction<false | LoanerTechType[]>>
 ): Promise<void> {
   try {
     const response = await fetch(
@@ -37,16 +26,7 @@ export async function fetchLoanerTech(
 
 export function isCheckedOut(
   selectedCards: number[],
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[]
+  loanerTech: false | LoanerTechType[]
 ): boolean {
   return selectedCards.every(
     (id) =>
