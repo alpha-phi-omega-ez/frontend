@@ -10,25 +10,17 @@ import {
 import LoanerTech from "@/components/loanertech/loanertech";
 import CheckInCheckOutModalContent from "@/components/loanertech/modals";
 import LoanerTechSelector from "@/components/loanertech/selector";
+import { LoanerTechType } from "@/types/loanertech";
 
 export default function LoanerTechPage() {
-  const [loanerTech, setLoanerTech] = useState<
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[]
-  >([]);
+  const [loanerTech, setLoanerTech] = useState<false | LoanerTechType[]>([]);
   const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [loanerTechAvailable, setLoanerTechAvailable] = useState<boolean>(true);
   const loanerTechAvailableRef = useRef<boolean>(loanerTechAvailable);
+  const [itemsCheckedOut, setItemsCheckedOut] = useState<number>(0);
 
   useEffect(() => {
     checkAuthStatus();
@@ -50,18 +42,39 @@ export default function LoanerTechPage() {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    if (loanerTech) {
+      const checkedOut = loanerTech.filter((item) => !item.in_office);
+      setItemsCheckedOut(checkedOut.length);
+    }
+  }, [loanerTech]);
+
   return (
     <>
       <section className="justify-center pb-4 md:pb-6 text-center mb-5">
-        <div className="mb-10">
+        <div className="mb-6">
           <h1 className={title()}>Loaner Tech</h1>
         </div>
         {isAuthenticated && (
-          <LoanerTechSelector
-            selectedCards={selectedCards}
-            onOpen={onOpen}
-            loanerTech={loanerTech}
-          />
+          <>
+            <div className="mb-4 mx-auto w-fit">
+              <p
+                className={
+                  !loanerTechAvailable && itemsCheckedOut > 0
+                    ? "rounded p-2 bg-orange-500 font-bold"
+                    : undefined
+                }
+              >
+                {itemsCheckedOut} Item{itemsCheckedOut !== 1 ? "s" : ""} checked
+                out
+              </p>
+            </div>
+            <LoanerTechSelector
+              selectedCards={selectedCards}
+              onOpen={onOpen}
+              loanerTech={loanerTech}
+            />
+          </>
         )}
         {!isAuthenticated && (
           <p className="w-2/3 mx-auto text-center mb-8">
