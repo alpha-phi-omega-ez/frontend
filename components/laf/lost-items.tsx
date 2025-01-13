@@ -6,6 +6,7 @@ import {
   Textarea,
   DatePicker,
   Button,
+  Input,
 } from "@nextui-org/react";
 import { parseDate } from "@internationalized/date";
 import { useEffect, useState, Dispatch, SetStateAction, use } from "react";
@@ -20,6 +21,7 @@ interface LostItemsFormData {
   date: string;
   dateFilter: string;
   description: string;
+  id: string;
 }
 
 interface LostItemstFormProps {
@@ -61,9 +63,11 @@ export default function LostItems({
     date: todaysDate.toString(),
     dateFilter: "Before",
     description: "",
+    id: "",
   });
   const [emptyForm, setEmptyForm] = useState(true);
   const [descriptionChange, setDescriptionChange] = useState("");
+  const [idChange, setIdChange] = useState("");
 
   useEffect(() => {
     const updateLAFItems = setTimeout(() => {
@@ -71,6 +75,13 @@ export default function LostItems({
     }, 500);
     return () => clearTimeout(updateLAFItems);
   }, [descriptionChange]);
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("id", idChange.replace(/\D/g, ""));
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [idChange]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -85,6 +96,7 @@ export default function LostItems({
           date: todaysDate.toString(),
           dateFilter: "Before",
           description: "",
+          id: "",
         });
       } else {
         fetchLAFItems({ ...formData }, setItems, logout);
@@ -185,6 +197,16 @@ export default function LostItems({
           </Select>
         </div>
         <div className="flex flex-row gap-3">
+          {/* Id Field */}
+          <Input
+            label="ID"
+            variant="bordered"
+            placeholder="LAF ID"
+            {...register("id")}
+            errorMessage={errors.id?.message}
+            isInvalid={!!errors.id}
+            onChange={(e) => setIdChange(e.target.value)}
+          />
           {/* Date Filter Selector */}
           <Select
             label="Date Filter"
@@ -229,7 +251,7 @@ export default function LostItems({
           onChange={(e) => setDescriptionChange(e.target.value)}
         />
 
-        {!emptyForm && (
+        {!emptyForm && idChange === "" && (
           <Button color="primary" type="submit">
             Create Lost Report
           </Button>
