@@ -127,7 +127,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
         {
-          method: "POST",
+          method: "PUT",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
