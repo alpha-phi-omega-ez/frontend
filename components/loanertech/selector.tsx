@@ -1,20 +1,11 @@
-import { Typography } from "@mui/material";
 import { Button } from "@nextui-org/react";
 import { isCheckedOut } from "@/utils/loanertech/utils";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface LoanerTechSelectorProps {
   selectedCards: number[];
   onOpen: () => void;
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[];
+  loanerTech: false | LoanerTechType[];
 }
 
 export default function LoanerTechSelector({
@@ -24,7 +15,10 @@ export default function LoanerTechSelector({
 }: LoanerTechSelectorProps) {
   return (
     <div className="flex items-center justify-center gap-4 mb-6">
-      <Typography variant="body1">Selected: {selectedCards.length}</Typography>
+      <p>
+        {selectedCards.length} Item{selectedCards.length !== 1 ? "s" : ""}{" "}
+        Selected
+      </p>
       <Button
         isDisabled={selectedCards.length === 0}
         onPress={onOpen}
