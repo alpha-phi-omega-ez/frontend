@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import CheckInModalContent from "./checkInModal";
 import CheckOutModalContent from "./checkOutModal";
 import { isCheckedOut } from "@/utils/loanertech/utils";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface CheckInCheckOutModalContentProps {
   isOpen: boolean;
@@ -9,29 +10,8 @@ interface CheckInCheckOutModalContentProps {
   loanerTechAvailable: boolean;
   selectedCards: number[];
   setSelectedCards: Dispatch<SetStateAction<number[]>>;
-  setLoanerTech: Dispatch<
-    SetStateAction<
-      | false
-      | {
-          description: string;
-          id: number;
-          in_office: boolean;
-          name?: string;
-          phone?: string;
-          email?: string;
-        }[]
-    >
-  >;
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[];
+  setLoanerTech: Dispatch<SetStateAction<false | LoanerTechType[]>>;
+  loanerTech: false | LoanerTechType[];
 }
 
 export default function CheckInCheckOutModalContent({

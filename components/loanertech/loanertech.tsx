@@ -2,18 +2,10 @@ import UnAuthorizedLoanerTech from "./unauthLoanertech";
 import AuthorizedLoanerTech from "./authLoanertech";
 import { useAuth } from "@/context/AuthContext";
 import { Dispatch, SetStateAction } from "react";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface LoanerTechProps {
-  loanerTech:
-    | false
-    | {
-        description: string;
-        id: number;
-        in_office: boolean;
-        name?: string;
-        phone?: string;
-        email?: string;
-      }[];
+  loanerTech: false | LoanerTechType[];
   loanerTechAvailable: boolean;
   selectedCards: number[];
   setSelectedCards: Dispatch<SetStateAction<number[]>>;

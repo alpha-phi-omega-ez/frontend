@@ -203,7 +203,7 @@ export default function EditLAFModal({
                 Cancel
               </Button>
               <Button color="success" type="submit">
-                Save
+                Edit
               </Button>
             </ModalFooter>
           </form>

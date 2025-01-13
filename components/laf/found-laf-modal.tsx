@@ -82,6 +82,31 @@ export default function FoundLAFModal({
     onOpenChange();
   };
 
+  const archiveItem = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/archive/${given_id}`,
+        {
+          method: "PUT",
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        newAlert("LAF item archived " + displayId, "success");
+        updateTable();
+      } else {
+        newAlert("Failed to archive LAF item " + displayId, "danger");
+      }
+    } catch (error) {
+      console.error(error);
+      newAlert("Failed to archive LAF item " + displayId, "danger");
+    }
+    reset();
+    clearErrors();
+    onOpenChange();
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -135,13 +160,18 @@ export default function FoundLAFModal({
                 />
               </div>
             </ModalBody>
-            <ModalFooter>
-              <Button color="danger" onPress={onClose}>
-                Cancel
+            <ModalFooter className="justify-between">
+              <Button color="warning" onPress={archiveItem}>
+                Archive Item
               </Button>
-              <Button color="success" type="submit">
-                Submit
-              </Button>
+              <div>
+                <Button color="danger" onPress={onClose} className="mr-2">
+                  Cancel
+                </Button>
+                <Button color="success" type="submit">
+                  Mark as Found
+                </Button>
+              </div>
             </ModalFooter>
           </form>
         )}

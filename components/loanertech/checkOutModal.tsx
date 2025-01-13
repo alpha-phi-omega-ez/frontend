@@ -7,8 +7,8 @@ import {
 } from "./modalComponents";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "@/context/AuthContext";
 import { useAlert } from "@/context/AlertContext";
+import { LoanerTechType } from "@/types/loanertech";
 
 interface CheckOutModalContentProps {
   isOpen: boolean;
@@ -16,19 +16,7 @@ interface CheckOutModalContentProps {
   loanerTechAvailable: boolean;
   selectedCards: number[];
   setSelectedCards: Dispatch<SetStateAction<number[]>>;
-  setLoanerTech: Dispatch<
-    SetStateAction<
-      | false
-      | {
-          description: string;
-          id: number;
-          in_office: boolean;
-          name?: string;
-          phone?: string;
-          email?: string;
-        }[]
-    >
-  >;
+  setLoanerTech: Dispatch<SetStateAction<false | LoanerTechType[]>>;
 }
 
 interface CheckOutFormData {
