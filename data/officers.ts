@@ -74,7 +74,7 @@ export const officers: Officer[] = [
     img: "/images/officers/corrsec.jpg",
     description:
       "The Corresponding Secretary is the face of the chapter. They are in charge of external communications and relationships with the alumni association, clubs on RPI's campus, and other nearby APO chapters. They are in charge of planning and executing outward-facing events, coordination for conferences, posts for the social media accounts, distribution of chapter newsletters, development of posters distributed on campus, and anything else dealing with representing APO to the public.",
-    name: "Rafael Cenzano",
+    name: "Andrew Wu",
   },
   {
     position: "Historian",
