@@ -97,7 +97,7 @@ export const siteConfig = {
   adminNavItems: [
     {
       label: "Wiki",
-      href: "/wiki",
+      href: "https://wiki.apoez.org/",
     },
   ],
 };
