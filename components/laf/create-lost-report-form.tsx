@@ -112,6 +112,16 @@ export default function CreateLostReportForm({
           "date",
           parseDate(new Date().toISOString().split("T")[0]).toString()
         );
+        clearErrors();
+        setFormData({
+          type: "",
+          location: "",
+          date: todaysDate.toString(),
+          dateFilter: "Before",
+          description: "",
+        });
+        setSwitchToLostReport(null);
+        setItems([]);
       } else {
         newAlert("Failed to create new Lost Report.", "danger");
       }

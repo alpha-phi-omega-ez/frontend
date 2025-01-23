@@ -16,6 +16,8 @@ export default function IndexPage() {
             <Image
               src={imageBase + "USS_Slater_Service.jpg"}
               alt="Service at the USS Slater"
+              className="w-full object-cover h-[350px]"
+              width="100%"
             />
             <CardBody className="p-5">
               <h3 className="text-3xl">Service</h3>
@@ -34,7 +36,12 @@ export default function IndexPage() {
             </CardBody>
           </Card>
           <Card shadow="sm">
-            <Image src={imageBase + "Leadership.jpg"} alt="USS Slater" />
+            <Image
+              src={imageBase + "Leadership.jpg"}
+              alt="USS Slater"
+              className="w-full object-cover  h-[350px]"
+              width="100%"
+            />
             <CardBody className="p-5">
               <h3 className="text-3xl">Leadership</h3>
               <p className="text-justify mt-2">
@@ -50,7 +57,12 @@ export default function IndexPage() {
             </CardBody>
           </Card>
           <Card shadow="sm">
-            <Image src={imageBase + "Friendship.jpg"} alt="Semiformal" />
+            <Image
+              src={imageBase + "Friendship.jpg"}
+              alt="Semiformal"
+              className="w-full object-cover  h-[350px]"
+              width="100%"
+            />
             <CardBody className="p-5">
               <h3 className="text-3xl">Friendship</h3>
               <p className="text-justify mt-2">
@@ -58,13 +70,21 @@ export default function IndexPage() {
                 about helping others. Our members are friends for life, and
                 maintain their relationships even after they graduate! See our
                 alumni organization,{" "}
-                <Link href="https://www.apoezaa.org/about/" target="_blank">
+                <a
+                  className="text-primary"
+                  href="https://www.apoezaa.org/about/"
+                  target="_blank"
+                >
                   EZAA (Epsilon Zeta Alumni Association)
-                </Link>
+                </a>
                 , for more information about alumni relationships and events and{" "}
-                <Link href="https://linktr.ee/apoenyaa" target="_blank">
+                <a
+                  className="text-primary"
+                  href="https://linktr.ee/apoenyaa"
+                  target="_blank"
+                >
                   ENYA (the Alpha Phi Omega Eastern New York Alumni Association)
-                </Link>{" "}
+                </a>{" "}
                 to learn about serving with APO after college. As an
                 organization, every semester we host a few events dedicated to
                 engaging our alumni base, connecting graduated brothers with
@@ -87,37 +107,27 @@ export default function IndexPage() {
         </div>
         <div className="mt-10 grid sm:grid-cols-3">
           <div>
-            <h3 className="text-2xl font-bold">Contact Us</h3>
+            <h3 className="text-3xl font-bold">Contact Us</h3>
             <p className="mt-2">
               Whether you are a community organization and need some volunteers,
               an RPI student looking to utilize our free services, or an
               individual looking for more information on our organization, we
               can help.
             </p>
-            <p className="mt-2">
-              General Inquires:{" "}
-              <Link href="mailto:contact@apoez.org">contact@apoez.org</Link>
-            </p>
-            <p className="mt-2">
-              Questions About Recruitment Events:{" "}
-              <Link href="mailto:membership@apoez.org">
-                membership@apoez.org
-              </Link>
-            </p>
-            <p className="mt-2">
+            <p className="mt-2 text-lg">General Inquires: </p>
+            <Link href="mailto:contact@apoez.org">contact@apoez.org</Link>
+            <p className="mt-2 text-lg">Questions About Recruitment Events: </p>
+            <Link href="mailto:membership@apoez.org">membership@apoez.org</Link>
+            <p className="mt-2 text-lg">
               Questions About the New Member Process
-              <Link href="mailto:newmembereducators@apoez.org">
-                newmembereducators@apoez.org
-              </Link>
             </p>
-            <p className="mt-2">
-              Office Number:{" "}
-              <Link href="tel:518-276-6516">+1 (518)-276-6516</Link>
-            </p>
+            <Link href="mailto:nme@apoez.org">nme@apoez.org</Link>
+            <p className="mt-2 text-lg">Office Number:</p>
+            <Link href="tel:518-276-6516">+1 (518)-276-6516</Link>
           </div>
           <Image src={imageBase + "Crest.jpg"} alt="APO Crest" />
           <div>
-            <h3 className="text-2xl font-bold">History</h3>
+            <h3 className="text-3xl font-bold">History</h3>
             <p className="mt-2">
               The Epsilon Zeta chapter is known for its service to the
               community. Founded in 1947, the Epsilon Zeta chapter was founded

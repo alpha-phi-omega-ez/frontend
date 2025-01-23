@@ -53,7 +53,8 @@ export default function FoundItemForm({
   });
 
   const { newAlert } = useAlert();
-  const { logout } = useAuth();
+  const { logout, auth } = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
 
   const onSubmit = async (data: FoundItemFormData) => {
     try {
@@ -97,7 +98,7 @@ export default function FoundItemForm({
   setValue("date", todaysDate.toString());
 
   useEffect(() => {
-    if (view !== "Found Item") {
+    if (isAuthenticated && view !== "Found Item") {
       reset({
         type: "",
         location: "",
