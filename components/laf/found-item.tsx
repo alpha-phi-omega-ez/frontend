@@ -72,17 +72,26 @@ export default function FoundItemForm({
       );
 
       if (response.ok) {
+        setItems([]);
+        reset();
+        setFormData({
+          type: "",
+          location: "",
+          date: todaysDate.toString(),
+          dateFilter: "Before",
+          description: "",
+        });
+        setDescriptionChange("");
+        setValue(
+          "date",
+          parseDate(new Date().toISOString().split("T")[0]).toString()
+        );
         const data = await response.json();
         newAlert(
           "New LAF Item created with ID: " +
             data.data.type.charAt(0) +
             data.data.id,
           "success"
-        );
-        reset();
-        setValue(
-          "date",
-          parseDate(new Date().toISOString().split("T")[0]).toString()
         );
       } else if (response.status === 401) {
         newAlert("Please log in and try again.", "danger");
@@ -99,12 +108,7 @@ export default function FoundItemForm({
 
   useEffect(() => {
     if (isAuthenticated && view !== "Found Item") {
-      reset({
-        type: "",
-        location: "",
-        date: todaysDate.toString(),
-        description: "",
-      });
+      reset();
       setValue("date", todaysDate.toString());
       clearErrors();
       setFormData({
@@ -115,6 +119,7 @@ export default function FoundItemForm({
         description: "",
       });
       setItems([]);
+      setDescriptionChange("");
     }
   }, [view]);
 
