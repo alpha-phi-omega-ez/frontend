@@ -33,4 +33,13 @@ jobs:
           sleep 30
           docker logs apoez-frontend-container
           docker stop apoez-frontend-container
+      
+      - name: "Check for Container Exit Code"
+        id: check_exit_code
+        run: |
+          docker inspect apoez-frontend-container --format='{{.State.ExitCode}}'
           docker rm apoez-frontend-container
+
+      - name: "Fail if Container Fails"
+        if: steps.check_exit_code.outputs.exit_code != '0'
+        run: exit 1
