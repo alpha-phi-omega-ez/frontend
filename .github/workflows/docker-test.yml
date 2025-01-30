@@ -17,12 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Next App
-        run: |
-          npm install
-          NEXT_PUBLIC_BACKEND_SERVER="https://apoez.org/api"
-          npm run build
-
       - name: "Build Docker Image"
         run: |
           docker build -t apoez-frontend .
@@ -33,4 +27,13 @@ jobs:
           sleep 30
           docker logs apoez-frontend-container
           docker stop apoez-frontend-container
+      
+      - name: "Check for Container Exit Code"
+        id: check_exit_code
+        run: |
+          docker inspect apoez-frontend-container --format='{{.State.ExitCode}}'
           docker rm apoez-frontend-container
+
+      - name: "Fail if Container Fails"
+        if: steps.check_exit_code.outputs.exit_code != '0'
+        run: exit 1
