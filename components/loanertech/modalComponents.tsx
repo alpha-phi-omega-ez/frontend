@@ -1,4 +1,4 @@
-import { ModalHeader, ModalFooter, Button } from "@nextui-org/react";
+import { ModalHeader, ModalFooter, Button } from "@heroui/react";
 import { Typography } from "@mui/material";
 
 interface LoanerTechModalHeaderProps {

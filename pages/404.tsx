@@ -1,5 +1,5 @@
-import { Button, Link } from "@nextui-org/react";
-import { Image } from "@nextui-org/react";
+import { Button, Link } from "@heroui/react";
+import { Image } from "@heroui/react";
 
 export default function RecruitmentPage() {
   return (

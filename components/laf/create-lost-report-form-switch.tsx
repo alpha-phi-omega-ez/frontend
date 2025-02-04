@@ -7,7 +7,7 @@ import {
   Input,
   Textarea,
   DatePicker,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { NewLostReportFormData } from "@/types/laf";
 import { useAlert } from "@/context/AlertContext";
 import { Dispatch, SetStateAction, useEffect } from "react";
@@ -152,6 +152,9 @@ export default function CreateLostReportFormSwitch({
           {...register("type", { required: "Type is required" })}
           errorMessage={errors.type?.message}
           isInvalid={!!errors.type}
+          scrollShadowProps={{
+            isEnabled: false,
+          }}
         >
           {lafTypes.map((type) => (
             <SelectItem key={type} value={type}>
@@ -178,6 +181,9 @@ export default function CreateLostReportFormSwitch({
             key: location,
             name: location,
           }))}
+          scrollShadowProps={{
+            isEnabled: false,
+          }}
           renderValue={(items) => {
             return (
               <div className="flex flex-wrap gap-2">
@@ -197,7 +203,6 @@ export default function CreateLostReportFormSwitch({
           ))}
         </Select>
       </div>
-
       {/* Description Field */}
       <Textarea
         label="Description"
@@ -209,7 +214,6 @@ export default function CreateLostReportFormSwitch({
         errorMessage={errors.description?.message}
         isInvalid={!!errors.description}
       />
-
       <Button color="primary" type="submit">
         Submit
       </Button>

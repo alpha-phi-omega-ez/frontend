@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Card, Link } from "@nextui-org/react";
+import { Card, Link } from "@heroui/react";
 
 const national_policies = [
   {

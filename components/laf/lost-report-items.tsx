@@ -8,8 +8,8 @@ import {
   TableCell,
   getKeyValue,
   Chip,
-} from "@nextui-org/react";
-import { useDisclosure } from "@nextui-org/react";
+} from "@heroui/react";
+import { useDisclosure } from "@heroui/react";
 import { EditIcon, LeaveIcon } from "@/components/icons";
 import { useState } from "react";
 import EditLostReportModal from "./edit-lost-report-modal";

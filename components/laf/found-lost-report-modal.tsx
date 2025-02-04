@@ -8,7 +8,7 @@ import {
   Chip,
   Card,
   CardBody,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
 
 interface FoundLostReportModalProps {

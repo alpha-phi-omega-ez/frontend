@@ -1,4 +1,4 @@
-import { Card, CardBody, Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@heroui/react";
 import { title } from "@/components/primitives";
 import { officers } from "@/data/officers";
 

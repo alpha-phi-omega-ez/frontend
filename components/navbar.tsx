@@ -9,7 +9,7 @@ import {
   NavbarItem,
   NavbarMenuItem,
   Card,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { ChevronDown, Logo } from "@/components/icons";

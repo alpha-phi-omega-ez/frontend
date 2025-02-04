@@ -8,7 +8,7 @@ import {
   Input,
   Textarea,
   DatePicker,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { LAFItem } from "@/types/laf";
@@ -225,6 +225,9 @@ export default function CreateLostReportForm({
               setValue("type", e.target.value);
               handleChange("type", e.target.value);
             }}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -251,6 +254,9 @@ export default function CreateLostReportForm({
               key: location,
               name: location,
             }))}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
             renderValue={(items) => {
               return (
                 <div className="flex flex-wrap gap-2">

@@ -8,7 +8,7 @@ import {
   Button,
   Input,
   Chip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
 
 interface FoundLAFModalProps {
@@ -108,7 +108,7 @@ export default function FoundLAFModal({
   };
 
   return (
-    <Modal
+    (<Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="4xl"
@@ -176,6 +176,6 @@ export default function FoundLAFModal({
           </form>
         )}
       </ModalContent>
-    </Modal>
+    </Modal>)
   );
 }

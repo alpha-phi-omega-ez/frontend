@@ -1,6 +1,6 @@
 import { title, subtitle } from "@/components/primitives";
-import { Card, CardBody } from "@nextui-org/card";
-import { Image, Link } from "@nextui-org/react";
+import { Card, CardBody } from "@heroui/card";
+import { Image, Link } from "@heroui/react";
 
 const imageBase = "/images/";
 

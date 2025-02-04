@@ -10,7 +10,7 @@ import {
   TimelineDot,
 } from "@mui/lab";
 import Slider from "react-slick";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { awards, award_images } from "@/data/chapter_awards";
 
 const AwardImages = () => {

@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Card, CardBody, Link } from "@nextui-org/react";
+import { Card, CardBody, Link } from "@heroui/react";
 
 const pages = [
   {

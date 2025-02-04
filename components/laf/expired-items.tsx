@@ -11,7 +11,7 @@ import {
   SelectItem,
   Input,
   Button,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Selection } from "@react-types/shared";
 import { useAuth } from "@/context/AuthContext";
@@ -173,6 +173,9 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             handleChange("type", e.target.value);
           }}
           defaultSelectedKeys={["All"]}
+          scrollShadowProps={{
+            isEnabled: false,
+          }}
         >
           <SelectItem key="All" value="All">
             All
