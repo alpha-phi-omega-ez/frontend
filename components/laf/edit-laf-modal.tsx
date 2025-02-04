@@ -10,7 +10,7 @@ import {
   SelectItem,
   DatePicker,
   Textarea,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { FoundItemFormData } from "@/types/laf";
 import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
@@ -132,6 +132,9 @@ export default function EditLAFModal({
                     setValue("type", e.target.value);
                   }}
                   defaultSelectedKeys={[given_type]}
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
                 >
                   {lafTypes.map((type) => (
                     <SelectItem key={type} value={type}>
@@ -155,6 +158,9 @@ export default function EditLAFModal({
                     setValue("location", e.target.value);
                   }}
                   defaultSelectedKeys={[given_location]}
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
                 >
                   {lafLocations.map((type) => (
                     <SelectItem key={type} value={type}>

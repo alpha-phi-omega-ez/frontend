@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Image, Link } from "@nextui-org/react";
+import { Image, Link } from "@heroui/react";
 
 const images = [
   {

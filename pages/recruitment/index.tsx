@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Image, Card } from "@nextui-org/react";
+import { Image, Card } from "@heroui/react";
 import { Events, Semester } from "@/data/recruitment";
 
 export default function RecruitmentPage() {

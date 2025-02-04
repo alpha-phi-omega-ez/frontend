@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
+import { Modal, ModalBody, ModalContent } from "@heroui/react";
 import { Typography } from "@mui/material";
 import { fetchLoanerTech } from "@/utils/loanertech/utils";
 import {

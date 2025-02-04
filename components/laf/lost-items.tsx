@@ -7,7 +7,7 @@ import {
   DatePicker,
   Button,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useEffect, useState, Dispatch, SetStateAction, use } from "react";
 import LAFItems from "./laf-items";
@@ -152,6 +152,9 @@ export default function LostItems({
             errorMessage={errors.type?.message}
             isInvalid={!!errors.type}
             onChange={(e) => handleChange("type", e.target.value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -177,6 +180,9 @@ export default function LostItems({
               key: location,
               name: location,
             }))}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
             renderValue={(items) => {
               return (
                 <div className="flex flex-wrap gap-2">
@@ -216,6 +222,9 @@ export default function LostItems({
             errorMessage={errors.dateFilter?.message}
             isInvalid={!!errors.dateFilter}
             onChange={(e) => handleChange("dateFilter", e.target.value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             <SelectItem key="Before" value="Before">
               Before

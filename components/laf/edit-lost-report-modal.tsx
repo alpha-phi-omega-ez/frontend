@@ -12,7 +12,7 @@ import {
   Textarea,
   Chip,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { NewLostReportFormData } from "@/types/laf";
 import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
@@ -201,6 +201,9 @@ export default function EditLostReportModal({
                     setValue("type", e.target.value);
                   }}
                   defaultSelectedKeys={[given_type]}
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
                 >
                   {lafTypes.map((type) => (
                     <SelectItem key={type} value={type}>
@@ -229,6 +232,9 @@ export default function EditLostReportModal({
                     key: location,
                     name: location,
                   }))}
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
                   renderValue={(items) => {
                     return (
                       <div className="flex flex-wrap gap-2">

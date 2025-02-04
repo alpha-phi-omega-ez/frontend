@@ -2,7 +2,7 @@ import { title } from "@/components/primitives";
 import { useEffect, useState, useRef } from "react";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import {
   fetchLoanerTech,
   checkLoanerTechAvailablility,

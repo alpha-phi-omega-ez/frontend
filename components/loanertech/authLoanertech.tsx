@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@nextui-org/card";
+import { Card, CardBody } from "@heroui/card";
 import { isCheckedOut } from "@/utils/loanertech/utils";
 import { Dispatch, SetStateAction } from "react";
 import { LoanerTechType } from "@/types/loanertech";

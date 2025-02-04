@@ -5,7 +5,7 @@ import {
   SelectItem,
   Textarea,
   DatePicker,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useAlert } from "@/context/AlertContext";
 import { useAuth } from "@/context/AuthContext";
@@ -175,6 +175,9 @@ export default function FoundItemForm({
               setValue("type", e.target.value);
               handleChange("type", e.target.value);
             }}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -195,6 +198,9 @@ export default function FoundItemForm({
             onChange={(e) => {
               setValue("location", e.target.value);
               handleChange("location", e.target.value);
+            }}
+            scrollShadowProps={{
+              isEnabled: false,
             }}
           >
             {lafLocations.map((type) => (

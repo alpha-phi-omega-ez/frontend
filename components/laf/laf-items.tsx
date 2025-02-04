@@ -7,8 +7,8 @@ import {
   TableRow,
   TableCell,
   getKeyValue,
-} from "@nextui-org/react";
-import { useDisclosure } from "@nextui-org/react";
+} from "@heroui/react";
+import { useDisclosure } from "@heroui/react";
 import { EditIcon, LeaveIcon } from "@/components/icons";
 import EditLAFModal from "./edit-laf-modal";
 import FoundLAFModal from "./found-laf-modal";

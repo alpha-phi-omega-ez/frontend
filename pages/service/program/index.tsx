@@ -8,7 +8,7 @@ import {
   PersonHandRaise,
 } from "@/components/icons";
 import { title } from "@/components/primitives";
-import { Link, Image } from "@nextui-org/react";
+import { Link, Image } from "@heroui/react";
 import {
   images,
   service_stats,

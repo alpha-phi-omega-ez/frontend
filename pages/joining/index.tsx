@@ -1,5 +1,5 @@
 import { title } from "@/components/primitives";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 
 export default function JoiningPage() {
   return (

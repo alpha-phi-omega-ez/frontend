@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalContent, Input } from "@nextui-org/react";
+import { Modal, ModalBody, ModalContent, Input } from "@heroui/react";
 import { Typography } from "@mui/material";
 import { fetchLoanerTech } from "@/utils/loanertech/utils";
 import {
@@ -100,7 +100,7 @@ export default function CheckOutModalContent({
   };
 
   return (
-    <Modal
+    (<Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="xl"
@@ -167,6 +167,6 @@ export default function CheckOutModalContent({
           </form>
         )}
       </ModalContent>
-    </Modal>
+    </Modal>)
   );
 }

@@ -6,7 +6,7 @@ import {
   Textarea,
   DatePicker,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
 import LostReportItems from "./lost-report-items";
@@ -116,6 +116,9 @@ export default function LostReports({
             errorMessage={errors.type?.message}
             isInvalid={!!errors.type}
             onChange={(e) => handleChange("type", e.target.value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {lafTypes.map((type) => (
               <SelectItem key={type} value={type}>
@@ -141,6 +144,9 @@ export default function LostReports({
               key: location,
               name: location,
             }))}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
             renderValue={(items) => {
               return (
                 <div className="flex flex-wrap gap-2">
@@ -170,6 +176,9 @@ export default function LostReports({
             errorMessage={errors.dateFilter?.message}
             isInvalid={!!errors.dateFilter}
             onChange={(e) => handleChange("dateFilter", e.target.value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             <SelectItem key="Before" value="Before">
               Before

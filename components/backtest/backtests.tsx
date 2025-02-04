@@ -1,4 +1,4 @@
-import { Card, Link, CardBody } from "@nextui-org/react";
+import { Card, Link, CardBody } from "@heroui/react";
 
 interface BacktestsProps {
   backtests: null | { type: string; tests: string[] }[];

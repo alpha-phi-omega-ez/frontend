@@ -3,7 +3,7 @@ import { useState } from "react";
 import CourseCodes from "@/components/backtest/coursecodes";
 import Courses from "@/components/backtest/courses";
 import Backtests from "@/components/backtest/backtests";
-import { Breadcrumbs, BreadcrumbItem, Button } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem, Button } from "@heroui/react";
 import Error from "@/components/error";
 
 interface BacktestPageProps {

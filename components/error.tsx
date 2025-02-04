@@ -1,4 +1,4 @@
-import { Image, Button } from "@nextui-org/react";
+import { Image, Button } from "@heroui/react";
 import { useRouter } from "next/router";
 
 export default function Error({ title }: { title: string }) {
