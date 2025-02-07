@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json .npmrc* ./
-RUN npm ci;
+RUN npm ci
 
 
 # Rebuild the source code only when needed
@@ -24,7 +24,7 @@ COPY . .
 
 ENV NEXT_PUBLIC_BACKEND_SERVER=https://apoez.org/api
 
-RUN npm run build;
+RUN npm run build
 
 
 # Production image, copy all the files and run next
