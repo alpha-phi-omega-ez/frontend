@@ -10,6 +10,8 @@ on:
       - "**.yml"
       - "package.json"
       - "package-lock.json"
+      - "Dockerfile"
+      - ".dockerignore"
 
 jobs:
   build:
