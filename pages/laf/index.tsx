@@ -36,16 +36,6 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
     checkAuthStatus();
   }, [view]);
 
-  const views: ViewState[] = [
-    "Found Item",
-    "Lost Items",
-    "Submit Lost Report",
-    "Find Lost Report",
-    // "Matching Lost Reports",
-    "Expired Items",
-    // "Archive",
-  ];
-
   const [switchToLostReport, setSwitchToLostReport] = useState<Record<
     string,
     string
@@ -58,7 +48,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       </div>
       {!loading && isAuthenticated && (
         <>
-          <LAFSelector view={view} setView={setView} views={views} />
+          <LAFSelector view={view} setView={setView} />
           <div
             style={{
               display: view === "Found Item" ? "block" : "none",
@@ -109,7 +99,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
           </div>
           <div
             style={{
-              display: view === "Matching Lost Reports" ? "block" : "none",
+              display: view === "New Lost Reports" ? "block" : "none",
             }}
           >
             <p>Matching Lost Reports in progress</p>
