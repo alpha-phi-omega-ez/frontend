@@ -7,6 +7,7 @@ import NewLostReport from "@/components/laf/create-lost-report";
 import LostItems from "@/components/laf/lost-items";
 import LostReports from "@/components/laf/lost-reports";
 import ExpiredItems from "@/components/laf/expired-items";
+import NewLostReports from "@/components/laf/new-lost-reports";
 import { useAuth } from "@/context/AuthContext";
 import { ViewState } from "@/types/laf";
 
@@ -102,7 +103,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
               display: view === "New Lost Reports" ? "block" : "none",
             }}
           >
-            <p>Matching Lost Reports in progress</p>
+            <NewLostReports view={view} />
           </div>
           <div
             style={{
