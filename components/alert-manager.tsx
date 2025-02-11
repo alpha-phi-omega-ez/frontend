@@ -14,7 +14,11 @@ interface AlertManagerProps {
 
 export default function AlertManager({ alerts, setAlerts }: AlertManagerProps) {
   const removeAlert = (index: number) => {
-    setAlerts((prev) => prev.filter((_, i) => i !== index));
+    setAlerts((prev) => {
+      const newAlerts = [...prev];
+      newAlerts.splice(index, 1);
+      return newAlerts;
+    });
   };
 
   return (
