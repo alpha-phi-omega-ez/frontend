@@ -3,7 +3,7 @@ export type ViewState =
   | "Lost Items"
   | "Submit Lost Report"
   | "Find Lost Report"
-  | "Matching Lost Reports"
+  | "New Lost Reports"
   | "Expired Items"
   | "Archive"
   | "error";
