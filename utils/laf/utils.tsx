@@ -60,20 +60,22 @@ export async function fetchLAFItems(
 export async function fetchLostReportItems(
   formData: Record<string, string>,
   setLostReportItems: React.Dispatch<React.SetStateAction<LostReportItem[]>>,
-  logout: () => void
+  logout: () => void,
+  newReports: boolean = false
 ) {
   // Prepare params based on form data
   const params = await convertFormToParams(formData);
 
   try {
     // Make the fetch request
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/?${params}`,
-      {
-        method: "GET",
-        credentials: "include",
-      }
-    );
+    const url = newReports
+      ? `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new`
+      : `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/?${params}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
 
     if (response.ok) {
       const response_data = await response.json();
