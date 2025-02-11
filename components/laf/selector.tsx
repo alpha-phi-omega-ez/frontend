@@ -26,7 +26,7 @@ export default function LAFSelector({ setView, view }: LAFSelectorProps) {
 
   const fetchNewLostReports = async () => {
     const data = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/new/count`,
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
       {
         credentials: "include",
       }
