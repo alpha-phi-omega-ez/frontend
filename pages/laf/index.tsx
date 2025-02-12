@@ -23,6 +23,20 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   const [view, setView] = useState<ViewState>("Found Item");
   const [loading, setLoading] = useState(true);
 
+  const [newLostReports, setNewLostReports] = useState(0);
+  const fetchNewLostReports = async () => {
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
+      {
+        credentials: "include",
+      }
+    );
+    if (data.ok) {
+      const json = await data.json();
+      setNewLostReports(json.data);
+    }
+  };
+
   useEffect(() => {
     if (lafTypes && lafLocations) {
       setLoading(false);
@@ -31,6 +45,9 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
 
   useEffect(() => {
     checkAuthStatus();
+    fetchNewLostReports();
+    const interval = setInterval(fetchNewLostReports, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -49,7 +66,11 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       </div>
       {!loading && isAuthenticated && (
         <>
-          <LAFSelector view={view} setView={setView} />
+          <LAFSelector
+            view={view}
+            setView={setView}
+            newLostReports={newLostReports}
+          />
           <div
             style={{
               display: view === "Found Item" ? "block" : "none",
@@ -103,7 +124,10 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
               display: view === "New Lost Reports" ? "block" : "none",
             }}
           >
-            <NewLostReports view={view} />
+            <NewLostReports
+              view={view}
+              fetchNewLostReports={fetchNewLostReports}
+            />
           </div>
           <div
             style={{
