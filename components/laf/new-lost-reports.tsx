@@ -127,7 +127,7 @@ export default function NewLostReports({
         const formData: Record<string, string> = {
           type: selectedReport.type,
           location: selectedReport.location.join(", "),
-          description: selectedReport.description,
+          // description: selectedReport.description,
         };
         fetchLAFItems(formData, setItems, logout);
       }
