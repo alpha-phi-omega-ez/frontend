@@ -124,9 +124,13 @@ export default function NewLostReports({
         setSelectedItem(null);
         setItems([]);
       } else {
+        const [day, month, year] = selectedReport.date.split("/");
+        const formattedDate = `${year}-${month}-${day}`;
         const formData: Record<string, string> = {
           type: selectedReport.type,
           location: selectedReport.location.join(", "),
+          date: formattedDate,
+          dateFilter: "Before",
           // description: selectedReport.description,
         };
         fetchLAFItems(formData, setItems, logout);
