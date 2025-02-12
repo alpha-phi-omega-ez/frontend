@@ -63,13 +63,12 @@ export default function NewLostReports({
   const [items, setItems] = useState<LAFItem[]>([]);
 
   const handleSelectionChange = (selection: Selection) => {
-    console.log("Selection change: ", selection);
     setSelectedItem(selection);
   };
 
   const markAsViewed = async () => {
     if (selectedItem === null) {
-      console.error("No item selected");
+      console.error("No lost report selected");
       newAlert("No lost report selected", "danger");
       return;
     }
@@ -102,9 +101,18 @@ export default function NewLostReports({
   };
 
   useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
     if (isAuthenticated && view === "New Lost Reports") {
       fetchLostReportItems({}, setLostReportItems, logout, true);
+      interval = setInterval(() => {
+        fetchLostReportItems({}, setLostReportItems, logout, true);
+      }, 15000);
     }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [view]);
 
   useEffect(() => {
