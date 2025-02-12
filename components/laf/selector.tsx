@@ -5,9 +5,14 @@ import { Badge } from "@heroui/react";
 interface LAFSelectorProps {
   setView: React.Dispatch<React.SetStateAction<ViewState>>;
   view: ViewState;
+  newLostReports: number;
 }
 
-export default function LAFSelector({ setView, view }: LAFSelectorProps) {
+export default function LAFSelector({
+  setView,
+  view,
+  newLostReports,
+}: LAFSelectorProps) {
   const views: ViewState[] = [
     "Found Item",
     "Lost Items",
@@ -21,27 +26,6 @@ export default function LAFSelector({ setView, view }: LAFSelectorProps) {
   const changeSelector = (view: ViewState) => {
     setView(view);
   };
-
-  const [newLostReports, setNewLostReports] = useState(0);
-
-  const fetchNewLostReports = async () => {
-    const data = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
-      {
-        credentials: "include",
-      }
-    );
-    if (data.ok) {
-      const json = await data.json();
-      setNewLostReports(json.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchNewLostReports();
-    const interval = setInterval(fetchNewLostReports, 15000);
-    return () => clearInterval(interval);
-  }, [view]);
 
   return (
     <div className="flex items-center justify-center my-10">
