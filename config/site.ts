@@ -99,5 +99,9 @@ export const siteConfig = {
       label: "Wiki",
       href: "https://wiki.apoez.org/",
     },
+    {
+      label: "Money Tool",
+      href: "https://sites.google.com/apoez.org/apoezmoneytool/home",
+    },
   ],
 };

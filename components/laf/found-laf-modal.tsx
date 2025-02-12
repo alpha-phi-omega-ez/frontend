@@ -48,6 +48,7 @@ export default function FoundLAFModal({
       name: "",
       email: "",
     },
+    mode: "onSubmit",
   });
 
   const { newAlert } = useAlert();
@@ -108,7 +109,7 @@ export default function FoundLAFModal({
   };
 
   return (
-    (<Modal
+    <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="4xl"
@@ -155,6 +156,7 @@ export default function FoundLAFModal({
                       message: "Enter a valid email",
                     },
                   })}
+                  onChange={() => clearErrors("email")}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
                 />
@@ -176,6 +178,6 @@ export default function FoundLAFModal({
           </form>
         )}
       </ModalContent>
-    </Modal>)
+    </Modal>
   );
 }

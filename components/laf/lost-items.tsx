@@ -51,7 +51,7 @@ export default function LostItems({
     clearErrors,
     handleSubmit,
     formState: { errors },
-  } = useForm<LostItemsFormData>();
+  } = useForm<LostItemsFormData>({ mode: "onSubmit" });
 
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
   setValue("date", todaysDate.toString());
@@ -173,9 +173,6 @@ export default function LostItems({
             aria-label="Possible Locations"
             variant="bordered"
             placeholder="Select Location(s)"
-            {...register("location")}
-            errorMessage={errors.location?.message}
-            isInvalid={!!errors.location}
             items={lafLocations.map((location) => ({
               key: location,
               name: location,

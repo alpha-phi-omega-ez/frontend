@@ -41,7 +41,7 @@ export default function LostReports({
     reset,
     clearErrors,
     formState: { errors },
-  } = useForm<LostReportsFormData>();
+  } = useForm<LostReportsFormData>({ mode: "onSubmit" });
   const { logout, auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
@@ -137,9 +137,6 @@ export default function LostReports({
             aria-label="Possible Locations"
             variant="bordered"
             placeholder="Select Location(s)"
-            {...register("location", { required: "Location is required" })}
-            errorMessage={errors.location?.message}
-            isInvalid={!!errors.location}
             items={lafLocations.map((location) => ({
               key: location,
               name: location,
@@ -227,7 +224,10 @@ export default function LostReports({
             })}
             errorMessage={errors.email?.message}
             isInvalid={!!errors.email}
-            onChange={(e) => handleChange("email", e.target.value)}
+            onChange={(e) => {
+              handleChange("email", e.target.value);
+              clearErrors("email");
+            }}
           />
         </div>
         {/* Description Field */}
