@@ -4,32 +4,29 @@ import { AlertType } from "@/types";
 // AlertManager component
 interface AlertManagerProps {
   alerts: {
+    id: number;
     message: string;
     type: AlertType;
   }[];
   setAlerts: React.Dispatch<
-    React.SetStateAction<{ message: string; type: AlertType }[]>
+    React.SetStateAction<{ id: number; message: string; type: AlertType }[]>
   >;
 }
 
 export default function AlertManager({ alerts, setAlerts }: AlertManagerProps) {
   const removeAlert = (index: number) => {
-    setAlerts((prev) => {
-      const newAlerts = [...prev];
-      newAlerts.splice(index, 1);
-      return newAlerts;
-    });
+    setAlerts((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
     <div className="fixed max-w-6xl top-4 w-full flex flex-col items-center space-y-4 z-50 left-1/2 transform -translate-x-1/2">
-      {alerts.map((alert, index) => (
+      {alerts.map((alert) => (
         <Alert
-          key={index}
+          key={alert.id}
           variant="flat"
           color={alert.type}
           isClosable
-          onClose={() => removeAlert(index)}
+          onClose={() => removeAlert(alert.id)}
           description=""
           className="flex items-center"
         >

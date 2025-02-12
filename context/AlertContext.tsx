@@ -14,13 +14,17 @@ interface AlertProviderrProps {
 export function AlertProvider({ children }: AlertProviderrProps) {
   const [alerts, setAlerts] = useState<
     {
+      id: number;
       message: string;
       type: AlertType;
     }[]
   >([]);
 
   const newAlert = (alert: string, type: AlertType) => {
-    setAlerts((prev) => [...prev, { message: alert, type: type }]);
+    setAlerts((prev) => [
+      ...prev,
+      { id: Date.now(), message: alert, type: type },
+    ]);
   };
 
   return (
