@@ -100,7 +100,7 @@ export default function CheckOutModalContent({
   };
 
   return (
-    (<Modal
+    <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="xl"
@@ -142,6 +142,7 @@ export default function CheckOutModalContent({
                     message: "Enter a valid email",
                   },
                 })}
+                onChange={() => clearErrors("email")}
                 errorMessage={errors.email?.message}
                 isInvalid={!!errors.email}
               />
@@ -167,6 +168,6 @@ export default function CheckOutModalContent({
           </form>
         )}
       </ModalContent>
-    </Modal>)
+    </Modal>
   );
 }

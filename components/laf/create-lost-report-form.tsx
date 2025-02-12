@@ -53,6 +53,7 @@ export default function CreateLostReportForm({
       email: "",
       description: "",
     },
+    mode: "onSubmit",
   });
 
   const [descriptionChange, setDescriptionChange] = useState("");
@@ -186,6 +187,7 @@ export default function CreateLostReportForm({
                 message: "Enter a valid email",
               },
             })}
+            onChange={() => clearErrors("email")}
             errorMessage={errors.email?.message}
             isInvalid={!!errors.email}
           />
@@ -247,9 +249,6 @@ export default function CreateLostReportForm({
             variant="bordered"
             isRequired
             placeholder="Select Location(s)"
-            {...register("location", { required: "Location is required" })}
-            errorMessage={errors.location?.message}
-            isInvalid={!!errors.location}
             items={lafLocations.map((location) => ({
               key: location,
               name: location,

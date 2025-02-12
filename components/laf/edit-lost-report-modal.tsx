@@ -64,6 +64,7 @@ export default function EditLostReportModal({
       email: "",
       description: "",
     },
+    mode: "onSubmit",
   });
 
   const { newAlert } = useAlert();
@@ -161,6 +162,7 @@ export default function EditLostReportModal({
                       message: "Enter a valid email",
                     },
                   })}
+                  onChange={() => clearErrors("email")}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
                   defaultValue={given_email}
@@ -223,11 +225,6 @@ export default function EditLostReportModal({
                   variant="bordered"
                   isRequired
                   placeholder="Select Location(s)"
-                  {...register("location", {
-                    required: "Location is required",
-                  })}
-                  errorMessage={errors.location?.message}
-                  isInvalid={!!errors.location}
                   items={lafLocations.map((location) => ({
                     key: location,
                     name: location,
