@@ -7,6 +7,7 @@ import {
   TableCell,
   getKeyValue,
   Chip,
+  Button,
 } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Selection } from "@react-types/shared";
@@ -15,14 +16,20 @@ import { fetchLostReportItems, fetchLAFItems } from "@/utils/laf/utils";
 import { LostReportItem } from "@/types/laf";
 import LAFItems from "./laf-items";
 import { LAFItem } from "@/types/laf";
+import { useAlert } from "@/context/AlertContext";
 
 interface NewLostReportsProps {
   view: string;
+  fetchNewLostReports: () => void;
 }
 
-export default function NewLostReports({ view }: NewLostReportsProps) {
+export default function NewLostReports({
+  view,
+  fetchNewLostReports,
+}: NewLostReportsProps) {
   const { logout, auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
+  const { newAlert } = useAlert();
 
   const columns = [
     {
@@ -49,10 +56,6 @@ export default function NewLostReports({ view }: NewLostReportsProps) {
       key: "email",
       label: "Email",
     },
-    {
-      key: "actions",
-      label: "Actions",
-    },
   ];
 
   const [lostReportItems, setLostReportItems] = useState<LostReportItem[]>([]);
@@ -64,17 +67,48 @@ export default function NewLostReports({ view }: NewLostReportsProps) {
     setSelectedItem(selection);
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (view !== "New Lost Reports") {
+  const markAsViewed = async () => {
+    if (selectedItem === null) {
+      console.error("No item selected");
+      newAlert("No lost report selected", "danger");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/viewed/${
+          Array.from(selectedItem)[0]
+        }`,
+        {
+          method: "PUT",
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
         fetchLostReportItems({}, setLostReportItems, logout, true);
+        fetchNewLostReports();
+        setItems([]);
+        setSelectedItem(null);
+        newAlert("Lost Report marked as viewed", "success");
+      } else {
+        console.error("Error marking lost report as viewed");
+        newAlert("Error marking lost report as viewed", "danger");
       }
+    } catch (error) {
+      console.error(error);
+      newAlert("Error marking lost report as viewed", "danger");
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated && view === "New Lost Reports") {
+      fetchLostReportItems({}, setLostReportItems, logout, true);
     }
   }, [view]);
 
   useEffect(() => {
     if (selectedItem) {
-      console.log("Selected Item: ", selectedItem);
       const selectedReport = lostReportItems.find(
         (item) => item.id === Array.from(selectedItem)[0]
       );
@@ -82,21 +116,28 @@ export default function NewLostReports({ view }: NewLostReportsProps) {
         setSelectedItem(null);
         setItems([]);
       } else {
-        console.log("Selected Report: ", selectedReport);
         const formData: Record<string, string> = {
           type: selectedReport.type,
           location: selectedReport.location.join(", "),
           description: selectedReport.description,
         };
-        console.log("Form Data: ", formData);
         fetchLAFItems(formData, setItems, logout);
-        console.log("Items: ", items);
       }
     }
   }, [selectedItem]);
 
   return (
     <>
+      <h2 className="text-center mt-5 text-3xl">New External Lost Reports</h2>
+      <div className="flex justify-center my-4">
+        <Button
+          color="primary"
+          isDisabled={selectedItem === null}
+          onPress={markAsViewed}
+        >
+          Mark Lost Report as Viewed
+        </Button>
+      </div>
       <Table
         aria-label="LAF Items"
         className="my-5"
@@ -118,19 +159,15 @@ export default function NewLostReports({ view }: NewLostReportsProps) {
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey == "actions" ? (
-                    <p>View</p>
-                  ) : columnKey === "id" ? (
-                    item.type.charAt(0) + item.id
-                  ) : columnKey === "location" ? (
-                    item.location.map((loc, index) => (
-                      <Chip key={index} className="mr-1 my-1">
-                        {loc}
-                      </Chip>
-                    ))
-                  ) : (
-                    getKeyValue(item, columnKey)
-                  )}
+                  {columnKey === "id"
+                    ? item.type.charAt(0) + item.id
+                    : columnKey === "location"
+                    ? item.location.map((loc, index) => (
+                        <Chip key={index} className="mr-1 my-1">
+                          {loc}
+                        </Chip>
+                      ))
+                    : getKeyValue(item, columnKey)}
                 </TableCell>
               )}
             </TableRow>
