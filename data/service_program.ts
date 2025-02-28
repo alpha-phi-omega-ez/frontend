@@ -38,10 +38,10 @@ export const images = [
 export const service_stats: ServiceStats[] = [
   {
     title: "Fall 2024 Service Stats",
-    average: "47.7",
-    hours: "1717+",
-    events: "65",
-    organizations: "22+",
+    average: "41.01",
+    hours: "2378+",
+    events: "107",
+    organizations: "45+",
   },
   {
     title: "Spring 2024 Service Stats",
