@@ -205,7 +205,9 @@ export default function LostItems({
             errorMessage={errors.id?.message}
             isInvalid={!!errors.id}
             onChange={(e) => setIdChange(e.target.value)}
+            autoComplete="off"
           />
+
           {/* Date Filter Selector */}
           <Select
             label="Date Filter"

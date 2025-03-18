@@ -173,6 +173,7 @@ export default function CreateLostReportForm({
             {...register("name", { required: "Name is required" })}
             errorMessage={errors.name?.message}
             isInvalid={!!errors.name}
+            autoComplete="off"
           />
           {/* Email Field */}
           <Input
@@ -190,6 +191,7 @@ export default function CreateLostReportForm({
             onChange={() => clearErrors("email")}
             errorMessage={errors.email?.message}
             isInvalid={!!errors.email}
+            autoComplete="off"
           />
           {/* Date Field */}
           <DatePicker

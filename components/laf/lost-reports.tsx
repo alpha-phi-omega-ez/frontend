@@ -201,6 +201,7 @@ export default function LostReports({
             errorMessage={errors.name?.message}
             isInvalid={!!errors.name}
             onChange={(e) => handleChange("name", e.target.value)}
+            autoComplete="off"
           />
           {/* Email Field */}
           <Input
@@ -220,6 +221,7 @@ export default function LostReports({
               handleChange("email", e.target.value);
               clearErrors("email");
             }}
+            autoComplete="off"
           />
         </div>
         {/* Description Field */}
