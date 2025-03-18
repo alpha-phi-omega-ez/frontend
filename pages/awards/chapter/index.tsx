@@ -46,7 +46,7 @@ export default function ChapterAwardsPage() {
           recognized by a number of local organizations and APO nationals for
           achievement to our community, campus, and country. Our most notable
           achievement is winning the Dean Arno Nowotny National Service Award
-          6x. Below are our other notable achievements.
+          6 times. Below are our other notable achievements.
         </p>
       </div>
       <AwardImages />
