@@ -157,9 +157,7 @@ export default function LostItems({
             }}
           >
             {lafTypes.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
 
@@ -193,9 +191,7 @@ export default function LostItems({
             onChange={(e) => handleChange("location", e.target.value)}
           >
             {lafLocations.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
         </div>
@@ -209,7 +205,9 @@ export default function LostItems({
             errorMessage={errors.id?.message}
             isInvalid={!!errors.id}
             onChange={(e) => setIdChange(e.target.value)}
+            autoComplete="off"
           />
+
           {/* Date Filter Selector */}
           <Select
             label="Date Filter"
@@ -223,12 +221,8 @@ export default function LostItems({
               isEnabled: false,
             }}
           >
-            <SelectItem key="Before" value="Before">
-              Before
-            </SelectItem>
-            <SelectItem key="After" value="After">
-              After
-            </SelectItem>
+            <SelectItem key="Before">Before</SelectItem>
+            <SelectItem key="After">After</SelectItem>
           </Select>
 
           {/* Date Field */}

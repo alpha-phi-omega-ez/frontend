@@ -121,9 +121,7 @@ export default function LostReports({
             }}
           >
             {lafTypes.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
 
@@ -157,9 +155,7 @@ export default function LostReports({
             onChange={(e) => handleChange("location", e.target.value)}
           >
             {lafLocations.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
         </div>
@@ -177,12 +173,8 @@ export default function LostReports({
               isEnabled: false,
             }}
           >
-            <SelectItem key="Before" value="Before">
-              Before
-            </SelectItem>
-            <SelectItem key="After" value="After">
-              After
-            </SelectItem>
+            <SelectItem key="Before">Before</SelectItem>
+            <SelectItem key="After">After</SelectItem>
           </Select>
 
           {/* Date Field */}
@@ -209,6 +201,7 @@ export default function LostReports({
             errorMessage={errors.name?.message}
             isInvalid={!!errors.name}
             onChange={(e) => handleChange("name", e.target.value)}
+            autoComplete="off"
           />
           {/* Email Field */}
           <Input
@@ -228,6 +221,7 @@ export default function LostReports({
               handleChange("email", e.target.value);
               clearErrors("email");
             }}
+            autoComplete="off"
           />
         </div>
         {/* Description Field */}

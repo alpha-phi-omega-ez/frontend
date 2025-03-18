@@ -177,14 +177,10 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             isEnabled: false,
           }}
         >
-          <SelectItem key="All" value="All">
-            All
-          </SelectItem>
+          <SelectItem key="All">All</SelectItem>
           <>
             {lafTypes.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </>
         </Select>
@@ -271,9 +267,15 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey === "id"
-                    ? item.type.charAt(0) + item.id
-                    : getKeyValue(item, columnKey)}
+                  {columnKey === "id" ? (
+                    item.type.charAt(0) + item.id
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
+                  ) : (
+                    getKeyValue(item, columnKey)
+                  )}
                 </TableCell>
               )}
             </TableRow>
@@ -312,9 +314,15 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey === "id"
-                    ? item.type.charAt(0) + item.id
-                    : getKeyValue(item, columnKey)}
+                  {columnKey === "id" ? (
+                    item.type.charAt(0) + item.id
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
+                  ) : (
+                    getKeyValue(item, columnKey)
+                  )}
                 </TableCell>
               )}
             </TableRow>

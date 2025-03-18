@@ -135,6 +135,10 @@ export default function LostReportItems({
                         {loc}
                       </Chip>
                     ))
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
                   ) : (
                     getKeyValue(item, columnKey)
                   )}

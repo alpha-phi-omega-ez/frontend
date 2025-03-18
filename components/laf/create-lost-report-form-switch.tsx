@@ -99,6 +99,7 @@ export default function CreateLostReportFormSwitch({
           {...register("name", { required: "Name is required" })}
           errorMessage={errors.name?.message}
           isInvalid={!!errors.name}
+          autoComplete="off"
         />
         {/* Email Field */}
         <Input
@@ -115,6 +116,7 @@ export default function CreateLostReportFormSwitch({
           })}
           errorMessage={errors.email?.message}
           isInvalid={!!errors.email}
+          autoComplete="off"
         />
         {/* Date Field */}
         <DatePicker
@@ -157,9 +159,7 @@ export default function CreateLostReportFormSwitch({
           }}
         >
           {lafTypes.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
+            <SelectItem key={type}>{type}</SelectItem>
           ))}
         </Select>
 
@@ -197,9 +197,7 @@ export default function CreateLostReportFormSwitch({
           defaultSelectedKeys={switchToLostReport?.location?.split(",") || []}
         >
           {lafLocations.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
+            <SelectItem key={type}>{type}</SelectItem>
           ))}
         </Select>
       </div>

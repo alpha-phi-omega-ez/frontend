@@ -148,6 +148,7 @@ export default function EditLostReportModal({
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                   defaultValue={given_name}
+                  autoComplete="off"
                 />
                 {/* Email Field */}
                 <Input
@@ -166,6 +167,7 @@ export default function EditLostReportModal({
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
                   defaultValue={given_email}
+                  autoComplete="off"
                 />
                 {/* Date Field */}
                 <DatePicker
@@ -208,9 +210,7 @@ export default function EditLostReportModal({
                   }}
                 >
                   {lafTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
+                    <SelectItem key={type}>{type}</SelectItem>
                   ))}
                 </Select>
 
@@ -248,9 +248,7 @@ export default function EditLostReportModal({
                   defaultSelectedKeys={given_locations || []}
                 >
                   {lafLocations.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
+                    <SelectItem key={type}>{type}</SelectItem>
                   ))}
                 </Select>
               </div>
