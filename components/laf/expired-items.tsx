@@ -267,9 +267,15 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey === "id"
-                    ? item.type.charAt(0) + item.id
-                    : getKeyValue(item, columnKey)}
+                  {columnKey === "id" ? (
+                    item.type.charAt(0) + item.id
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
+                  ) : (
+                    getKeyValue(item, columnKey)
+                  )}
                 </TableCell>
               )}
             </TableRow>
@@ -308,9 +314,15 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {columnKey === "id"
-                    ? item.type.charAt(0) + item.id
-                    : getKeyValue(item, columnKey)}
+                  {columnKey === "id" ? (
+                    item.type.charAt(0) + item.id
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
+                  ) : (
+                    getKeyValue(item, columnKey)
+                  )}
                 </TableCell>
               )}
             </TableRow>

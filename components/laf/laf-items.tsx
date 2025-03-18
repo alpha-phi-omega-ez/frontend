@@ -120,6 +120,10 @@ export default function LAFItems({
                     </div>
                   ) : columnKey === "id" ? (
                     item.type.charAt(0) + item.id
+                  ) : columnKey === "description" ? (
+                    <div className="truncate max-w-xs" title={item.description}>
+                      {item.description}
+                    </div>
                   ) : (
                     getKeyValue(item, columnKey)
                   )}
