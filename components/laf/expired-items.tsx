@@ -177,14 +177,10 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             isEnabled: false,
           }}
         >
-          <SelectItem key="All" value="All">
-            All
-          </SelectItem>
+          <SelectItem key="All">All</SelectItem>
           <>
             {lafTypes.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </>
         </Select>

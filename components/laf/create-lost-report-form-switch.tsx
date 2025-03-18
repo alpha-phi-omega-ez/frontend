@@ -157,9 +157,7 @@ export default function CreateLostReportFormSwitch({
           }}
         >
           {lafTypes.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
+            <SelectItem key={type}>{type}</SelectItem>
           ))}
         </Select>
 
@@ -197,9 +195,7 @@ export default function CreateLostReportFormSwitch({
           defaultSelectedKeys={switchToLostReport?.location?.split(",") || []}
         >
           {lafLocations.map((type) => (
-            <SelectItem key={type} value={type}>
-              {type}
-            </SelectItem>
+            <SelectItem key={type}>{type}</SelectItem>
           ))}
         </Select>
       </div>

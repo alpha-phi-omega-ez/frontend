@@ -232,9 +232,7 @@ export default function CreateLostReportForm({
             }}
           >
             {lafTypes.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
 
@@ -272,9 +270,7 @@ export default function CreateLostReportForm({
             }}
           >
             {lafLocations.map((type) => (
-              <SelectItem key={type} value={type}>
-                {type}
-              </SelectItem>
+              <SelectItem key={type}>{type}</SelectItem>
             ))}
           </Select>
         </div>

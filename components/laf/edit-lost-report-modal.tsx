@@ -208,9 +208,7 @@ export default function EditLostReportModal({
                   }}
                 >
                   {lafTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
+                    <SelectItem key={type}>{type}</SelectItem>
                   ))}
                 </Select>
 
@@ -248,9 +246,7 @@ export default function EditLostReportModal({
                   defaultSelectedKeys={given_locations || []}
                 >
                   {lafLocations.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
+                    <SelectItem key={type}>{type}</SelectItem>
                   ))}
                 </Select>
               </div>
