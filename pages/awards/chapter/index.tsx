@@ -45,8 +45,8 @@ export default function ChapterAwardsPage() {
           Throughout 75+ years of existence, the Epsilon Zeta chapter has been
           recognized by a number of local organizations and APO nationals for
           achievement to our community, campus, and country. Our most notable
-          achievement is winning the Dean Arno Nowotny National Service Award
-          6x. Below are our other notable achievements.
+          achievement is winning the Dean Arno Nowotny National Service Award 6
+          times. Below are our other notable achievements.
         </p>
       </div>
       <AwardImages />
