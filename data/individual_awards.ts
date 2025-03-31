@@ -1,6 +1,9 @@
 export const DSKS: string[] = [
+  "Allie Labrecque",
+  "Jadyn Baidoo-Davis",
+  "Sara Seelman",
   "Kedaar Iyer",
-  "Christopher Dostilio",
+  "Chris Dostilio",
   "Samael Collins",
   "Rafael Cenzano",
   "Jetta McPhee",
@@ -102,6 +105,12 @@ export const DSKS: string[] = [
 ];
 
 export const OLAS: string[] = [
+  "Zachary Gordon",
+  "Hannah Burr",
+  "Sara Ann Rochford",
+  "Marie-Elizabeth Kabeya",
+  "Joshua Youngbar",
+  "Mags Martin",
   "Kedaar Iyer",
   "Jetta McPhee",
   "Daegan Fuss",
