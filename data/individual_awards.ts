@@ -107,10 +107,8 @@ export const DSKS: string[] = [
 export const OLAS: string[] = [
   "Zachary Gordon",
   "Hannah Burr",
-  "Sara Ann Rochford",
   "Marie-Elizabeth Kabeya",
   "Joshua Youngbar",
-  "Mags Martin",
   "Kedaar Iyer",
   "Jetta McPhee",
   "Daegan Fuss",
