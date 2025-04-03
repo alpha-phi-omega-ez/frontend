@@ -27,8 +27,30 @@ npm install
 ### Run the development server
 
 ```bash
+make develop
+```
+
+or
+
+```bash
 npm run dev
 ```
+
+### Build the server for production
+
+```bash
+make build
+```
+
+or
+
+```bash
+npm run build
+```
+
+### Using this system in production
+
+Currently using [GitHub actions](https://github.com/alpha-phi-omega-ez/frontend/blob/main/.github/workflows/docker-deploy.yml) the server is built and created into a [Docker image](https://github.com/alpha-phi-omega-ez/frontend/pkgs/container/frontend) that is currently used in production
 
 ## License
 
