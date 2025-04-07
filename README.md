@@ -54,4 +54,4 @@ Currently using [GitHub actions](https://github.com/alpha-phi-omega-ez/frontend/
 
 ## License
 
-Licensed under the [AGPL license]([https://github.com/nextui-org/next-pages-template/blob/main/LICENSE](https://github.com/alpha-phi-omega-ez/frontend/blob/main/LICENSE)).
+Licensed under the [AGPL license](https://github.com/alpha-phi-omega-ez/frontend/blob/main/LICENSE).
