@@ -14,6 +14,7 @@ import { EditIcon, LeaveIcon } from "@/components/icons";
 import { useState } from "react";
 import EditLostReportModal from "./edit-lost-report-modal";
 import FoundLostReportModal from "./found-lost-report-modal";
+import DescriptionCell from "./description-cell";
 
 interface LostReportsItemsProps {
   items: LostReportItem[];
@@ -136,9 +137,7 @@ export default function LostReportItems({
                       </Chip>
                     ))
                   ) : columnKey === "description" ? (
-                    <div className="truncate max-w-xs" title={item.description}>
-                      {item.description}
-                    </div>
+                    <DescriptionCell description={item.description} />
                   ) : (
                     getKeyValue(item, columnKey)
                   )}
