@@ -10,15 +10,12 @@ import {
   Chip,
 } from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
+import { FoundItemModalData } from "@/types/laf";
 
 interface FoundLAFModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  given_type: string;
-  given_location: string;
-  given_date: string;
-  given_description: string;
-  given_id: string;
+  laf_data: FoundItemModalData;
   updateTable: () => void;
 }
 
@@ -30,11 +27,7 @@ interface SubmitFoundItemFormData {
 export default function FoundLAFModal({
   isOpen,
   onOpenChange,
-  given_type,
-  given_location,
-  given_date,
-  given_description,
-  given_id,
+  laf_data,
   updateTable,
 }: FoundLAFModalProps) {
   const {
@@ -52,12 +45,12 @@ export default function FoundLAFModal({
   });
 
   const { newAlert } = useAlert();
-  const displayId = given_type.charAt(0).toUpperCase() + given_id;
+  const displayId = laf_data.type.charAt(0).toUpperCase() + laf_data.id;
 
   const onSubmit = async (data: SubmitFoundItemFormData) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/found/${given_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/found/${laf_data.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -86,7 +79,7 @@ export default function FoundLAFModal({
   const archiveItem = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/archive/${given_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/archive/${laf_data.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -126,11 +119,11 @@ export default function FoundLAFModal({
               {displayId}
             </ModalHeader>
             <ModalBody>
-              <p>{given_description}</p>
+              <p>{laf_data.description}</p>
               <div className="flex flex-row gap-3 mb-5">
-                <Chip>{given_type}</Chip>
-                <Chip>{given_location}</Chip>
-                <Chip>{given_date}</Chip>
+                <Chip>{laf_data.type}</Chip>
+                <Chip>{laf_data.location}</Chip>
+                <Chip>{laf_data.date}</Chip>
               </div>
               <div className="flex flex-row gap-3">
                 {/* Name Field */}

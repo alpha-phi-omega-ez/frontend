@@ -15,17 +15,14 @@ import { FoundItemFormData } from "@/types/laf";
 import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
 import { useAlert } from "@/context/AlertContext";
+import { FoundItemModalData } from "@/types/laf";
 
 interface EditLAFModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
   lafTypes: string[];
   lafLocations: string[];
-  given_type: string;
-  given_location: string;
-  given_date: string;
-  given_description: string;
-  given_id: string;
+  laf_data: FoundItemModalData;
   updateTable: () => void;
 }
 
@@ -34,11 +31,7 @@ export default function EditLAFModal({
   onOpenChange,
   lafTypes,
   lafLocations,
-  given_type,
-  given_location,
-  given_date,
-  given_description,
-  given_id,
+  laf_data,
   updateTable,
 }: EditLAFModalProps) {
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
@@ -51,22 +44,22 @@ export default function EditLAFModal({
     formState: { errors },
   } = useForm<FoundItemFormData>({
     defaultValues: {
-      type: given_type,
-      location: given_location,
-      date: given_date,
-      description: given_description,
+      type: laf_data.type,
+      location: laf_data.location,
+      date: laf_data.date,
+      description: laf_data.description,
     },
   });
 
   const { newAlert } = useAlert();
   const [date, setDate] = useState<string>(todaysDate.toString());
-  const displayId = given_type.charAt(0).toUpperCase() + given_id;
+  const displayId = laf_data.type.charAt(0).toUpperCase() + laf_data.id;
 
   const onSubmit = async (data: FoundItemFormData) => {
     try {
       data.date = date;
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/${given_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/${laf_data.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -93,12 +86,12 @@ export default function EditLAFModal({
   };
 
   useEffect(() => {
-    setValue("type", given_type);
-    setValue("location", given_location);
-    setValue("date", given_date);
-    setValue("description", given_description);
-    setDate(given_date);
-  }, [given_type, given_location, given_date, given_description]);
+    setValue("type", laf_data.type);
+    setValue("location", laf_data.location);
+    setValue("date", laf_data.date);
+    setValue("description", laf_data.description);
+    setDate(laf_data.date);
+  }, [laf_data]);
 
   return (
     <Modal
@@ -131,7 +124,7 @@ export default function EditLAFModal({
                   onChange={(e) => {
                     setValue("type", e.target.value);
                   }}
-                  defaultSelectedKeys={[given_type]}
+                  defaultSelectedKeys={[laf_data.type]}
                   scrollShadowProps={{
                     isEnabled: false,
                   }}
@@ -155,7 +148,7 @@ export default function EditLAFModal({
                   onChange={(e) => {
                     setValue("location", e.target.value);
                   }}
-                  defaultSelectedKeys={[given_location]}
+                  defaultSelectedKeys={[laf_data.location]}
                   scrollShadowProps={{
                     isEnabled: false,
                   }}
@@ -183,7 +176,7 @@ export default function EditLAFModal({
                   }}
                   errorMessage={errors.date?.message}
                   isInvalid={!!errors.date}
-                  defaultValue={parseDate(given_date)}
+                  defaultValue={parseDate(laf_data.date)}
                   maxValue={todaysDate}
                 />
               </div>
@@ -197,7 +190,7 @@ export default function EditLAFModal({
                 })}
                 errorMessage={errors.description?.message}
                 isInvalid={!!errors.description}
-                defaultValue={given_description}
+                defaultValue={laf_data.description}
               />
             </ModalBody>
             <ModalFooter>
