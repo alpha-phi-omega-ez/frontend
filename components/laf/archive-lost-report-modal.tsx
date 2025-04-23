@@ -8,30 +8,19 @@ import {
   Chip,
 } from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
+import { LostReportModalData } from "@/types/laf";
 
 interface ArchiveLostReportModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
-  given_type: string;
-  given_locations: string[];
-  given_date: string;
-  given_description: string;
-  given_id: string;
-  given_name: string;
-  given_email: string;
+  lost_report_data: LostReportModalData;
   updateTable: () => void;
 }
 
 export default function ArchiveLostReportModal({
   isOpen,
   onOpenChange,
-  given_type,
-  given_locations,
-  given_date,
-  given_description,
-  given_id,
-  given_name,
-  given_email,
+  lost_report_data,
   updateTable,
 }: ArchiveLostReportModalProps) {
   const { newAlert } = useAlert();
@@ -39,7 +28,7 @@ export default function ArchiveLostReportModal({
   const checkIn = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/found/${given_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/found/${lost_report_data.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -72,15 +61,15 @@ export default function ArchiveLostReportModal({
             <ModalHeader>Archive Lost Report</ModalHeader>
             <ModalBody>
               <p>Are you sure you want to archive this lost report?</p>
-              <p>{given_description}</p>
+              <p>{lost_report_data.description}</p>
               <div className="flex flex-row gap-3 mb-5">
-                <Chip>{given_type}</Chip>
-                {given_locations.map((location, index) => (
+                <Chip>{lost_report_data.type}</Chip>
+                {lost_report_data.locations.map((location, index) => (
                   <Chip key={index}>{location}</Chip>
                 ))}
-                <Chip>{given_date}</Chip>
-                <Chip>{given_name}</Chip>
-                <Chip>{given_email}</Chip>
+                <Chip>{lost_report_data.date}</Chip>
+                <Chip>{lost_report_data.name}</Chip>
+                <Chip>{lost_report_data.email}</Chip>
               </div>
             </ModalBody>
             <ModalFooter>

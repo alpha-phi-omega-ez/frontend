@@ -17,19 +17,14 @@ import { NewLostReportFormData } from "@/types/laf";
 import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
 import { useAlert } from "@/context/AlertContext";
+import { LostReportModalData } from "@/types/laf";
 
 interface EditLostReportModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
   lafTypes: string[];
   lafLocations: string[];
-  given_type: string;
-  given_locations: string[];
-  given_date: string;
-  given_description: string;
-  given_id: string;
-  given_name: string;
-  given_email: string;
+  lost_report_data: LostReportModalData;
   updateTable: () => void;
 }
 
@@ -38,13 +33,7 @@ export default function EditLostReportModal({
   onOpenChange,
   lafTypes,
   lafLocations,
-  given_type,
-  given_locations,
-  given_date,
-  given_description,
-  given_id,
-  given_name,
-  given_email,
+  lost_report_data,
   updateTable,
 }: EditLostReportModalProps) {
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
@@ -78,7 +67,7 @@ export default function EditLostReportModal({
         .map((loc) => loc.trim())
         .join(",");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/${given_id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/${lost_report_data.id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -105,20 +94,20 @@ export default function EditLostReportModal({
   };
 
   useEffect(() => {
-    setValue("type", given_type);
-    setValue("location", given_locations.join(","));
-    setValue("date", given_date);
-    setValue("description", given_description);
-    setValue("name", given_name);
-    setValue("email", given_email);
-    setDate(given_date);
+    setValue("type", lost_report_data.type);
+    setValue("location", lost_report_data.locations.join(","));
+    setValue("date", lost_report_data.date);
+    setValue("description", lost_report_data.description);
+    setValue("name", lost_report_data.name);
+    setValue("email", lost_report_data.email);
+    setDate(lost_report_data.date);
   }, [
-    given_type,
-    given_locations,
-    given_date,
-    given_description,
-    given_name,
-    given_email,
+    lost_report_data.type,
+    lost_report_data.locations,
+    lost_report_data.date,
+    lost_report_data.description,
+    lost_report_data.name,
+    lost_report_data.email,
   ]);
 
   return (
@@ -136,7 +125,7 @@ export default function EditLostReportModal({
           >
             <ModalHeader>Edit Lost Report</ModalHeader>
             <ModalBody>
-              <p>{given_description}</p>
+              <p>{lost_report_data.description}</p>
               <div className="flex flex-row gap-3">
                 {/* Name Field */}
                 <Input
@@ -147,7 +136,7 @@ export default function EditLostReportModal({
                   {...register("name", { required: "Name is required" })}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  defaultValue={given_name}
+                  defaultValue={lost_report_data.name}
                   autoComplete="off"
                 />
                 {/* Email Field */}
@@ -166,7 +155,7 @@ export default function EditLostReportModal({
                   onChange={() => clearErrors("email")}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
-                  defaultValue={given_email}
+                  defaultValue={lost_report_data.email}
                   autoComplete="off"
                 />
                 {/* Date Field */}
@@ -186,7 +175,7 @@ export default function EditLostReportModal({
                   }}
                   errorMessage={errors.date?.message}
                   isInvalid={!!errors.date}
-                  defaultValue={parseDate(given_date)}
+                  defaultValue={parseDate(lost_report_data.date)}
                   maxValue={todaysDate}
                 />
               </div>
@@ -204,7 +193,7 @@ export default function EditLostReportModal({
                   onChange={(e) => {
                     setValue("type", e.target.value);
                   }}
-                  defaultSelectedKeys={[given_type]}
+                  defaultSelectedKeys={[lost_report_data.type]}
                   scrollShadowProps={{
                     isEnabled: false,
                   }}
@@ -245,7 +234,7 @@ export default function EditLostReportModal({
                   onChange={(e) => {
                     setValue("location", e.target.value);
                   }}
-                  defaultSelectedKeys={given_locations || []}
+                  defaultSelectedKeys={lost_report_data.locations || []}
                 >
                   {lafLocations.map((type) => (
                     <SelectItem key={type}>{type}</SelectItem>
@@ -263,7 +252,7 @@ export default function EditLostReportModal({
                 })}
                 errorMessage={errors.description?.message}
                 isInvalid={!!errors.description}
-                defaultValue={given_description}
+                defaultValue={lost_report_data.description}
               />
             </ModalBody>
             <ModalFooter>
