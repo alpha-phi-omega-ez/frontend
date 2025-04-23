@@ -74,14 +74,6 @@ export default function LAFItems({
     onOpenChange: onFoundOpenChange,
   } = useDisclosure();
 
-  type FormState = {
-    type: string;
-    location: string;
-    date: string;
-    description: string;
-    id: string;
-  };
-
   type Action = { type: "SET_FORM"; payload: FoundItemModalData };
 
   function formReducer(
