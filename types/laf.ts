@@ -46,3 +46,12 @@ export type FoundItemFormData = {
   date: string;
   description: string;
 };
+
+export type FoundItemModalData = {
+  type: string;
+  location: string;
+  date: string;
+  description: string;
+  id: string;
+  modal: "edit" | "found" | null;
+};
