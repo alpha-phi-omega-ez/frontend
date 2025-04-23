@@ -13,7 +13,7 @@ import { useDisclosure } from "@heroui/react";
 import { EditIcon, LeaveIcon } from "@/components/icons";
 import { useState } from "react";
 import EditLostReportModal from "./edit-lost-report-modal";
-import FoundLostReportModal from "./found-lost-report-modal";
+import ArchiveLostReportModal from "./archive-lost-report-modal";
 import DescriptionCell from "./description-cell";
 
 interface LostReportsItemsProps {
@@ -163,7 +163,7 @@ export default function LostReportItems({
             given_email={email}
             updateTable={updateTable}
           />
-          <FoundLostReportModal
+          <ArchiveLostReportModal
             isOpen={isFoundOpen}
             onOpenChange={onFoundOpenChange}
             given_type={type}

@@ -9,7 +9,7 @@ import {
 } from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
 
-interface FoundLostReportModalProps {
+interface ArchiveLostReportModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
   given_type: string;
@@ -22,7 +22,7 @@ interface FoundLostReportModalProps {
   updateTable: () => void;
 }
 
-export default function FoundLostReportModal({
+export default function ArchiveLostReportModal({
   isOpen,
   onOpenChange,
   given_type,
@@ -33,7 +33,7 @@ export default function FoundLostReportModal({
   given_name,
   given_email,
   updateTable,
-}: FoundLostReportModalProps) {
+}: ArchiveLostReportModalProps) {
   const { newAlert } = useAlert();
 
   const checkIn = async () => {
