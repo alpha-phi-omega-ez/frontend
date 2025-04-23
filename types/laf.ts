@@ -55,3 +55,14 @@ export type FoundItemModalData = {
   id: string;
   modal: "edit" | "found" | null;
 };
+
+export type LostReportModalData = {
+  type: string;
+  locations: string[];
+  date: string;
+  description: string;
+  id: string;
+  name: string;
+  email: string;
+  modal: "edit" | "archive" | null;
+};
