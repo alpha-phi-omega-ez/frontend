@@ -12,8 +12,9 @@ import { useDisclosure } from "@heroui/react";
 import { EditIcon, LeaveIcon } from "@/components/icons";
 import EditLAFModal from "./edit-laf-modal";
 import FoundLAFModal from "./found-laf-modal";
-import { useState } from "react";
+import { useReducer, useEffect } from "react";
 import DescriptionCell from "./description-cell";
+import { FoundItemModalData } from "@/types/laf";
 
 interface LAFItemsProps {
   items: LAFItem[];
@@ -60,21 +61,57 @@ export default function LAFItems({
         ]
       : []),
   ];
+
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
     onOpenChange: onEditOpenChange,
   } = useDisclosure();
+
   const {
     isOpen: isFoundOpen,
     onOpen: onFoundOpen,
     onOpenChange: onFoundOpenChange,
   } = useDisclosure();
-  const [type, setType] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [id, setId] = useState<string>("0");
+
+  type FormState = {
+    type: string;
+    location: string;
+    date: string;
+    description: string;
+    id: string;
+  };
+
+  type Action = { type: "SET_FORM"; payload: FoundItemModalData };
+
+  function formReducer(
+    state: FoundItemModalData,
+    action: Action
+  ): FoundItemModalData {
+    switch (action.type) {
+      case "SET_FORM":
+        return action.payload;
+      default:
+        return state;
+    }
+  }
+
+  const [formState, dispatch] = useReducer(formReducer, {
+    type: "",
+    location: "",
+    date: "",
+    description: "",
+    id: "0",
+    modal: null,
+  });
+
+  useEffect(() => {
+    if (formState.modal === "edit") {
+      onEditOpen();
+    } else if (formState.modal === "found") {
+      onFoundOpen();
+    }
+  }, [formState]);
 
   return (
     <>
@@ -94,13 +131,18 @@ export default function LAFItems({
                       <button
                         aria-label="Edit"
                         onClick={() => {
-                          setType(item.type);
-                          setLocation(item.location);
                           const [month, day, year] = item.date.split("/");
-                          setDate(`${year}-${month}-${day}`);
-                          setDescription(item.description);
-                          setId(item.id);
-                          onEditOpen();
+                          dispatch({
+                            type: "SET_FORM",
+                            payload: {
+                              type: item.type,
+                              location: item.location,
+                              date: `${year}-${month}-${day}`,
+                              description: item.description,
+                              id: item.id,
+                              modal: "edit",
+                            },
+                          });
                         }}
                       >
                         <EditIcon />
@@ -108,12 +150,17 @@ export default function LAFItems({
                       <button
                         aria-label="Found Item"
                         onClick={() => {
-                          setType(item.type);
-                          setLocation(item.location);
-                          setDate(item.date);
-                          setDescription(item.description);
-                          setId(item.id);
-                          onFoundOpen();
+                          dispatch({
+                            type: "SET_FORM",
+                            payload: {
+                              type: item.type,
+                              location: item.location,
+                              date: item.date,
+                              description: item.description,
+                              id: item.id,
+                              modal: "found",
+                            },
+                          });
                         }}
                       >
                         <LeaveIcon />
@@ -139,21 +186,13 @@ export default function LAFItems({
             onOpenChange={onEditOpenChange}
             lafTypes={lafTypes}
             lafLocations={lafLocations}
-            given_type={type}
-            given_location={location}
-            given_date={date}
-            given_description={description}
-            given_id={id}
+            laf_data={formState}
             updateTable={updateTable}
           />
           <FoundLAFModal
             isOpen={isFoundOpen}
             onOpenChange={onFoundOpenChange}
-            given_type={type}
-            given_location={location}
-            given_date={date}
-            given_description={description}
-            given_id={id}
+            laf_data={formState}
             updateTable={updateTable}
           />
         </>
