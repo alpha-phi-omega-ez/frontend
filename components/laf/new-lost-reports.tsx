@@ -12,20 +12,21 @@ import {
 import { useEffect, useState } from "react";
 import { Selection } from "@react-types/shared";
 import { useAuth } from "@/context/AuthContext";
-import { fetchLostReportItems, fetchLAFItems } from "@/utils/laf/utils";
+import { fetchLostReportItems, fetchLAFItems } from "@/utils/laf";
 import { LostReportItem } from "@/types/laf";
 import LAFItems from "./laf-items";
 import { LAFItem } from "@/types/laf";
 import { useAlert } from "@/context/AlertContext";
+import { fetchNewLostReports } from "@/utils/laf";
 
 interface NewLostReportsProps {
   view: string;
-  fetchNewLostReports: () => void;
+  setNewLostReports: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function NewLostReports({
   view,
-  fetchNewLostReports,
+  setNewLostReports,
 }: NewLostReportsProps) {
   const { logout, auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
@@ -86,7 +87,7 @@ export default function NewLostReports({
 
       if (response.ok) {
         fetchLostReportItems({}, setLostReportItems, logout, true);
-        fetchNewLostReports();
+        fetchNewLostReports(setNewLostReports);
         setItems([]);
         setSelectedItem(null);
         newAlert("Lost Report marked as viewed", "success");
@@ -131,7 +132,6 @@ export default function NewLostReports({
           location: selectedReport.location.join(", "),
           date: formattedDate,
           dateFilter: "Before",
-          // description: selectedReport.description,
         };
         fetchLAFItems(formData, setItems, logout);
       }
