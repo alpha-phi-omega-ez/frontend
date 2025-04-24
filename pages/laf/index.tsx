@@ -10,6 +10,7 @@ import ExpiredItems from "@/components/laf/expired-items";
 import NewLostReports from "@/components/laf/new-lost-reports";
 import { useAuth } from "@/context/AuthContext";
 import { ViewState } from "@/types/laf";
+import { fetchNewLostReports } from "@/utils/laf";
 
 interface LAFPageProps {
   lafTypes: string[];
@@ -24,19 +25,6 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   const [loading, setLoading] = useState(true);
   const [newLostReports, setNewLostReports] = useState(0);
 
-  const fetchNewLostReports = async () => {
-    const data = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
-      {
-        credentials: "include",
-      }
-    );
-    if (data.ok) {
-      const json = await data.json();
-      setNewLostReports(json.data);
-    }
-  };
-
   useEffect(() => {
     if (lafTypes && lafLocations) {
       setLoading(false);
@@ -45,7 +33,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
 
   useEffect(() => {
     checkAuthStatus();
-    fetchNewLostReports();
+    fetchNewLostReports(setNewLostReports);
     const interval = setInterval(fetchNewLostReports, 15000);
     return () => clearInterval(interval);
   }, []);
@@ -124,10 +112,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
               display: view === "New Lost Reports" ? "block" : "none",
             }}
           >
-            <NewLostReports
-              view={view}
-              fetchNewLostReports={fetchNewLostReports}
-            />
+            <NewLostReports view={view} setNewLostReports={setNewLostReports} />
           </div>
           <div
             style={{
