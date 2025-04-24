@@ -90,3 +90,18 @@ export async function fetchLostReportItems(
     setLostReportItems([]);
   }
 }
+
+export async function fetchNewLostReports(
+  setNewLostReports: React.Dispatch<React.SetStateAction<number>>
+) {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
+    {
+      credentials: "include",
+    }
+  );
+  if (data.ok) {
+    const json = await data.json();
+    setNewLostReports(json.data);
+  }
+}

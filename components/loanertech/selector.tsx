@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { isCheckedOut } from "@/utils/loanertech/utils";
+import { isCheckedOut } from "@/utils/loanertech";
 import { LoanerTechType } from "@/types/loanertech";
 
 interface LoanerTechSelectorProps {
