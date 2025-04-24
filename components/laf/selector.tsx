@@ -19,7 +19,6 @@ export default function LAFSelector({
     "Find Lost Report",
     "New Lost Reports",
     "Expired Items",
-    // "Archive",
   ];
 
   return (
