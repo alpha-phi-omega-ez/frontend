@@ -5,7 +5,6 @@ export type ViewState =
   | "Find Lost Report"
   | "New Lost Reports"
   | "Expired Items"
-  | "Archive"
   | "error";
 
 export type LAFItem = {

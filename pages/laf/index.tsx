@@ -22,8 +22,8 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
 
   const [view, setView] = useState<ViewState>("Found Item");
   const [loading, setLoading] = useState(true);
-
   const [newLostReports, setNewLostReports] = useState(0);
+
   const fetchNewLostReports = async () => {
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/count`,
@@ -135,13 +135,6 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
             }}
           >
             <ExpiredItems lafTypes={lafTypes} view={view} />
-          </div>
-          <div
-            style={{
-              display: view === "Archive" ? "block" : "none",
-            }}
-          >
-            <p>Archive in progress</p>
           </div>
         </>
       )}
