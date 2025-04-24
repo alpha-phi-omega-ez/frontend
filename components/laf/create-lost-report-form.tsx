@@ -13,7 +13,7 @@ import { parseDate } from "@internationalized/date";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { LAFItem } from "@/types/laf";
 import LAFItems from "./laf-items";
-import { fetchLAFItems } from "@/utils/laf/utils";
+import { fetchLAFItems } from "@/utils/laf";
 import { useAlert } from "@/context/AlertContext";
 import { useAuth } from "@/context/AuthContext";
 

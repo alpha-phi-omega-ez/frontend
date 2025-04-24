@@ -6,7 +6,7 @@ import { useDisclosure } from "@heroui/react";
 import {
   fetchLoanerTech,
   checkLoanerTechAvailablility,
-} from "@/utils/loanertech/utils";
+} from "@/utils/loanertech";
 import LoanerTech from "@/components/loanertech/loanertech";
 import CheckInCheckOutModalContent from "@/components/loanertech/modals";
 import LoanerTechSelector from "@/components/loanertech/selector";

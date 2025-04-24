@@ -1,5 +1,5 @@
 import { Modal, ModalBody, ModalContent, Input } from "@heroui/react";
-import { fetchLoanerTech } from "@/utils/loanertech/utils";
+import { fetchLoanerTech } from "@/utils/loanertech";
 import {
   LoanerTechModalFooter,
   LoanerTechModalHeader,

@@ -11,7 +11,7 @@ import { parseDate } from "@internationalized/date";
 import { useState, useEffect } from "react";
 import LostReportItems from "./lost-report-items";
 import { useAuth } from "@/context/AuthContext";
-import { fetchLostReportItems } from "@/utils/laf/utils";
+import { fetchLostReportItems } from "@/utils/laf";
 import { LostReportItem } from "@/types/laf";
 
 interface LostReportsFormData {

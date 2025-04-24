@@ -12,7 +12,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
 import { LostReportItem } from "@/types/laf";
 import LostReportItems from "./lost-report-items";
-import { fetchLostReportItems } from "@/utils/laf/utils";
+import { fetchLostReportItems } from "@/utils/laf";
 import { FoundItemFormData } from "@/types/laf";
 
 interface FoundItemFormProps {

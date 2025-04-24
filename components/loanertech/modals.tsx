@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import CheckInModalContent from "./checkInModal";
 import CheckOutModalContent from "./checkOutModal";
-import { isCheckedOut } from "@/utils/loanertech/utils";
+import { isCheckedOut } from "@/utils/loanertech";
 import { LoanerTechType } from "@/types/loanertech";
 
 interface CheckInCheckOutModalContentProps {

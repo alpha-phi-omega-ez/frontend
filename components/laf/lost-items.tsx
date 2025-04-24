@@ -12,7 +12,7 @@ import { parseDate } from "@internationalized/date";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import LAFItems from "./laf-items";
 import { LAFItem, ViewState } from "@/types/laf";
-import { fetchLAFItems } from "@/utils/laf/utils";
+import { fetchLAFItems } from "@/utils/laf";
 import { useAuth } from "@/context/AuthContext";
 
 interface LostItemsFormData {

@@ -1,5 +1,5 @@
 import { Card, CardBody } from "@heroui/card";
-import { isCheckedOut } from "@/utils/loanertech/utils";
+import { isCheckedOut } from "@/utils/loanertech";
 import { Dispatch, SetStateAction } from "react";
 import { LoanerTechType } from "@/types/loanertech";
 
