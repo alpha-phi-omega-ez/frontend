@@ -13,11 +13,12 @@ import LoanerTechSelector from "@/components/loanertech/selector";
 import { LoanerTechType } from "@/types/loanertech";
 
 export default function LoanerTechPage() {
-  const [loanerTech, setLoanerTech] = useState<false | LoanerTechType[]>([]);
   const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
-  const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const [loanerTech, setLoanerTech] = useState<false | LoanerTechType[]>([]);
   const [loanerTechAvailable, setLoanerTechAvailable] = useState<boolean>(true);
   const loanerTechAvailableRef = useRef<boolean>(loanerTechAvailable);
   const [itemsCheckedOut, setItemsCheckedOut] = useState<number>(0);
@@ -25,7 +26,10 @@ export default function LoanerTechPage() {
   useEffect(() => {
     checkAuthStatus();
     fetchLoanerTech(setLoanerTech);
-    checkLoanerTechAvailablility(setLoanerTechAvailable);
+    checkLoanerTechAvailablility(
+      setLoanerTechAvailable,
+      loanerTechAvailableRef
+    );
 
     const intervalId = setInterval(() => {
       if (
@@ -34,7 +38,10 @@ export default function LoanerTechPage() {
       ) {
         checkAuthStatus();
         fetchLoanerTech(setLoanerTech);
-        checkLoanerTechAvailablility(setLoanerTechAvailable);
+        checkLoanerTechAvailablility(
+          setLoanerTechAvailable,
+          loanerTechAvailableRef
+        );
       }
     }, 5000); // Fetch every 5 seconds
 
