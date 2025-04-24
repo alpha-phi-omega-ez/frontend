@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, MutableRefObject } from "react";
 import { LoanerTechType } from "@/types/loanertech";
 
 export async function fetchLoanerTech(
@@ -36,15 +36,17 @@ export function isCheckedOut(
 }
 
 export function checkLoanerTechAvailablility(
-  setLoanerTechAvailable: Dispatch<SetStateAction<boolean>>
+  setLoanerTechAvailable: Dispatch<SetStateAction<boolean>>,
+  loanerTechAvailableRef: MutableRefObject<boolean>
 ): void {
   const estNow = new Date(
     new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
   );
-  setLoanerTechAvailable(
+  const available =
     estNow.getDay() >= 1 &&
-      estNow.getDay() <= 5 &&
-      estNow.getHours() >= 9 &&
-      estNow.getHours() < 12 + 4
-  );
+    estNow.getDay() <= 5 &&
+    estNow.getHours() >= 9 &&
+    estNow.getHours() < 12 + 4;
+  setLoanerTechAvailable(available);
+  loanerTechAvailableRef.current = available;
 }
