@@ -1,5 +1,4 @@
 import { Modal, ModalBody, ModalContent } from "@heroui/react";
-import { Typography } from "@mui/material";
 import { fetchLoanerTech } from "@/utils/loanertech/utils";
 import {
   LoanerTechModalFooter,
@@ -68,9 +67,7 @@ export default function CheckInModalContent({
               selectedCards={selectedCards}
             />
             <ModalBody>
-              <Typography variant="body1">
-                Are you sure you want to check in the selected items?
-              </Typography>
+              <p>Are you sure you want to check in the selected items?</p>
             </ModalBody>
             <LoanerTechModalFooter onClose={onClose} checkIn={checkIn} />
           </>
