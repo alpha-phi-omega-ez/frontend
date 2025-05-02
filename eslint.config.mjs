@@ -10,6 +10,8 @@ export default [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: "module",
+      },
+      ecmaFeatures: {
         jsx: true,
       },
     },
@@ -18,8 +20,10 @@ export default [
       "@typescript-eslint": typescriptEslintPlugin,
     },
     rules: {
-      "react/react-in-jsx-scope": "off",
-      // Add TypeScript-specific rules here if needed
+      ...eslintPluginReact.configs.recommended.rules,
+      ...typescriptEslintPlugin.configs.recommended.rules,
+
+      "react/react-in-jsx-scope": "off", // React 17+ JSX transform
     },
     settings: {
       react: {
