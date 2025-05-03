@@ -1,5 +1,14 @@
 import { ImageType } from "@/components/carousel";
 
+interface Event {
+  title: string;
+  description: string;
+  date: string;
+  timing: string;
+  location: string;
+  images: ImageType[];
+}
+
 const service_day = "/images/service_day/";
 const ysd = "/images/ysd/";
 const bmoc = "/images/bmoc/";
@@ -68,7 +77,7 @@ const OvernighterImages: ImageType[] = [
   { img: overnighter + "Overnighter(15).jpg", alt: "Overnighter" },
 ];
 
-export const Events = [
+export const Events: Event[] = [
   {
     title: "RPI Service Day",
     description:
