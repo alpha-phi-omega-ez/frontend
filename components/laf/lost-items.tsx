@@ -134,6 +134,19 @@ export default function LostItems({
   const onSubmit = async () => {
     setView("Submit Lost Report");
     setSwitchToLostReport({ ...formData });
+    reset();
+    setValue("date", todaysDate.toString());
+    setValue("dateFilter", "Before");
+    clearErrors();
+    setFormData({
+      type: "",
+      location: "",
+      date: todaysDate.toString(),
+      dateFilter: "Before",
+      description: "",
+      id: "",
+    });
+    setEmptyForm(true);
   };
 
   return (

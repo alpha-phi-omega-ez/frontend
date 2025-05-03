@@ -61,7 +61,7 @@ export default function LoanerTechPage() {
               <p
                 className={
                   !loanerTechAvailable && itemsCheckedOut > 0
-                    ? "rounded p-2 bg-orange-500 font-bold"
+                    ? "rounded-lg p-2 bg-orange-500 font-bold"
                     : undefined
                 }
               >

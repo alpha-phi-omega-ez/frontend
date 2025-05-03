@@ -4,7 +4,7 @@ This website displays information on the Alpha Phi Omega, Epsilon Zeta Chapter a
 
 Originally, it used a template for creating applications using Next.js 14 (pages directory) and NextUI (v2). Now the application is on Next.js 15
 
->Note: Since Next.js 14, the pages router is recommend migrating to the [new App Router](https://nextjs.org/docs/app) to leverage React's latest features. Currently, the app uses the pages router but plans to transition are in the future
+>Note: Since Next.js 14, the pages router is recommended to migrate to the [new App Router](https://nextjs.org/docs/app) to leverage React's latest features. Currently, the app uses the pages router but plans to transition are in the future
 
 ## Technologies Used
 
@@ -27,19 +27,31 @@ npm install
 ### Run the development server
 
 ```bash
+make develop
+```
+
+or
+
+```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+### Build the server for production
 
 ```bash
-public-hoist-pattern[]=*@nextui-org/*
+make build
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+or
+
+```bash
+npm run build
+```
+
+### Using this system in production
+
+Currently using [GitHub actions](https://github.com/alpha-phi-omega-ez/frontend/blob/main/.github/workflows/docker-deploy.yml) the server is built and created into a [Docker image](https://github.com/alpha-phi-omega-ez/frontend/pkgs/container/frontend) that is currently used in production
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-pages-template/blob/main/LICENSE).
+Licensed under the [AGPL license](https://github.com/alpha-phi-omega-ez/frontend/blob/main/LICENSE).

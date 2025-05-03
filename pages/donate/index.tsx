@@ -37,6 +37,19 @@ export default function DonatePage() {
         <p className="mt-5">
           Without our donor&apos;s help, we couldn&apos;t do the work we do!
         </p>
+        <h2 className="text-3xl font-bold mt-10">Creating an Endowment</h2>
+        <p className="mt-4">
+          The chapter is creating an endowment for long term financial
+          stability. We are currently raising money to establish the endowment
+          donations can be made through this{" "}
+          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=443.101&bledit=1&sort=1&appealcode=APO125">
+            link
+          </Link>
+          . The goal of the endowment is to reduce the financial burden of
+          students joining our chapter, currently the national office charger
+          new members $99 to join. The endowment will allow us to offset costs
+          in the long term and reduce our dependency on dues.
+        </p>
         <h2 className="text-3xl font-bold mt-10">How to Donate?</h2>
         <p className="mt-4">
           You can donate through our{" "}
