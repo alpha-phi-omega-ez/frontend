@@ -9,7 +9,7 @@ import {
   Input,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { useEffect, useState, Dispatch, SetStateAction, use } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import LAFItems from "./laf-items";
 import { LAFItem, ViewState } from "@/types/laf";
 import { fetchLAFItems } from "@/utils/laf/utils";
@@ -104,7 +104,7 @@ export default function LostItems({
     }
   }, [view]);
 
-  const handleChange = (name: keyof LostItemsFormData, value: any) => {
+  const handleChange = (name: keyof LostItemsFormData, value: string) => {
     const updatedFormData = {
       ...formData,
       [name]: value,
@@ -131,7 +131,7 @@ export default function LostItems({
     fetchLAFItems({ ...formData }, setItems, logout);
   };
 
-  const onSubmit = async (_: LostItemsFormData) => {
+  const onSubmit = async () => {
     setView("Submit Lost Report");
     setSwitchToLostReport({ ...formData });
   };

@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
-export const Navbar = () => {
+export default function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const { auth } = useAuth();
@@ -182,4 +182,4 @@ export const Navbar = () => {
       </NavbarMenu>
     </NextUINavbar>
   );
-};
+}

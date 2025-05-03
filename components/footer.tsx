@@ -14,7 +14,7 @@ import {
 } from "./icons";
 
 // Define the Footer component
-export const Footer = () => {
+export function Footer() {
   return (
     <footer className="main-blue-background py-8 text-center main-white-font">
       <div className="container mx-auto px-4">
@@ -100,4 +100,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+}

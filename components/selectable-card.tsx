@@ -5,7 +5,10 @@ interface SelectableCardProps {
   onPress: () => void;
 }
 
-export function SelectableCard({ title, onPress }: SelectableCardProps) {
+export default function SelectableCard({
+  title,
+  onPress,
+}: SelectableCardProps) {
   return (
     <Card
       isPressable

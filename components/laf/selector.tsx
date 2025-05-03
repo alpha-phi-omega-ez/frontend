@@ -1,5 +1,4 @@
 import { ViewState } from "@/types/laf";
-import { useEffect, useState } from "react";
 import { Badge } from "@heroui/react";
 
 interface LAFSelectorProps {
