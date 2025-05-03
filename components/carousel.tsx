@@ -19,7 +19,7 @@ const deafultSettings = {
   arrows: true,
 };
 
-export default function DefaultCarousel(images: ImageType[]) {
+export default function DefaultCarousel({ images }: { images: ImageType[] }) {
   return (
     <Slider {...deafultSettings}>
       {images.map((item, index) => (

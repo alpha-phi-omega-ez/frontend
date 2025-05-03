@@ -23,7 +23,7 @@ export default function ServiceEventsPage() {
               <p className="mb-1">{item.location}</p>
             </div>
             <div>
-              <DefaultCarousel {...item.images} />
+              <DefaultCarousel images={item.images} />
             </div>
           </div>
         ))}
