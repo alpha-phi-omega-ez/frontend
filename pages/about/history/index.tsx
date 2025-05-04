@@ -30,7 +30,7 @@ export default function HistoryPage() {
         <p className="w-85/100 mx-auto mt-4">
           The main mission of Alpha Phi Omega is to create inclusive communities
           for a more peaceful world by developing leaders, uniting members
-          through friendship and rendering service to all. Read about EZ's
+          through friendship and rendering service to all. Read about EZ&apos;s
           history as we continue to strive to serve the campus, community and
           beyond.
         </p>

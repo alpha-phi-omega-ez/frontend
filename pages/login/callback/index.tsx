@@ -24,7 +24,7 @@ export default function CallBackPage() {
         credentials: "include",
         body: JSON.stringify({ code }),
       })
-        .then((_) => {
+        .then(() => {
           login();
           router.push(redirectPath);
           return null;

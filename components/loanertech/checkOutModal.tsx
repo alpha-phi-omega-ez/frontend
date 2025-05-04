@@ -1,5 +1,4 @@
 import { Modal, ModalBody, ModalContent, Input } from "@heroui/react";
-import { Typography } from "@mui/material";
 import { fetchLoanerTech } from "@/utils/loanertech/utils";
 import {
   LoanerTechModalFooter,
@@ -115,9 +114,9 @@ export default function CheckOutModalContent({
             />
             <ModalBody>
               {!loanerTechAvailable && (
-                <Typography className="mb-4" color="warning">
+                <p className="mb-4" color="warning">
                   Warning, it is outside of loaner tech hours.
-                </Typography>
+                </p>
               )}
               {/* Name Field */}
               <Input

@@ -6,8 +6,6 @@ import {
   ModalFooter,
   Button,
   Chip,
-  Card,
-  CardBody,
 } from "@heroui/react";
 import { useAlert } from "@/context/AlertContext";
 

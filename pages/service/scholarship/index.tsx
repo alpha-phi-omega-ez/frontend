@@ -11,7 +11,7 @@ export default function ServiceProgramPage() {
       </div>
       <p className="mb-4">
         The APO Community Service Award was started in the 1975-76 school year
-        at RPI to celebrate the Institute's 150th anniversary. The award is
+        at RPI to celebrate the Institute&apos;s 150th anniversary. The award is
         given to incoming freshman students who had shown exemplary service and
         extracurricular activities in High School. 1995 was the last time the
         scholarship was awarded for almost ten years, due to the difficulty in
