@@ -13,6 +13,7 @@ import { EditIcon, LeaveIcon } from "@/components/icons";
 import EditLAFModal from "./edit-laf-modal";
 import FoundLAFModal from "./found-laf-modal";
 import { useState } from "react";
+import DescriptionCell from "./description-cell";
 
 interface LAFItemsProps {
   items: LAFItem[];
@@ -121,9 +122,7 @@ export default function LAFItems({
                   ) : columnKey === "id" ? (
                     item.type.charAt(0) + item.id
                   ) : columnKey === "description" ? (
-                    <div className="truncate max-w-xs" title={item.description}>
-                      {item.description}
-                    </div>
+                    <DescriptionCell description={item.description} />
                   ) : (
                     getKeyValue(item, columnKey)
                   )}
