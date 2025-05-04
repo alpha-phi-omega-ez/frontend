@@ -12,6 +12,7 @@ on:
       - "package-lock.json"
       - "Dockerfile"
       - ".dockerignore"
+      - ".github/workflows/docker-test.yml"
 
 permissions:
   contents: read
