@@ -7,7 +7,13 @@ interface AlertContextType {
   newAlert: (alert: string, type: AlertType) => void;
 }
 
-const AlertContext = createContext<AlertContextType | undefined>(undefined);
+// Use a dummy function to avoid "unused parameter" warning
+const noop = () => {};
+
+const AlertContext = createContext<AlertContextType>({
+  newAlert: noop,
+});
+
 interface AlertProviderrProps {
   children: ReactNode;
 }
