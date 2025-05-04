@@ -3,10 +3,11 @@ import AlertManager from "@/components/alert-manager";
 import { AlertType } from "@/types";
 
 // Create a context for the alerts
-const AlertContext = createContext({
-  newAlert: (alert: string, type: AlertType) => {},
-});
+interface AlertContextType {
+  newAlert: (alert: string, type: AlertType) => void;
+}
 
+const AlertContext = createContext<AlertContextType | undefined>(undefined);
 interface AlertProviderrProps {
   children: ReactNode;
 }
