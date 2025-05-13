@@ -10,7 +10,7 @@ export default function CallBackPage() {
   const [error, setError] = useState(false);
   const { newAlert } = useAlert();
 
-  function sanitizeRedirectPath(path: string) {
+  function sanitizeRedirectPath(path: string | null) {
     // Allow only paths starting with "/" and disallow any external URLs, path traversal, or embedded protocols
     if (
       path &&
