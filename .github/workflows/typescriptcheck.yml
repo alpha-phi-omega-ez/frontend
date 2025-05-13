@@ -1,0 +1,26 @@
+name: TypeScript Check
+
+on:
+  pull_request:
+    paths:
+      - "**.ts"
+      - "**.tsx"
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typescript check
+        run: tsc --noEmit

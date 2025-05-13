@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check": "next lint && tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
