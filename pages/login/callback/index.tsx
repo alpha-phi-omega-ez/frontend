@@ -10,9 +10,15 @@ export default function CallBackPage() {
   const [error, setError] = useState(false);
   const { newAlert } = useAlert();
 
-  function sanitizeRedirectPath(path: string) {
-    // Allow only paths starting with "/" and disallow any external URLs
-    if (path && path.startsWith("/") && !path.startsWith("//")) {
+  function sanitizeRedirectPath(path: string | null) {
+    // Allow only paths starting with "/" and disallow any external URLs, path traversal, or embedded protocols
+    if (
+      path &&
+      path.startsWith("/") &&
+      !path.startsWith("//") &&
+      !path.includes("..") &&
+      !path.includes(":")
+    ) {
       return path;
     }
     return null; // Default to null if the path is invalid
