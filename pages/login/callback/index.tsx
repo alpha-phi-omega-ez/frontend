@@ -10,10 +10,24 @@ export default function CallBackPage() {
   const [error, setError] = useState(false);
   const { newAlert } = useAlert();
 
+  function sanitizeRedirectPath(path: string | null) {
+    // Allow only paths starting with "/" and disallow any external URLs, path traversal, or embedded protocols
+    if (
+      path &&
+      path.startsWith("/") &&
+      !path.startsWith("//") &&
+      !path.includes("..") &&
+      !path.includes(":")
+    ) {
+      return path;
+    }
+    return null; // Default to null if the path is invalid
+  }
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    const redirectPath = urlParams.get("redirect") || "/";
+    const redirectPath = sanitizeRedirectPath(urlParams.get("redirect")) || "/";
 
     if (code) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/token`, {
