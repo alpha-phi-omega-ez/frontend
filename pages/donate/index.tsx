@@ -42,7 +42,7 @@ export default function DonatePage() {
           The chapter is creating an endowment for long term financial
           stability. We are currently raising money to establish the endowment
           donations can be made through this{" "}
-          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=443.101&bledit=1&sort=1&appealcode=APO125">
+          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=488.101&bledit=1&sort=1">
             link
           </Link>
           . The goal of the endowment is to reduce the financial burden of
