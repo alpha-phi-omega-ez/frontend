@@ -44,5 +44,8 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.4.4"
+  },
+  "overrides": {
+    "@internationalized/date": "3.8.2"
   }
 }
