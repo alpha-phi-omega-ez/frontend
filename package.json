@@ -15,7 +15,7 @@
     "@heroui/alert": "^2.2.19",
     "@heroui/card": "^2.2.18",
     "@heroui/react": "^2.7.9",
-    "@mui/lab": "^7.0.0-beta.11",
+    "@mui/lab": "^7.0.0-beta.14",
     "@types/node": "22.15.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",
