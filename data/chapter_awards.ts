@@ -12,6 +12,12 @@ interface AwardImage {
 
 export const awards: Award[] = [
   {
+    name: "Outstanding Service Project Award",
+    years: "2025",
+    from: "APO Region Q",
+    purpose: "Recognition for the Biggest Meme on Campus service project.",
+  },
+  {
     name: "Joseph J. Scanlon National Certificate of Merit",
     years: "2024",
     from: "APO National Office",

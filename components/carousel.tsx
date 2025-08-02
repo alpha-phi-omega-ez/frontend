@@ -19,7 +19,7 @@ const deafultSettings = {
   arrows: true,
 };
 
-const DefaultCarousel: React.FC<{ images: ImageType[] }> = ({ images }) => {
+export default function DefaultCarousel({ images }: { images: ImageType[] }) {
   return (
     <Slider {...deafultSettings}>
       {images.map((item, index) => (
@@ -35,6 +35,4 @@ const DefaultCarousel: React.FC<{ images: ImageType[] }> = ({ images }) => {
       ))}
     </Slider>
   );
-};
-
-export default DefaultCarousel;
+}

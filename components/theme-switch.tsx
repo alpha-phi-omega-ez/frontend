@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { SwitchProps, useSwitch } from "@heroui/react";
 import { useTheme } from "next-themes";
@@ -11,16 +11,17 @@ export interface ThemeSwitchProps {
   classNames?: SwitchProps["classNames"];
 }
 
-export const ThemeSwitch: FC<ThemeSwitchProps> = ({
-  className,
-  classNames,
-}) => {
+export function ThemeSwitch({ className, classNames }: ThemeSwitchProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   const { theme, setTheme } = useTheme();
 
   const onChange = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
 
   const {
@@ -82,4 +83,4 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
       </div>
     </Component>
   );
-};
+}

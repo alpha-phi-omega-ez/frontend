@@ -35,14 +35,14 @@ export default function DonatePage() {
           program and maintaining our office.
         </p>
         <p className="mt-5">
-          Without our donor's help, we couldn't do the work we do!
+          Without our donor&apos;s help, we couldn&apos;t do the work we do!
         </p>
         <h2 className="text-3xl font-bold mt-10">Creating an Endowment</h2>
         <p className="mt-4">
           The chapter is creating an endowment for long term financial
           stability. We are currently raising money to establish the endowment
           donations can be made through this{" "}
-          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=443.101&bledit=1&sort=1&appealcode=APO125">
+          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=488.101&bledit=1&sort=1">
             link
           </Link>
           . The goal of the endowment is to reduce the financial burden of
@@ -54,8 +54,8 @@ export default function DonatePage() {
         <p className="mt-4">
           You can donate through our{" "}
           <Link href="https://www.paypal.com/paypalme/apoez">paypal</Link> or
-          via check. If using check, make sure to make it out to "Alpha Phi
-          Omega Epsilon Zeta Chapter". Our mailing address is:
+          via check. If using check, make sure to make it out to &quot;Alpha Phi
+          Omega Epsilon Zeta Chapter&quot;. Our mailing address is:
         </p>
         <p className="mt-2">C/O Rensselaer Union</p>
         <p className="mt-2">110 8th Street</p>

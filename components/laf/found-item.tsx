@@ -132,7 +132,7 @@ export default function FoundItemForm({
     return () => clearTimeout(updateLAFItems);
   }, [descriptionChange]);
 
-  const handleChange = (name: keyof FoundItemFormData, value: any) => {
+  const handleChange = (name: keyof FoundItemFormData, value: string) => {
     const updatedFormData = {
       ...formData,
       [name]: value,

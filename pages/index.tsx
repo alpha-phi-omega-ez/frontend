@@ -29,9 +29,9 @@ export default function IndexPage() {
                 for free for the RPI community! We host a number of service
                 events with different community organizations in the Greater
                 Central NY area, including but not limited to: Mohawk Hudson
-                Humane Society, Sanctuary, Berkshire Bird Paradise, Joseph's
-                House, Unity House, The Animal Support Project, and Northern
-                Rivers.
+                Humane Society, Sanctuary, Berkshire Bird Paradise,
+                Joseph&apos;s House, Unity House, The Animal Support Project,
+                and Northern Rivers.
               </p>
             </CardBody>
           </Card>
@@ -74,6 +74,7 @@ export default function IndexPage() {
                   className="text-primary"
                   href="https://www.apoezaa.org/about/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   EZAA (Epsilon Zeta Alumni Association)
                 </a>
@@ -82,6 +83,7 @@ export default function IndexPage() {
                   className="text-primary"
                   href="https://linktr.ee/apoenyaa"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   ENYA (the Alpha Phi Omega Eastern New York Alumni Association)
                 </a>{" "}
@@ -101,8 +103,9 @@ export default function IndexPage() {
             we strive to better our community, campus, country, and beyond
             through serving others and volunteerism, while promoting ideals of
             leadership, friendship, and service amongst members. First
-            established on Lafayette's College campus (PA), in 1925, membership
-            has since grown to over 525,000 members and 325 chapters nationwide!
+            established on Lafayette&apos;s College campus (PA), in 1925,
+            membership has since grown to over 525,000 members and 325 chapters
+            nationwide!
           </p>
         </div>
         <div className="mt-10 grid sm:grid-cols-3">
@@ -131,16 +134,16 @@ export default function IndexPage() {
             <p className="mt-2">
               The Epsilon Zeta chapter is known for its service to the
               community. Founded in 1947, the Epsilon Zeta chapter was founded
-              in RPI's Clubhouse building, current-day Lally Hall. During our
-              75+ years we have received the Dean Arno Nowotny, an APO national
-              service award, a record breaking 6 times, and the Josiah Frank
-              History Award 2 times. We currently run the Lost and Found for
-              campus, the Backtest Services, and Charger Loaner Service, all
+              in RPI&apos;s Clubhouse building, current-day Lally Hall. During
+              our 75+ years we have received the Dean Arno Nowotny, an APO
+              national service award, a record breaking 6 times, and the Josiah
+              Frank History Award 2 times. We currently run the Lost and Found
+              for campus, the Backtest Services, and Charger Loaner Service, all
               free of charge to the community. Click below to learn more about
-              our chapter's unique history.
+              our chapter&apos;s unique history.
             </p>
             <Link className="mt-2" href="/about/history">
-              EZ's History
+              EZ&apos;s History
             </Link>
           </div>
         </div>

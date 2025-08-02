@@ -132,7 +132,7 @@ export default function CreateLostReportForm({
     }
   };
 
-  const handleChange = (name: keyof NewLostReportFormData, value: any) => {
+  const handleChange = (name: keyof NewLostReportFormData, value: string) => {
     if (isAuthenticated) {
       const updatedFormData = {
         ...formData,

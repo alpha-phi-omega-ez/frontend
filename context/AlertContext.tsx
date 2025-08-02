@@ -3,8 +3,15 @@ import AlertManager from "@/components/alert-manager";
 import { AlertType } from "@/types";
 
 // Create a context for the alerts
-const AlertContext = createContext({
-  newAlert: (alert: string, type: AlertType) => {},
+interface AlertContextType {
+  newAlert: (alert: string, type: AlertType) => void;
+}
+
+// Use a dummy function to avoid "unused parameter" warning
+const noop = () => {};
+
+const AlertContext = createContext<AlertContextType>({
+  newAlert: noop,
 });
 
 interface AlertProviderrProps {

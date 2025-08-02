@@ -90,7 +90,7 @@ export default function LostReports({
     return () => clearTimeout(updateLAFItems);
   }, [descriptionChange]);
 
-  const handleChange = (name: keyof LostReportsFormData, value: any) => {
+  const handleChange = (name: keyof LostReportsFormData, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,

@@ -15,18 +15,16 @@ import {
   community_events,
   other_events,
 } from "@/data/service_program";
+import { IconSvgProps } from "@/types";
 
-const IconWithText = ({
-  Icon,
-  label,
-  value,
-  color,
-}: {
-  Icon: any;
+type IconWithTextProps = {
+  Icon: React.FC<IconSvgProps>;
   value: string;
   label: string;
   color?: "blue" | "yellow";
-}) => (
+};
+
+const IconWithText = ({ Icon, label, value, color }: IconWithTextProps) => (
   <div className="flex flex-col items-center">
     <div
       className={`flex items-center justify-center w-16 h-16 ${
@@ -80,11 +78,11 @@ export default function ServiceProgramPage() {
           <Link href="https://www.apoezaa.org/about/" target="_blank">
             EZAA
           </Link>{" "}
-          (Our chapter's Alumni Association), and External Service plans events
-          with on campus organizations as well as small, RPI public events. Each
-          individual chairship allows our chapter to fulfill our greater purpose
-          of "more people doing more service". Find more information and photos
-          from some of our events{" "}
+          (Our chapter&apos;s Alumni Association), and External Service plans
+          events with on campus organizations as well as small, RPI public
+          events. Each individual chairship allows our chapter to fulfill our
+          greater purpose of &quot;more people doing more service&quot;. Find
+          more information and photos from some of our events{" "}
           <Link href="/service/events" target="_blank">
             here
           </Link>
@@ -92,7 +90,7 @@ export default function ServiceProgramPage() {
         </p>
         <p className="mt-3">
           We currently partner with local organizations such as Captial Region
-          Scouting America, Northern Rivers, Joseph's House, Underground
+          Scouting America, Northern Rivers, Joseph&apos;s House, Underground
           Railroad Education Center, Mohawk Hudson Marathon, Berkshire Bird
           Paradise, USS Slater, Regional Food Bank of Northeastern New York, The
           Sanctuary for Independent Media, Homeward Bound Dog Shelter, YMCA,
@@ -169,14 +167,15 @@ export default function ServiceProgramPage() {
               } justify-center`}
             >
               {event.stats.map((stat, statIndex) => {
-                const IconComponent = {
-                  PersonArmsUp,
-                  Hourglass,
-                  Door,
-                  Chart,
-                  Money,
-                  PersonHandRaise,
-                }[stat.icon];
+                const IconComponent =
+                  {
+                    PersonArmsUp,
+                    Hourglass,
+                    Door,
+                    Chart,
+                    Money,
+                    PersonHandRaise,
+                  }[stat.icon] || (() => <div>Icon not found</div>);
                 return (
                   <IconWithText
                     key={statIndex}
@@ -207,14 +206,15 @@ export default function ServiceProgramPage() {
               } justify-center`}
             >
               {event.stats.map((stat, statIndex) => {
-                const IconComponent = {
-                  PersonArmsUp,
-                  Hourglass,
-                  Door,
-                  Chart,
-                  Money,
-                  PersonHandRaise,
-                }[stat.icon];
+                const IconComponent =
+                  {
+                    PersonArmsUp,
+                    Hourglass,
+                    Door,
+                    Chart,
+                    Money,
+                    PersonHandRaise,
+                  }[stat.icon] || (() => <div>Icon not found</div>);
                 return (
                   <IconWithText
                     key={statIndex}

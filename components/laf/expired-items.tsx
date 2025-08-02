@@ -102,7 +102,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     }
   }, [view, searchData]);
 
-  const handleChange = (name: string, value: any) => {
+  const handleChange = (name: string, value: string) => {
     // Allow only numbers and ensure it's >= 0
     if (/^\d*$/.test(value) || name === "type") {
       setSearchData((prevData) => ({

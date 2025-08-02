@@ -1,6 +1,4 @@
 import { ModalHeader, ModalFooter, Button } from "@heroui/react";
-import { Typography } from "@mui/material";
-
 interface LoanerTechModalHeaderProps {
   title: string;
   selectedCards: number[];
@@ -12,13 +10,13 @@ export function LoanerTechModalHeader({
 }: LoanerTechModalHeaderProps) {
   return (
     <ModalHeader>
-      <Typography id="modal-title" variant="h6">
+      <h4 id="modal-title" className="text-2xl font-semibold">
         {title}{" "}
         {selectedCards
           .sort()
           .map((id) => `#${id}`)
           .join(", ")}
-      </Typography>
+      </h4>
     </ModalHeader>
   );
 }

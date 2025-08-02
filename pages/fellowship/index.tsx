@@ -36,9 +36,9 @@ export default function FellowshipPage() {
         </p>
         <p className="mt-5">
           Intramurals is our sports team that participates in club competitions
-          on RPI's campus. We currently play soccer, volleyball, table tennis,
-          and spikeball. Our team, APOcalypse is open to any member of the RPI
-          community to join, and we have a number of friends involved
+          on RPI&apos;s campus. We currently play soccer, volleyball, table
+          tennis, and spikeball. Our team, APOcalypse is open to any member of
+          the RPI community to join, and we have a number of friends involved
           intramurally that are not brothers. Sunshine is responsible for
           overall good vibes and positivity within the chapter. They host
           de-stress events, determine brother of the week, and have lighthearted
