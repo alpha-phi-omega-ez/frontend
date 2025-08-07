@@ -1,29 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 import { SelectableCard } from "@/components/selectable-card";
 import { useAlert } from "@/context/AlertContext";
+import { ReducerActions } from "@/types/backtest";
 
 interface CourseCodesProps {
   courseCodes: null | string[];
-  setCurrentCourseCode: Dispatch<SetStateAction<string | null>>;
-  setView: Dispatch<
-    SetStateAction<"codes" | "courses" | "backtests" | "error">
-  >;
-  setCourses: Dispatch<
-    SetStateAction<
-      | {
-          id: string;
-          name: string;
-        }[]
-      | null
-    >
-  >;
+  dispatch: Dispatch<ReducerActions>;
 }
 
 export default function CourseCodes({
   courseCodes,
-  setCurrentCourseCode,
-  setView,
-  setCourses,
+  dispatch,
 }: CourseCodesProps) {
   const { newAlert } = useAlert();
 
@@ -33,22 +20,19 @@ export default function CourseCodes({
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/courses/${code}`
       );
       if (!response.ok) {
-        setView("error");
+        dispatch({ type: "ERROR" });
       } else {
         const data = await response.json();
-        setCourses(data["data"]);
+        dispatch({
+          type: "SET_COURSES",
+          payload: { courses: data["data"], currentCourseCode: code },
+        });
       }
     } catch (error) {
       console.error(error);
       newAlert(`Failed to fetch courses for ${code}`, "danger");
-      setView("error");
+      dispatch({ type: "ERROR" });
     }
-  };
-
-  const selectCode = (code: string) => {
-    fetchCourses(code);
-    setCurrentCourseCode(code);
-    setView("courses");
   };
 
   return (
@@ -59,7 +43,7 @@ export default function CourseCodes({
             <SelectableCard
               key={item}
               onPress={() => {
-                selectCode(item);
+                fetchCourses(item);
               }}
               title={item}
             />
