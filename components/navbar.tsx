@@ -110,7 +110,7 @@ export function Navbar() {
                   <a
                     key={sublink.href}
                     href={sublink.href}
-                    className="py-2 px-4 text-base hover:bg-gray-600 whitespace-nowrap"
+                    className="py-2 px-4 text-base hover:dark:bg-gray-600 hover:bg-gray-200 whitespace-nowrap"
                   >
                     {sublink.label}
                   </a>
