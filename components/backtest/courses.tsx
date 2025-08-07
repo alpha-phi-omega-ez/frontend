@@ -1,58 +1,34 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 import { SelectableCard } from "@/components/selectable-card";
 import { useAlert } from "@/context/AlertContext";
+import { ReducerActions } from "@/types/backtest";
 
 interface CoursesProps {
   courses: null | { id: string; name: string }[];
-  setCurrentCourse: Dispatch<
-    SetStateAction<{
-      id: string;
-      name: string;
-    } | null>
-  >;
-  setView: Dispatch<
-    SetStateAction<"codes" | "courses" | "backtests" | "error">
-  >;
-  setBacktests: Dispatch<
-    SetStateAction<
-      | {
-          type: string;
-          tests: string[];
-        }[]
-      | null
-    >
-  >;
+  dispatch: Dispatch<ReducerActions>;
 }
 
-export default function Courses({
-  courses,
-  setCurrentCourse,
-  setView,
-  setBacktests,
-}: CoursesProps) {
+export default function Courses({ courses, dispatch }: CoursesProps) {
   const { newAlert } = useAlert();
-  const fetchBacktests = async (id: string) => {
+  const fetchBacktests = async (item: { id: string; name: string }) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/backtest/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/backtest/${item.id}`
       );
       if (!response.ok) {
-        setView("error");
+        dispatch({ type: "ERROR" });
       } else {
         const data = await response.json();
-        setBacktests(data["data"]);
+        dispatch({
+          type: "SET_BACKTESTS",
+          payload: { backtests: data["data"], currentCourse: item },
+        });
       }
     } catch (error) {
       console.error(error);
       newAlert("Failed to update Lost Report", "danger");
-      setView("error");
+      dispatch({ type: "ERROR" });
     }
-  };
-
-  const selectCourse = (item: { id: string; name: string }) => {
-    fetchBacktests(item.id); // TODO: update to wait for request to be complete
-    setCurrentCourse(item);
-    setView("backtests");
   };
 
   return (
@@ -63,7 +39,7 @@ export default function Courses({
             <SelectableCard
               key={item.id}
               onPress={() => {
-                selectCourse(item);
+                fetchBacktests(item);
               }}
               title={item.name}
             />
