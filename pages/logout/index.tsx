@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
 import { useAlert } from "@/context/AlertContext";
+import { getSafeRedirectPath } from "@/utils/redirect";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function LogoutPage() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const redirectPath = urlParams.get("redirect") || "/";
+    const redirectPath = getSafeRedirectPath(urlParams.get("redirect"));
 
     if (auth.isAuthenticated) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/logout`, {
