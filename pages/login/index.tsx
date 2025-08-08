@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
+import { getSafeRedirectPath } from "@/utils/redirect";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -8,7 +9,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const redirectPath = urlParams.get("redirect") || "/";
+    const redirectPath = getSafeRedirectPath(urlParams.get("redirect"));
 
     if (!auth.isAuthenticated) {
       router.push(

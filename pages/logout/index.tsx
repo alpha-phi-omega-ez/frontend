@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
 import { useAlert } from "@/context/AlertContext";
+import { getSafeRedirectPath } from "@/utils/redirect";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -11,6 +12,9 @@ export default function LogoutPage() {
   const { newAlert } = useAlert();
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPath = getSafeRedirectPath(urlParams.get("redirect"));
+
     if (auth.isAuthenticated) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/logout`, {
         method: "POST",
@@ -24,7 +28,7 @@ export default function LogoutPage() {
           if (data.success) {
             Promise.resolve(logout()).then(() => {
               console.log("Logged out successfully");
-              router.push("/");
+              router.push(redirectPath);
               return null;
             });
           } else {
@@ -39,7 +43,7 @@ export default function LogoutPage() {
         });
     } else {
       Promise.resolve(logout()).then(() => {
-        router.push("/");
+        router.push(redirectPath);
       });
     }
   }, [router]);

@@ -37,6 +37,11 @@ export function Navbar() {
     router.push(`/login?redirect=${currentPath}`);
   };
 
+  const handleLogout = () => {
+    const currentPath = encodeURIComponent(router.asPath);
+    router.push(`/logout?redirect=${currentPath}`);
+  };
+
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -128,7 +133,7 @@ export function Navbar() {
             className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
             onPress={() => {
               if (isAuthenticated) {
-                router.push("/logout");
+                handleLogout();
               } else {
                 handleLogin();
               }
@@ -151,7 +156,7 @@ export function Navbar() {
             className="data-[active=true]:text-primary data-[active=true]:font-medium main-gold-background main-blue-color main-black-font font-bold"
             onPress={() => {
               if (isAuthenticated) {
-                router.push("/logout");
+                handleLogout();
               } else {
                 handleLogin();
               }
