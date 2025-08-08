@@ -11,6 +11,9 @@ export default function LogoutPage() {
   const { newAlert } = useAlert();
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPath = urlParams.get("redirect") || "/";
+
     if (auth.isAuthenticated) {
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER}/logout`, {
         method: "POST",
@@ -24,7 +27,7 @@ export default function LogoutPage() {
           if (data.success) {
             Promise.resolve(logout()).then(() => {
               console.log("Logged out successfully");
-              router.push("/");
+              router.push(redirectPath);
               return null;
             });
           } else {
@@ -39,7 +42,7 @@ export default function LogoutPage() {
         });
     } else {
       Promise.resolve(logout()).then(() => {
-        router.push("/");
+        router.push(redirectPath);
       });
     }
   }, [router]);
