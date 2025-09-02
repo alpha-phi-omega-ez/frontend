@@ -35,7 +35,7 @@
     "postcss": "8.4.49",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-hook-form": "^7.56.1",
+    "react-hook-form": "^7.62.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "tailwind-variants": "^1.0.0",
