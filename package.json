@@ -13,7 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@heroui/alert": "^2.2.19",
-    "@heroui/card": "^2.2.18",
+    "@heroui/card": "^2.2.24",
     "@heroui/react": "^2.7.9",
     "@mui/lab": "^7.0.0-beta.16",
     "@types/node": "24.3.0",
