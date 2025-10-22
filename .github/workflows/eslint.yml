@@ -7,6 +7,8 @@ on:
       - "**.jsx"
       - "**.ts"
       - "**.tsx"
+      - ".github/workflows/eslint.yml"
+      - "eslint.config.js"
 
 permissions:
   contents: read
@@ -24,7 +26,4 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        uses: sibiraj-s/action-eslint@c24ff92cabb3ad38994c99f5583c59125ea040b0
-        with:
-          eslint-args: "./**/*.{ts,tsx} --max-warnings=0"
-          annotations: true
+        run: npx eslint "./**/*.{js,jsx,ts,tsx}" --max-warnings=0
