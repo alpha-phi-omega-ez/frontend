@@ -8,11 +8,9 @@ on:
       - "**.ts"
       - "**.tsx"
       - "**.yml"
-      - "package.json"
-      - "package-lock.json"
+      - "**.json"
       - "Dockerfile"
       - ".dockerignore"
-      - ".github/workflows/docker-test.yml"
 
 permissions:
   contents: read
