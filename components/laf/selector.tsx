@@ -27,7 +27,7 @@ export default function LAFSelector({
         {views.map((item, index) => (
           <button
             key={index}
-            onClick={() => setView(view)}
+            onClick={() => setView(item)}
             className={`flex-1 mx-1 py-2 px-2 rounded-full text-center transition-all duration-300 
               ${
                 view === item
