@@ -11,10 +11,11 @@ import {
 } from "@heroui/react";
 import { useDisclosure } from "@heroui/react";
 import { EditIcon, LeaveIcon } from "@/components/icons";
-import { useState } from "react";
+import { useReducer, useEffect } from "react";
 import EditLostReportModal from "./edit-lost-report-modal";
-import FoundLostReportModal from "./found-lost-report-modal";
+import ArchiveLostReportModal from "./archive-lost-report-modal";
 import DescriptionCell from "./description-cell";
+import { LostReportModalData } from "@/types/laf";
 
 interface LostReportsItemsProps {
   items: LostReportItem[];
@@ -65,23 +66,51 @@ export default function LostReportItems({
         ]
       : []),
   ];
+
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
     onOpenChange: onEditOpenChange,
   } = useDisclosure();
+
   const {
-    isOpen: isFoundOpen,
-    onOpen: onFoundOpen,
-    onOpenChange: onFoundOpenChange,
+    isOpen: isArchiveOpen,
+    onOpen: onArchiveOpen,
+    onOpenChange: onArchiveOpenChange,
   } = useDisclosure();
-  const [type, setType] = useState<string>("");
-  const [location, setLocation] = useState<string[]>([]);
-  const [date, setDate] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [id, setId] = useState<string>("0");
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+
+  type Action = { type: "SET_FORM"; payload: LostReportModalData };
+
+  function formReducer(
+    state: LostReportModalData,
+    action: Action
+  ): LostReportModalData {
+    switch (action.type) {
+      case "SET_FORM":
+        return action.payload;
+      default:
+        return state;
+    }
+  }
+
+  const [formState, dispatch] = useReducer(formReducer, {
+    type: "",
+    locations: [""],
+    date: "",
+    description: "",
+    id: "0",
+    name: "",
+    email: "",
+    modal: null,
+  });
+
+  useEffect(() => {
+    if (formState.modal === "edit") {
+      onEditOpen();
+    } else if (formState.modal === "archive") {
+      onArchiveOpen();
+    }
+  }, [formState]);
 
   return (
     <>
@@ -101,15 +130,20 @@ export default function LostReportItems({
                       <button
                         aria-label="Edit"
                         onClick={() => {
-                          setType(item.type);
-                          setLocation(item.location);
                           const [month, day, year] = item.date.split("/");
-                          setDate(`${year}-${month}-${day}`);
-                          setDescription(item.description);
-                          setId(item.id);
-                          setName(item.name);
-                          setEmail(item.email);
-                          onEditOpen();
+                          dispatch({
+                            type: "SET_FORM",
+                            payload: {
+                              type: item.type,
+                              locations: item.location,
+                              date: `${year}-${month}-${day}`,
+                              description: item.description,
+                              id: item.id,
+                              name: item.name,
+                              email: item.email,
+                              modal: "edit",
+                            },
+                          });
                         }}
                       >
                         <EditIcon />
@@ -117,14 +151,19 @@ export default function LostReportItems({
                       <button
                         aria-label="Found Item"
                         onClick={() => {
-                          setType(item.type);
-                          setLocation(item.location);
-                          setDate(item.date);
-                          setDescription(item.description);
-                          setId(item.id);
-                          setName(item.name);
-                          setEmail(item.email);
-                          onFoundOpen();
+                          dispatch({
+                            type: "SET_FORM",
+                            payload: {
+                              type: item.type,
+                              locations: item.location,
+                              date: item.date,
+                              description: item.description,
+                              id: item.id,
+                              name: item.name,
+                              email: item.email,
+                              modal: "archive",
+                            },
+                          });
                         }}
                       >
                         <LeaveIcon />
@@ -154,25 +193,13 @@ export default function LostReportItems({
             onOpenChange={onEditOpenChange}
             lafTypes={lafTypes}
             lafLocations={lafLocations}
-            given_type={type}
-            given_locations={location}
-            given_date={date}
-            given_description={description}
-            given_id={id}
-            given_name={name}
-            given_email={email}
+            lost_report_data={formState}
             updateTable={updateTable}
           />
-          <FoundLostReportModal
-            isOpen={isFoundOpen}
-            onOpenChange={onFoundOpenChange}
-            given_type={type}
-            given_locations={location}
-            given_date={date}
-            given_description={description}
-            given_id={id}
-            given_name={name}
-            given_email={email}
+          <ArchiveLostReportModal
+            isOpen={isArchiveOpen}
+            onOpenChange={onArchiveOpenChange}
+            lost_report_data={formState}
             updateTable={updateTable}
           />
         </>

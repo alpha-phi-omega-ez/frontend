@@ -23,7 +23,7 @@ export default function AlertManager({ alerts, setAlerts }: AlertManagerProps) {
       {alerts.map((alert) => (
         <Alert
           key={alert.id}
-          variant="flat"
+          variant="solid"
           color={alert.type}
           isClosable
           onClose={() => removeAlert(alert.id)}

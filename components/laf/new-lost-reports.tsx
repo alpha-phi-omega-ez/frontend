@@ -9,23 +9,24 @@ import {
   Chip,
   Button,
 } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { Selection } from "@react-types/shared";
 import { useAuth } from "@/context/AuthContext";
-import { fetchLostReportItems, fetchLAFItems } from "@/utils/laf/utils";
+import { fetchLostReportItems, fetchLAFItems } from "@/utils/laf";
 import { LostReportItem } from "@/types/laf";
 import LAFItems from "./laf-items";
 import { LAFItem } from "@/types/laf";
 import { useAlert } from "@/context/AlertContext";
+import { fetchNewLostReports } from "@/utils/laf";
 
 interface NewLostReportsProps {
   view: string;
-  fetchNewLostReports: () => void;
+  setNewLostReports: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function NewLostReports({
   view,
-  fetchNewLostReports,
+  setNewLostReports,
 }: NewLostReportsProps) {
   const { logout, auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
@@ -58,16 +59,59 @@ export default function NewLostReports({
     },
   ];
 
-  const [lostReportItems, setLostReportItems] = useState<LostReportItem[]>([]);
-  const [selectedItem, setSelectedItem] = useState<Selection | null>(null);
-  const [items, setItems] = useState<LAFItem[]>([]);
+  // State interface for the reducer
+  interface NewLostReportsState {
+    lostReportItems: LostReportItem[];
+    selectedItem: Selection | null;
+    items: LAFItem[];
+  }
+
+  // Action types for the reducer
+  type NewLostReportsAction =
+    | { type: "SET_LOST_REPORT_ITEMS"; payload: LostReportItem[] }
+    | { type: "SET_SELECTED_ITEM"; payload: Selection | null }
+    | { type: "SET_MATCHING_ITEMS"; payload: LAFItem[] }
+    | { type: "RESET_SELECTION" };
+
+  // Reducer function
+  function newLostReportsReducer(
+    state: NewLostReportsState,
+    action: NewLostReportsAction
+  ): NewLostReportsState {
+    switch (action.type) {
+      case "SET_LOST_REPORT_ITEMS":
+        return { ...state, lostReportItems: action.payload };
+      case "SET_SELECTED_ITEM":
+        return { ...state, selectedItem: action.payload };
+      case "SET_MATCHING_ITEMS":
+        return { ...state, items: action.payload };
+      case "RESET_SELECTION":
+        return { ...state, selectedItem: null, items: [] };
+      default:
+        return state;
+    }
+  }
+
+  // Initial state
+  const initialState: NewLostReportsState = {
+    lostReportItems: [],
+    selectedItem: null,
+    items: [],
+  };
+
+  const [state, dispatch] = useReducer(newLostReportsReducer, initialState);
+
+  // Helper function to handle fetchLostReportItems dispatch mapping
+  const handleLostReportItemsDispatch = (action: { type: "SET_ITEMS"; payload: LostReportItem[] }) => {
+    dispatch({ type: "SET_LOST_REPORT_ITEMS", payload: action.payload });
+  };
 
   const handleSelectionChange = (selection: Selection) => {
-    setSelectedItem(selection);
+    dispatch({ type: "SET_SELECTED_ITEM", payload: selection });
   };
 
   const markAsViewed = async () => {
-    if (selectedItem === null) {
+    if (state.selectedItem === null) {
       console.error("No lost report selected");
       newAlert("No lost report selected", "danger");
       return;
@@ -76,7 +120,7 @@ export default function NewLostReports({
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/reports/new/viewed/${
-          Array.from(selectedItem)[0]
+          Array.from(state.selectedItem)[0]
         }`,
         {
           method: "PUT",
@@ -85,10 +129,9 @@ export default function NewLostReports({
       );
 
       if (response.ok) {
-        fetchLostReportItems({}, setLostReportItems, logout, true);
-        fetchNewLostReports();
-        setItems([]);
-        setSelectedItem(null);
+        fetchLostReportItems({}, handleLostReportItemsDispatch, logout, true);
+        fetchNewLostReports(setNewLostReports);
+        dispatch({ type: "RESET_SELECTION" });
         newAlert("Lost Report marked as viewed", "success");
       } else {
         console.error("Error marking lost report as viewed");
@@ -103,9 +146,9 @@ export default function NewLostReports({
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (isAuthenticated && view === "New Lost Reports") {
-      fetchLostReportItems({}, setLostReportItems, logout, true);
+      fetchLostReportItems({}, handleLostReportItemsDispatch, logout, true);
       interval = setInterval(() => {
-        fetchLostReportItems({}, setLostReportItems, logout, true);
+        fetchLostReportItems({}, handleLostReportItemsDispatch, logout, true);
       }, 15000);
     }
     return () => {
@@ -116,13 +159,12 @@ export default function NewLostReports({
   }, [view]);
 
   useEffect(() => {
-    if (selectedItem) {
-      const selectedReport = lostReportItems.find(
-        (item) => item.id === Array.from(selectedItem)[0]
+    if (state.selectedItem) {
+      const selectedReport = state.lostReportItems.find(
+        (item) => item.id === Array.from(state.selectedItem!)[0]
       );
       if (selectedReport === undefined) {
-        setSelectedItem(null);
-        setItems([]);
+        dispatch({ type: "RESET_SELECTION" });
       } else {
         const [day, month, year] = selectedReport.date.split("/");
         const formattedDate = `${year}-${month}-${day}`;
@@ -131,12 +173,11 @@ export default function NewLostReports({
           location: selectedReport.location.join(", "),
           date: formattedDate,
           dateFilter: "Before",
-          // description: selectedReport.description,
         };
-        fetchLAFItems(formData, setItems, logout);
+        fetchLAFItems(formData, (action) => dispatch({ type: "SET_MATCHING_ITEMS", payload: action.payload }), logout);
       }
     }
-  }, [selectedItem]);
+  }, [state.selectedItem]);
 
   return (
     <>
@@ -144,7 +185,7 @@ export default function NewLostReports({
       <div className="flex justify-center my-4">
         <Button
           color="primary"
-          isDisabled={selectedItem === null}
+          isDisabled={state.selectedItem === null}
           onPress={markAsViewed}
         >
           Mark Lost Report as Viewed
@@ -164,7 +205,7 @@ export default function NewLostReports({
           )}
         </TableHeader>
         <TableBody
-          items={lostReportItems}
+          items={state.lostReportItems}
           emptyContent={"No New Lost Reports found."}
         >
           {(item) => (
@@ -190,7 +231,7 @@ export default function NewLostReports({
         Potential Matching LAF items
       </h2>
       <LAFItems
-        items={items}
+        items={state.items}
         lafTypes={[]}
         lafLocations={[]}
         updateTable={() => {}}

@@ -10,10 +10,10 @@ import {
   DatePicker,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useReducer, Dispatch, SetStateAction } from "react";
 import { LAFItem } from "@/types/laf";
 import LAFItems from "./laf-items";
-import { fetchLAFItems } from "@/utils/laf/utils";
+import { fetchLAFItems } from "@/utils/laf";
 import { useAlert } from "@/context/AlertContext";
 import { useAuth } from "@/context/AuthContext";
 
@@ -56,44 +56,97 @@ export default function CreateLostReportForm({
     mode: "onSubmit",
   });
 
-  const [descriptionChange, setDescriptionChange] = useState("");
+  // State interface for the reducer
+  interface CreateLostReportState {
+    descriptionChange: string;
+    items: LAFItem[];
+    formData: {
+      type: string;
+      location: string;
+      date: string;
+      dateFilter: string;
+      description: string;
+    };
+  }
+
+  // Action types for the reducer
+  type CreateLostReportAction =
+    | { type: "SET_DEBOUNCE_VALUE"; payload: string }
+    | { type: "SET_ITEMS"; payload: LAFItem[] }
+    | { type: "SET_FIELD"; payload: { name: string; value: string } }
+    | { type: "RESET_FORM" };
+
+  // Reducer function
+  function createLostReportReducer(
+    state: CreateLostReportState,
+    action: CreateLostReportAction
+  ): CreateLostReportState {
+    switch (action.type) {
+      case "SET_DEBOUNCE_VALUE":
+        return { ...state, descriptionChange: action.payload };
+      case "SET_ITEMS":
+        return { ...state, items: action.payload };
+      case "SET_FIELD":
+        return {
+          ...state,
+          formData: {
+            ...state.formData,
+            [action.payload.name]: action.payload.value,
+          },
+        };
+      case "RESET_FORM":
+        return {
+          ...state,
+          formData: {
+            type: "",
+            location: "",
+            date: parseDate(new Date().toISOString().split("T")[0]).toString(),
+            dateFilter: "Before",
+            description: "",
+          },
+          descriptionChange: "",
+          items: [],
+        };
+      default:
+        return state;
+    }
+  }
+
+  // Initial state
+  const initialState: CreateLostReportState = {
+    descriptionChange: "",
+    items: [],
+    formData: {
+      type: "",
+      location: "",
+      date: todaysDate.toString(),
+      dateFilter: "Before",
+      description: "",
+    },
+  };
+
+  const [state, dispatch] = useReducer(createLostReportReducer, initialState);
 
   useEffect(() => {
     const updateLAFItems = setTimeout(() => {
-      handleChange("description", descriptionChange);
+      handleChange("description", state.descriptionChange);
     }, 500);
     return () => clearTimeout(updateLAFItems);
-  }, [descriptionChange]);
-
-  const [items, setItems] = useState<LAFItem[]>([]);
-  const [formData, setFormData] = useState({
-    type: "",
-    location: "",
-    date: todaysDate.toString(),
-    dateFilter: "Before",
-    description: "",
-  });
+  }, [state.descriptionChange]);
 
   useEffect(() => {
     if (isAuthenticated && view !== "Submit Lost Report") {
       reset();
       setValue("date", todaysDate.toString());
       clearErrors();
-      setFormData({
-        type: "",
-        location: "",
-        date: todaysDate.toString(),
-        dateFilter: "Before",
-        description: "",
-      });
+      dispatch({ type: "RESET_FORM" });
       setSwitchToLostReport(null);
-      setItems([]);
     }
   }, [view, isAuthenticated]);
 
   const onSubmit = async (data: NewLostReportFormData) => {
     try {
-      data.date = formData.date;
+      data.date = state.formData.date;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/report/`,
         {
@@ -114,15 +167,8 @@ export default function CreateLostReportForm({
           parseDate(new Date().toISOString().split("T")[0]).toString()
         );
         clearErrors();
-        setFormData({
-          type: "",
-          location: "",
-          date: todaysDate.toString(),
-          dateFilter: "Before",
-          description: "",
-        });
+        dispatch({ type: "RESET_FORM" });
         setSwitchToLostReport(null);
-        setItems([]);
       } else {
         newAlert("Failed to create new Lost Report.", "danger");
       }
@@ -134,12 +180,12 @@ export default function CreateLostReportForm({
 
   const handleChange = (name: keyof NewLostReportFormData, value: string) => {
     if (isAuthenticated) {
+      dispatch({ type: "SET_FIELD", payload: { name, value } });
+
       const updatedFormData = {
-        ...formData,
+        ...state.formData,
         [name]: value,
       };
-
-      setFormData(updatedFormData);
 
       // Check if the form is reset to the initial state
       if (
@@ -149,10 +195,10 @@ export default function CreateLostReportForm({
         updatedFormData.dateFilter === "Before" &&
         updatedFormData.description === ""
       ) {
-        setItems([]);
+        dispatch({ type: "SET_ITEMS", payload: [] });
       } else {
         // Trigger the fetch when form data changes
-        fetchLAFItems(updatedFormData, setItems, logout);
+        fetchLAFItems(updatedFormData, dispatch, logout);
       }
     }
   };
@@ -287,20 +333,20 @@ export default function CreateLostReportForm({
           })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => setDescriptionChange(e.target.value)}
+          onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}
         />
 
         <Button color="primary" type="submit">
           Submit
         </Button>
       </form>
-      {isAuthenticated && items && items.length > 0 && (
+      {isAuthenticated && state.items && state.items.length > 0 && (
         <>
           <h2 className="text-center mt-5 text-3xl">
             Potential Matching LAF items
           </h2>
           <LAFItems
-            items={items}
+            items={state.items}
             lafTypes={[]}
             lafLocations={[]}
             updateTable={() => {}}

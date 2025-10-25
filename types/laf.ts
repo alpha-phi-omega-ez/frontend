@@ -5,7 +5,6 @@ export type ViewState =
   | "Find Lost Report"
   | "New Lost Reports"
   | "Expired Items"
-  | "Archive"
   | "error";
 
 export type LAFItem = {
@@ -45,4 +44,24 @@ export type FoundItemFormData = {
   location: string;
   date: string;
   description: string;
+};
+
+export type FoundItemModalData = {
+  type: string;
+  location: string;
+  date: string;
+  description: string;
+  id: string;
+  modal: "edit" | "found" | null;
+};
+
+export type LostReportModalData = {
+  type: string;
+  locations: string[];
+  date: string;
+  description: string;
+  id: string;
+  name: string;
+  email: string;
+  modal: "edit" | "archive" | null;
 };
