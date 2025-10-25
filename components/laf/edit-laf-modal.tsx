@@ -91,7 +91,7 @@ export default function EditLAFModal({
     setValue("date", laf_data.date);
     setValue("description", laf_data.description);
     setDate(laf_data.date);
-  }, [laf_data]);
+  }, [laf_data.type, laf_data.location, laf_data.date, laf_data.description]);
 
   return (
     <Modal
