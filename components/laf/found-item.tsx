@@ -9,7 +9,7 @@ import {
 import { parseDate } from "@internationalized/date";
 import { useAlert } from "@/context/AlertContext";
 import { useAuth } from "@/context/AuthContext";
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import { LostReportItem } from "@/types/laf";
 import LostReportItems from "./lost-report-items";
 import { fetchLostReportItems } from "@/utils/laf";
@@ -43,14 +43,80 @@ export default function FoundItemForm({
   });
 
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
-  const [items, setItems] = useState<LostReportItem[]>([]);
-  const [formData, setFormData] = useState({
-    type: "",
-    location: "",
-    date: todaysDate.toString(),
-    dateFilter: "Before",
-    description: "",
-  });
+
+  // State interface for the reducer
+  interface FoundItemState {
+    items: LostReportItem[];
+    formData: {
+      type: string;
+      location: string;
+      date: string;
+      dateFilter: string;
+      description: string;
+    };
+    descriptionChange: string;
+  }
+
+  // Action types for the reducer
+  type FoundItemAction =
+    | { type: "SET_ITEMS"; payload: LostReportItem[] }
+    | { type: "SET_FIELD"; payload: { name: keyof FoundItemFormData; value: string } }
+    | { type: "RESET_FORM" }
+    | { type: "SET_DEBOUNCE_VALUE"; payload: string };
+
+  // Reducer function
+  function foundItemReducer(
+    state: FoundItemState,
+    action: FoundItemAction
+  ): FoundItemState {
+    switch (action.type) {
+      case "SET_ITEMS":
+        return { ...state, items: action.payload };
+      case "SET_FIELD":
+        return {
+          ...state,
+          formData: {
+            ...state.formData,
+            [action.payload.name]: action.payload.value,
+          },
+        };
+      case "RESET_FORM":
+        return {
+          ...state,
+          formData: {
+            type: "",
+            location: "",
+            date: parseDate(new Date().toISOString().split("T")[0]).toString(),
+            dateFilter: "Before",
+            description: "",
+          },
+          descriptionChange: "",
+          items: [],
+        };
+      case "SET_DEBOUNCE_VALUE":
+        return {
+          ...state,
+          descriptionChange: action.payload,
+        };
+      default:
+        return state;
+    }
+  }
+
+  // Initial state
+  const initialState: FoundItemState = {
+    items: [],
+    formData: {
+      type: "",
+      location: "",
+      date: todaysDate.toString(),
+      dateFilter: "Before",
+      description: "",
+    },
+    descriptionChange: "",
+  };
+
+  const [state, dispatch] = useReducer(foundItemReducer, initialState);
 
   const { newAlert } = useAlert();
   const { logout, auth } = useAuth();
@@ -58,7 +124,7 @@ export default function FoundItemForm({
 
   const onSubmit = async (data: FoundItemFormData) => {
     try {
-      data.date = formData.date;
+      data.date = state.formData.date;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/item/`,
         {
@@ -72,16 +138,8 @@ export default function FoundItemForm({
       );
 
       if (response.ok) {
-        setItems([]);
+        dispatch({ type: "RESET_FORM" });
         reset();
-        setFormData({
-          type: "",
-          location: "",
-          date: todaysDate.toString(),
-          dateFilter: "Before",
-          description: "",
-        });
-        setDescriptionChange("");
         setValue(
           "date",
           parseDate(new Date().toISOString().split("T")[0]).toString()
@@ -111,34 +169,24 @@ export default function FoundItemForm({
       reset();
       setValue("date", todaysDate.toString());
       clearErrors();
-      setFormData({
-        type: "",
-        location: "",
-        date: todaysDate.toString(),
-        dateFilter: "Before",
-        description: "",
-      });
-      setItems([]);
-      setDescriptionChange("");
+      dispatch({ type: "RESET_FORM" });
     }
   }, [view]);
 
-  const [descriptionChange, setDescriptionChange] = useState("");
-
   useEffect(() => {
     const updateLAFItems = setTimeout(() => {
-      handleChange("description", descriptionChange);
+      handleChange("description", state.descriptionChange);
     }, 500);
     return () => clearTimeout(updateLAFItems);
-  }, [descriptionChange]);
+  }, [state.descriptionChange]);
 
   const handleChange = (name: keyof FoundItemFormData, value: string) => {
+    dispatch({ type: "SET_FIELD", payload: { name, value } });
+
     const updatedFormData = {
-      ...formData,
+      ...state.formData,
       [name]: value,
     };
-
-    setFormData(updatedFormData);
 
     // Check if the form is reset to the initial state
     if (
@@ -148,10 +196,10 @@ export default function FoundItemForm({
       updatedFormData.dateFilter === "Before" &&
       updatedFormData.description === ""
     ) {
-      setItems([]);
+      dispatch({ type: "SET_ITEMS", payload: [] });
     } else {
       // Trigger the fetch when form data changes
-      fetchLostReportItems(updatedFormData, setItems, logout);
+      fetchLostReportItems(updatedFormData, dispatch, logout);
     }
   };
 
@@ -235,20 +283,20 @@ export default function FoundItemForm({
           {...register("description", { required: "Description is required" })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => setDescriptionChange(e.target.value)}
+          onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}
         />
 
         <Button color="primary" type="submit">
           Submit
         </Button>
       </form>
-      {items && items.length > 0 && (
+      {state.items && state.items.length > 0 && (
         <>
           <h2 className="text-center mt-5 text-3xl">
             Potential Matching Lost Reports
           </h2>
           <LostReportItems
-            items={items}
+            items={state.items}
             lafTypes={[]}
             lafLocations={[]}
             updateTable={() => {}}

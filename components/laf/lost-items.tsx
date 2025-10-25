@@ -9,7 +9,7 @@ import {
   Input,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useReducer, Dispatch, SetStateAction } from "react";
 import LAFItems from "./laf-items";
 import { LAFItem, ViewState } from "@/types/laf";
 import { fetchLAFItems } from "@/utils/laf";
@@ -56,97 +56,160 @@ export default function LostItems({
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
   setValue("date", todaysDate.toString());
 
-  const [items, setItems] = useState<LAFItem[]>([]);
-  const [formData, setFormData] = useState<LostItemsFormData>({
-    type: "",
-    location: "",
-    date: todaysDate.toString(),
-    dateFilter: "Before",
-    description: "",
-    id: "",
-  });
-  const [emptyForm, setEmptyForm] = useState(true);
-  const [descriptionChange, setDescriptionChange] = useState("");
-  const [idChange, setIdChange] = useState("");
+  // State interface for the reducer
+  interface LostItemsState {
+    items: LAFItem[];
+    formData: LostItemsFormData;
+    emptyForm: boolean;
+    descriptionChange: string;
+    idChange: string;
+  }
 
-  useEffect(() => {
-    const updateLAFItems = setTimeout(() => {
-      handleChange("description", descriptionChange);
-    }, 500);
-    return () => clearTimeout(updateLAFItems);
-  }, [descriptionChange]);
+  // Action types for the reducer
+  type LostItemsAction =
+    | { type: "SET_ITEMS"; payload: LAFItem[] }
+    | { type: "SET_FIELD"; payload: { name: keyof LostItemsFormData; value: string } }
+    | { type: "RESET_FORM"; payload: LostItemsFormData }
+    | { type: "SET_DEBOUNCE_VALUE"; payload: { field: "descriptionChange" | "idChange"; value: string } }
+    | { type: "UPDATE_EMPTY_FORM"; payload: LostItemsFormData };
 
-  useEffect(() => {
-    const updateLAFItems = setTimeout(() => {
-      handleChange("id", idChange.replace(/\D/g, ""));
-    }, 500);
-    return () => clearTimeout(updateLAFItems);
-  }, [idChange]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (view !== "Lost Items") {
-        reset();
-        setValue("date", todaysDate.toString());
-        setValue("dateFilter", "Before");
-        clearErrors();
-        setFormData({
-          type: "",
-          location: "",
-          date: todaysDate.toString(),
-          dateFilter: "Before",
-          description: "",
-          id: "",
-        });
-      } else {
-        fetchLAFItems({ ...formData }, setItems, logout);
-      }
+  // Reducer function
+  function lostItemsReducer(
+    state: LostItemsState,
+    action: LostItemsAction
+  ): LostItemsState {
+    switch (action.type) {
+      case "SET_ITEMS":
+        return { ...state, items: action.payload };
+      case "SET_FIELD":
+        const updatedFormData = {
+          ...state.formData,
+          [action.payload.name]: action.payload.value,
+        };
+        return {
+          ...state,
+          formData: updatedFormData,
+          emptyForm: isFormEmpty(updatedFormData),
+        };
+      case "RESET_FORM":
+        return {
+          ...state,
+          formData: action.payload,
+          emptyForm: true,
+          descriptionChange: "",
+          idChange: "",
+        };
+      case "SET_DEBOUNCE_VALUE":
+        return {
+          ...state,
+          [action.payload.field]: action.payload.value,
+        };
+      case "UPDATE_EMPTY_FORM":
+        return {
+          ...state,
+          emptyForm: isFormEmpty(action.payload),
+        };
+      default:
+        return state;
     }
-  }, [view]);
+  }
 
-  const handleChange = (name: keyof LostItemsFormData, value: string) => {
-    const updatedFormData = {
-      ...formData,
-      [name]: value,
-    };
-
-    setFormData(updatedFormData);
-    // Trigger the fetch when form data changes
-    fetchLAFItems({ ...formData, [name]: value }, setItems, logout);
-
-    if (
-      updatedFormData.type === "" &&
-      updatedFormData.location === "" &&
-      updatedFormData.date === todaysDate.toString() &&
-      updatedFormData.dateFilter === "Before" &&
-      updatedFormData.description === ""
-    ) {
-      setEmptyForm(true);
-    } else {
-      setEmptyForm(false);
-    }
+  // Helper function to check if form is empty
+  const isFormEmpty = (formData: LostItemsFormData): boolean => {
+    return (
+      formData.type === "" &&
+      formData.location === "" &&
+      formData.date === parseDate(new Date().toISOString().split("T")[0]).toString() &&
+      formData.dateFilter === "Before" &&
+      formData.description === ""
+    );
   };
 
-  const updateTable = () => {
-    fetchLAFItems({ ...formData }, setItems, logout);
-  };
-
-  const onSubmit = async () => {
-    setView("Submit Lost Report");
-    setSwitchToLostReport({ ...formData });
-    reset();
-    setValue("date", todaysDate.toString());
-    setValue("dateFilter", "Before");
-    clearErrors();
-    setFormData({
+  // Initial state
+  const initialState: LostItemsState = {
+    items: [],
+    formData: {
       type: "",
       location: "",
       date: todaysDate.toString(),
       dateFilter: "Before",
       description: "",
       id: "",
+    },
+    emptyForm: true,
+    descriptionChange: "",
+    idChange: "",
+  };
+
+  const [state, dispatch] = useReducer(lostItemsReducer, initialState);
+
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("description", state.descriptionChange);
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [state.descriptionChange]);
+
+  useEffect(() => {
+    const updateLAFItems = setTimeout(() => {
+      handleChange("id", state.idChange.replace(/\D/g, ""));
+    }, 500);
+    return () => clearTimeout(updateLAFItems);
+  }, [state.idChange]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (view !== "Lost Items") {
+        reset();
+        setValue("date", parseDate(new Date().toISOString().split("T")[0]).toString());
+        setValue("dateFilter", "Before");
+        clearErrors();
+        dispatch({
+          type: "RESET_FORM",
+          payload: {
+            type: "",
+            location: "",
+            date: parseDate(new Date().toISOString().split("T")[0]).toString(),
+            dateFilter: "Before",
+            description: "",
+            id: "",
+          },
+        });
+      } else {
+        fetchLAFItems({ ...state.formData }, dispatch, logout);
+      }
+    }
+  }, [view]);
+
+  const handleChange = (name: keyof LostItemsFormData, value: string) => {
+    dispatch({ type: "SET_FIELD", payload: { name, value } });
+    // Trigger the fetch when form data changes
+    fetchLAFItems({ ...state.formData, [name]: value }, dispatch, logout);
+  };
+
+  const updateTable = () => {
+    fetchLAFItems({ ...state.formData }, dispatch, logout);
+  };
+
+  const onSubmit = async () => {
+    setView("Submit Lost Report");
+    setSwitchToLostReport({ ...state.formData });
+    reset();
+    setValue("date", parseDate(new Date().toISOString().split("T")[0]).toString());
+    setValue("dateFilter", "Before");
+    clearErrors();
+    dispatch({
+      type: "RESET_FORM",
+      payload: {
+        type: "",
+        location: "",
+        date: parseDate(new Date().toISOString().split("T")[0]).toString(),
+        dateFilter: "Before",
+        description: "",
+        id: "",
+      },
     });
-    setEmptyForm(true);
   };
 
   return (
@@ -217,7 +280,7 @@ export default function LostItems({
             {...register("id")}
             errorMessage={errors.id?.message}
             isInvalid={!!errors.id}
-            onChange={(e) => setIdChange(e.target.value)}
+            onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: { field: "idChange", value: e.target.value } })}
             autoComplete="off"
           />
 
@@ -261,17 +324,17 @@ export default function LostItems({
           {...register("description")}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => setDescriptionChange(e.target.value)}
+          onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: { field: "descriptionChange", value: e.target.value } })}
         />
 
-        {!emptyForm && idChange === "" && (
+        {!state.emptyForm && state.idChange === "" && (
           <Button color="primary" type="submit">
             Create Lost Report
           </Button>
         )}
       </form>
       <LAFItems
-        items={items}
+        items={state.items}
         lafTypes={lafTypes}
         lafLocations={lafLocations}
         updateTable={updateTable}

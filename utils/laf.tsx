@@ -27,7 +27,7 @@ async function convertFormToParams(formData: Record<string, string>) {
 
 export async function fetchLAFItems(
   formData: Record<string, string>,
-  setLafItems: React.Dispatch<React.SetStateAction<LAFItem[]>>,
+  dispatch: (action: { type: "SET_ITEMS"; payload: LAFItem[] }) => void,
   logout: () => void
 ) {
   // Prepare params based on form data
@@ -45,7 +45,7 @@ export async function fetchLAFItems(
 
     if (response.ok) {
       const response_data = await response.json();
-      setLafItems(response_data.data);
+      dispatch({ type: "SET_ITEMS", payload: response_data.data });
     } else if (response.status === 401) {
       logout();
     } else {
@@ -53,13 +53,13 @@ export async function fetchLAFItems(
     }
   } catch (error) {
     console.error(error);
-    setLafItems([]);
+    dispatch({ type: "SET_ITEMS", payload: [] });
   }
 }
 
 export async function fetchLostReportItems(
   formData: Record<string, string>,
-  setLostReportItems: React.Dispatch<React.SetStateAction<LostReportItem[]>>,
+  dispatch: (action: { type: "SET_ITEMS"; payload: LostReportItem[] }) => void,
   logout: () => void,
   newReports: boolean = false
 ) {
@@ -79,7 +79,7 @@ export async function fetchLostReportItems(
 
     if (response.ok) {
       const response_data = await response.json();
-      setLostReportItems(response_data.data);
+      dispatch({ type: "SET_ITEMS", payload: response_data.data });
     } else if (response.status === 401) {
       logout();
     } else {
@@ -87,7 +87,7 @@ export async function fetchLostReportItems(
     }
   } catch (error) {
     console.error(error);
-    setLostReportItems([]);
+    dispatch({ type: "SET_ITEMS", payload: [] });
   }
 }
 

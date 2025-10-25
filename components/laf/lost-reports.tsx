@@ -8,7 +8,7 @@ import {
   Input,
 } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
 import LostReportItems from "./lost-report-items";
 import { useAuth } from "@/context/AuthContext";
 import { fetchLostReportItems } from "@/utils/laf";
@@ -48,59 +48,109 @@ export default function LostReports({
   const todaysDate = parseDate(new Date().toISOString().split("T")[0]);
   setValue("date", todaysDate.toString());
 
-  const [items, setItems] = useState<LostReportItem[]>([]);
-  const [formData, setFormData] = useState<LostReportsFormData>({
-    type: "",
-    location: "",
-    date: todaysDate.toString(),
-    dateFilter: "Before",
-    description: "",
-    name: "",
-    email: "",
-  });
+  // State interface for the reducer
+  interface LostReportsState {
+    items: LostReportItem[];
+    formData: LostReportsFormData;
+    descriptionChange: string;
+  }
+
+  // Action types for the reducer
+  type LostReportsAction =
+    | { type: "SET_ITEMS"; payload: LostReportItem[] }
+    | { type: "SET_FIELD"; payload: { name: keyof LostReportsFormData; value: string } }
+    | { type: "RESET_FORM"; payload: LostReportsFormData }
+    | { type: "SET_DEBOUNCE_VALUE"; payload: string };
+
+  // Reducer function
+  function lostReportsReducer(
+    state: LostReportsState,
+    action: LostReportsAction
+  ): LostReportsState {
+    switch (action.type) {
+      case "SET_ITEMS":
+        return { ...state, items: action.payload };
+      case "SET_FIELD":
+        return {
+          ...state,
+          formData: {
+            ...state.formData,
+            [action.payload.name]: action.payload.value,
+          },
+        };
+      case "RESET_FORM":
+        return {
+          ...state,
+          formData: action.payload,
+          descriptionChange: "",
+        };
+      case "SET_DEBOUNCE_VALUE":
+        return {
+          ...state,
+          descriptionChange: action.payload,
+        };
+      default:
+        return state;
+    }
+  }
+
+  // Initial state
+  const initialState: LostReportsState = {
+    items: [],
+    formData: {
+      type: "",
+      location: "",
+      date: todaysDate.toString(),
+      dateFilter: "Before",
+      description: "",
+      name: "",
+      email: "",
+    },
+    descriptionChange: "",
+  };
+
+  const [state, dispatch] = useReducer(lostReportsReducer, initialState);
 
   useEffect(() => {
     if (isAuthenticated) {
       if (view !== "Find Lost Report") {
         reset();
-        setValue("date", todaysDate.toString());
+        setValue("date", parseDate(new Date().toISOString().split("T")[0]).toString());
         setValue("dateFilter", "Before");
         clearErrors();
-        setFormData({
-          type: "",
-          location: "",
-          date: todaysDate.toString(),
-          dateFilter: "Before",
-          description: "",
-          name: "",
-          email: "",
+        dispatch({
+          type: "RESET_FORM",
+          payload: {
+            type: "",
+            location: "",
+            date: parseDate(new Date().toISOString().split("T")[0]).toString(),
+            dateFilter: "Before",
+            description: "",
+            name: "",
+            email: "",
+          },
         });
       } else {
-        fetchLostReportItems({ ...formData }, setItems, logout);
+        fetchLostReportItems({ ...state.formData }, dispatch, logout);
       }
     }
   }, [view]);
 
-  const [descriptionChange, setDescriptionChange] = useState("");
-
   useEffect(() => {
     const updateLAFItems = setTimeout(() => {
-      handleChange("description", descriptionChange);
+      handleChange("description", state.descriptionChange);
     }, 500);
     return () => clearTimeout(updateLAFItems);
-  }, [descriptionChange]);
+  }, [state.descriptionChange]);
 
   const handleChange = (name: keyof LostReportsFormData, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    dispatch({ type: "SET_FIELD", payload: { name, value } });
     // Trigger the fetch when form data changes
-    fetchLostReportItems({ ...formData, [name]: value }, setItems, logout);
+    fetchLostReportItems({ ...state.formData, [name]: value }, dispatch, logout);
   };
 
   const updateTable = () => {
-    fetchLostReportItems({ ...formData }, setItems, logout);
+    fetchLostReportItems({ ...state.formData }, dispatch, logout);
   };
 
   return (
@@ -231,11 +281,11 @@ export default function LostReports({
           {...register("description", { required: "Description is required" })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
-          onChange={(e) => setDescriptionChange(e.target.value)}
+          onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}
         />
       </form>
       <LostReportItems
-        items={items}
+        items={state.items}
         lafTypes={lafTypes}
         lafLocations={lafLocations}
         updateTable={updateTable}

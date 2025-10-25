@@ -34,7 +34,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   useEffect(() => {
     checkAuthStatus();
     fetchNewLostReports(setNewLostReports);
-    const interval = setInterval(fetchNewLostReports, 15000);
+    const interval = setInterval(() => fetchNewLostReports(setNewLostReports), 15000);
     return () => clearInterval(interval);
   }, []);
 
