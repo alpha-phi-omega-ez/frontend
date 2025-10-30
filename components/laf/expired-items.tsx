@@ -54,8 +54,8 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     expiredItems: LAFItem[];
     potentiallyExpiredItems: LAFItem[];
     searchData: Record<string, string>;
-    expiredSelectedKeys: string[];
-    potentiallyExpiredSelectedKeys: string[];
+    expiredSelectedKeys: number[];
+    potentiallyExpiredSelectedKeys: number[];
   }
 
   // Action types for the reducer
@@ -63,8 +63,8 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     | { type: "SET_EXPIRED_ITEMS"; payload: LAFItem[] }
     | { type: "SET_POTENTIALLY_EXPIRED_ITEMS"; payload: LAFItem[] }
     | { type: "SET_SEARCH_FIELD"; payload: { name: string; value: string } }
-    | { type: "SET_EXPIRED_SELECTION"; payload: string[] }
-    | { type: "SET_POTENTIALLY_EXPIRED_SELECTION"; payload: string[] }
+    | { type: "SET_EXPIRED_SELECTION"; payload: number[] }
+    | { type: "SET_POTENTIALLY_EXPIRED_SELECTION"; payload: number[] }
     | { type: "RESET_SELECTIONS" };
 
   // Reducer function
@@ -154,6 +154,15 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     }
   }, [view, state.searchData]);
 
+  // Watch for changes to expiredSelectedKeys and log them with delay
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log("Delayed log - expiredSelectedKeys:", state.expiredSelectedKeys);
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, [state.expiredSelectedKeys]);
+
   const handleChange = (name: string, value: string) => {
     // Allow only numbers and ensure it's >= 0
     if (/^\d*$/.test(value) || name === "type") {
@@ -167,52 +176,37 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
   };
 
   const handleExpiredTableSelectionChange = (keys: Selection) => {
-    const selectedKeysArray = Array.from(keys) as string[];
+    const arr = Array.from(keys) as (string | number)[];
+    console.log(arr);
 
-    console.log(selectedKeysArray);
-    
     // Handle "Select All" - replace "all" with all item IDs
-    if (
-      selectedKeysArray.length === 3 &&
-        selectedKeysArray[0] === "a" &&
-        selectedKeysArray[1] === "l" &&
-        selectedKeysArray[2] === "l"
-    ) {
-      const allItemIds = state.expiredItems.map(item => item.id.toString());
+    if (arr.length === 1 && arr[0] === "all") {
+      const allItemIds = state.expiredItems.map((item) => item.id);
       dispatch({ type: "SET_EXPIRED_SELECTION", payload: allItemIds });
-    } 
-    // Handle "Unselect All" - if no keys or only "all" was removed, clear selection
-    else if (selectedKeysArray.length === 0 || (state.expiredSelectedKeys.length > 0 && selectedKeysArray.length === 0)) {
+    } else if (arr.length === 0) {
+      // Unselect all
       dispatch({ type: "SET_EXPIRED_SELECTION", payload: [] });
-    } 
-    // Handle normal individual selections
-    else {
-      dispatch({ type: "SET_EXPIRED_SELECTION", payload: selectedKeysArray.filter(id => id !== "all") });
+    } else {
+      // Normal selections -> numbers
+      const ids = arr.filter((k) => k !== "all").map((k) => Number(k));
+      dispatch({ type: "SET_EXPIRED_SELECTION", payload: ids });
     }
   };
 
   const handlePotentiallyExpiredTableSelectionChange = (keys: Selection) => {
-    const selectedKeysArray = Array.from(keys) as string[];
-
-    console.log(selectedKeysArray);
+    const arr = Array.from(keys) as (string | number)[];
 
     // Handle "Select All" - replace "all" with all item IDs
-    if (
-      selectedKeysArray.length === 3 &&
-        selectedKeysArray[0] === "a" &&
-        selectedKeysArray[1] === "l" &&
-        selectedKeysArray[2] === "l"
-    ) {
-      const allItemIds = state.potentiallyExpiredItems.map(item => item.id.toString());
+    if (arr.length === 1 && arr[0] === "all") {
+      const allItemIds = state.potentiallyExpiredItems.map((item) => item.id);
       dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: allItemIds });
-    } 
-    // Handle "Unselect All" - if no keys or only "all" was removed, clear selection
-    else if (selectedKeysArray.length === 0 || (state.potentiallyExpiredSelectedKeys.length > 0 && selectedKeysArray.length === 0)) {
+    } else if (arr.length === 0) {
+      // Unselect all
       dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: [] });
-    } 
-    // Handle normal individual selections
-    else {
-      dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: selectedKeysArray.filter(id => id !== "all") });
+    } else {
+      // Normal selections -> numbers
+      const ids = arr.filter((k) => k !== "all").map((k) => Number(k));
+      dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: ids });
     }
 
     console.log(state.potentiallyExpiredSelectedKeys);
@@ -220,6 +214,8 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
 
   const archiveItems = async (table: string) => {
     try {
+      console.log(state.expiredSelectedKeys);
+      console.log(state.potentiallyExpiredSelectedKeys);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
         {
@@ -229,10 +225,9 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ids:
-              table === "expired"
-                ? state.expiredSelectedKeys.filter(id => id !== "all")
-                : state.potentiallyExpiredSelectedKeys.filter(id => id !== "all"),
+            ids: table === "expired"
+              ? state.expiredSelectedKeys
+              : state.potentiallyExpiredSelectedKeys,
           }),
         }
       );
@@ -347,7 +342,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
         isStriped
         color="primary"
         selectionMode="multiple"
-        selectedKeys={state.expiredSelectedKeys}
+        selectedKeys={new Set(state.expiredSelectedKeys.map((k) => k.toString()))}
         onSelectionChange={handleExpiredTableSelectionChange}
       >
         <TableHeader columns={columns}>
@@ -360,7 +355,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
           emptyContent={"No expired LAF items found."}
         >
           {(item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.id.toString()}>
               {(columnKey) => (
                 <TableCell>
                   {columnKey === "id" ? (
@@ -394,7 +389,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
         isStriped
         color="primary"
         selectionMode="multiple"
-        selectedKeys={state.potentiallyExpiredSelectedKeys}
+        selectedKeys={new Set(state.potentiallyExpiredSelectedKeys.map((k) => k.toString()))}
         onSelectionChange={handlePotentiallyExpiredTableSelectionChange}
       >
         <TableHeader columns={columns}>
@@ -407,7 +402,7 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
           emptyContent={"No potentially expired LAF items found."}
         >
           {(item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.id.toString()}>
               {(columnKey) => (
                 <TableCell>
                   {columnKey === "id" ? (
