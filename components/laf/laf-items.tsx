@@ -93,7 +93,7 @@ export default function LAFItems({
     location: "",
     date: "",
     description: "",
-    id: "0",
+    id: 0,
     modal: null,
   });
 

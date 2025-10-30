@@ -8,7 +8,7 @@ export type ViewState =
   | "error";
 
 export type LAFItem = {
-  id: string;
+  id: number;
   display_id: string;
   type: string;
   location: string;
@@ -51,7 +51,7 @@ export type FoundItemModalData = {
   location: string;
   date: string;
   description: string;
-  id: string;
+  id: number;
   modal: "edit" | "found" | null;
 };
 
