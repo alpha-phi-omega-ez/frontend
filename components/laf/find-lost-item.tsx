@@ -160,7 +160,7 @@ export default function LostItems({
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (view !== "Lost Items") {
+      if (view !== "Find Lost Item") {
         reset();
         setValue("date", parseDate(new Date().toISOString().split("T")[0]).toString());
         setValue("dateFilter", "Before");

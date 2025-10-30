@@ -2,9 +2,9 @@ import { title } from "@/components/primitives";
 import { useState, useEffect } from "react";
 import Error from "@/components/error";
 import LAFSelector from "@/components/laf/selector";
-import FoundItemForm from "@/components/laf/found-item";
+import FoundItemForm from "@/components/laf/submit-lost-item";
 import NewLostReport from "@/components/laf/create-lost-report";
-import LostItems from "@/components/laf/lost-items";
+import LostItems from "@/components/laf/find-lost-item";
 import LostReports from "@/components/laf/lost-reports";
 import ExpiredItems from "@/components/laf/expired-items";
 import NewLostReports from "@/components/laf/new-lost-reports";
@@ -21,7 +21,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
-  const [view, setView] = useState<ViewState>("Found Item");
+  const [view, setView] = useState<ViewState>("Submit Lost Item");
   const [loading, setLoading] = useState(true);
   const [newLostReports, setNewLostReports] = useState(0);
 
@@ -61,7 +61,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
           />
           <div
             style={{
-              display: view === "Found Item" ? "block" : "none",
+              display: view === "Submit Lost Item" ? "block" : "none",
             }}
           >
             <FoundItemForm
@@ -72,7 +72,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
           </div>
           <div
             style={{
-              display: view === "Lost Items" ? "block" : "none",
+              display: view === "Find Lost Item" ? "block" : "none",
             }}
           >
             <LostItems

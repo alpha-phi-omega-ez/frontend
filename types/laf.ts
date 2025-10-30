@@ -1,6 +1,6 @@
 export type ViewState =
-  | "Found Item"
-  | "Lost Items"
+  | "Submit Lost Item"
+  | "Find Lost Item"
   | "Submit Lost Report"
   | "Find Lost Report"
   | "New Lost Reports"
