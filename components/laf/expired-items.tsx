@@ -154,15 +154,6 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
     }
   }, [view, state.searchData]);
 
-  // Watch for changes to expiredSelectedKeys and log them with delay
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      console.log("Delayed log - expiredSelectedKeys:", state.expiredSelectedKeys);
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
-  }, [state.expiredSelectedKeys]);
-
   const handleChange = (name: string, value: string) => {
     // Allow only numbers and ensure it's >= 0
     if (/^\d*$/.test(value) || name === "type") {
@@ -177,7 +168,6 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
 
   const handleExpiredTableSelectionChange = (keys: Selection) => {
     const arr = Array.from(keys) as (string | number)[];
-    console.log(arr);
 
     // Handle "Select All" - replace "all" with all item IDs
     if (arr.length === 1 && arr[0] === "all") {
@@ -208,14 +198,10 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
       const ids = arr.filter((k) => k !== "all").map((k) => Number(k));
       dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: ids });
     }
-
-    console.log(state.potentiallyExpiredSelectedKeys);
   };
 
   const archiveItems = async (table: string) => {
     try {
-      console.log(state.expiredSelectedKeys);
-      console.log(state.potentiallyExpiredSelectedKeys);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/items/archive/`,
         {
