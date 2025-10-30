@@ -161,17 +161,61 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
         type: "SET_SEARCH_FIELD",
         payload: { name, value: value === "" ? "0" : value },
       });
+      // Clear any selections when filters change
+      dispatch({ type: "RESET_SELECTIONS" });
     }
   };
 
   const handleExpiredTableSelectionChange = (keys: Selection) => {
     const selectedKeysArray = Array.from(keys) as string[];
-    dispatch({ type: "SET_EXPIRED_SELECTION", payload: selectedKeysArray });
+
+    console.log(selectedKeysArray);
+    
+    // Handle "Select All" - replace "all" with all item IDs
+    if (
+      selectedKeysArray.length === 3 &&
+        selectedKeysArray[0] === "a" &&
+        selectedKeysArray[1] === "l" &&
+        selectedKeysArray[2] === "l"
+    ) {
+      const allItemIds = state.expiredItems.map(item => item.id.toString());
+      dispatch({ type: "SET_EXPIRED_SELECTION", payload: allItemIds });
+    } 
+    // Handle "Unselect All" - if no keys or only "all" was removed, clear selection
+    else if (selectedKeysArray.length === 0 || (state.expiredSelectedKeys.length > 0 && selectedKeysArray.length === 0)) {
+      dispatch({ type: "SET_EXPIRED_SELECTION", payload: [] });
+    } 
+    // Handle normal individual selections
+    else {
+      dispatch({ type: "SET_EXPIRED_SELECTION", payload: selectedKeysArray.filter(id => id !== "all") });
+    }
   };
 
   const handlePotentiallyExpiredTableSelectionChange = (keys: Selection) => {
     const selectedKeysArray = Array.from(keys) as string[];
-    dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: selectedKeysArray });
+
+    console.log(selectedKeysArray);
+
+    // Handle "Select All" - replace "all" with all item IDs
+    if (
+      selectedKeysArray.length === 3 &&
+        selectedKeysArray[0] === "a" &&
+        selectedKeysArray[1] === "l" &&
+        selectedKeysArray[2] === "l"
+    ) {
+      const allItemIds = state.potentiallyExpiredItems.map(item => item.id.toString());
+      dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: allItemIds });
+    } 
+    // Handle "Unselect All" - if no keys or only "all" was removed, clear selection
+    else if (selectedKeysArray.length === 0 || (state.potentiallyExpiredSelectedKeys.length > 0 && selectedKeysArray.length === 0)) {
+      dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: [] });
+    } 
+    // Handle normal individual selections
+    else {
+      dispatch({ type: "SET_POTENTIALLY_EXPIRED_SELECTION", payload: selectedKeysArray.filter(id => id !== "all") });
+    }
+
+    console.log(state.potentiallyExpiredSelectedKeys);
   };
 
   const archiveItems = async (table: string) => {
@@ -187,8 +231,8 @@ export default function ExpiredItems({ lafTypes, view }: ExpiredItemsProps) {
           body: JSON.stringify({
             ids:
               table === "expired"
-                ? state.expiredSelectedKeys
-                : state.potentiallyExpiredSelectedKeys,
+                ? state.expiredSelectedKeys.filter(id => id !== "all")
+                : state.potentiallyExpiredSelectedKeys.filter(id => id !== "all"),
           }),
         }
       );
