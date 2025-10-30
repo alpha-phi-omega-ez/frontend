@@ -140,7 +140,7 @@ export default function LAFItems({
                         <EditIcon />
                       </button>
                       <button
-                        aria-label="Found Item"
+                        aria-label="Submit Lost Item"
                         onClick={() => {
                           dispatch({
                             type: "SET_FORM",

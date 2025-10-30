@@ -165,7 +165,7 @@ export default function FoundItemForm({
   setValue("date", todaysDate.toString());
 
   useEffect(() => {
-    if (isAuthenticated && view !== "Found Item") {
+    if (isAuthenticated && view !== "Submit Lost Item") {
       reset();
       setValue("date", todaysDate.toString());
       clearErrors();

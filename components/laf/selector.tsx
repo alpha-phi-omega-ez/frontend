@@ -1,6 +1,8 @@
 import { ViewState } from "@/types/laf";
 import { Badge } from "@heroui/react";
 
+type SelectorViewState = Exclude<ViewState, "error">;
+
 interface LAFSelectorProps {
   setView: React.Dispatch<React.SetStateAction<ViewState>>;
   view: ViewState;
@@ -12,9 +14,9 @@ export default function LAFSelector({
   view,
   newLostReports,
 }: LAFSelectorProps) {
-  const views: ViewState[] = [
-    "Found Item",
-    "Lost Items",
+  const views: SelectorViewState[] = [
+    "Submit Lost Item",
+    "Find Lost Item",
     "Submit Lost Report",
     "Find Lost Report",
     "New Lost Reports",
