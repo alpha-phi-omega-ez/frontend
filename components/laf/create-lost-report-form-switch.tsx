@@ -96,7 +96,13 @@ export default function CreateLostReportFormSwitch({
           label="Name"
           variant="bordered"
           isRequired
-          {...register("name", { required: "Name is required" })}
+          {...register("name", { 
+            required: "Name is required",
+            maxLength: {
+              value: 100,
+              message: "Name must be 100 characters or less",
+            },
+          })}
           errorMessage={errors.name?.message}
           isInvalid={!!errors.name}
           autoComplete="off"
@@ -208,6 +214,10 @@ export default function CreateLostReportFormSwitch({
         isRequired
         {...register("description", {
           required: "Description is required",
+          maxLength: {
+            value: 2000,
+            message: "Description must be 2000 characters or less",
+          },
         })}
         errorMessage={errors.description?.message}
         isInvalid={!!errors.description}
