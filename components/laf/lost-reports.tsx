@@ -247,7 +247,13 @@ export default function LostReports({
             autoFocus
             label="Name"
             variant="bordered"
-            {...register("name", { required: "Name is required" })}
+            {...register("name", { 
+              required: "Name is required",
+              maxLength: {
+                value: 100,
+                message: "Name must be 100 characters or less",
+              },
+            })}
             errorMessage={errors.name?.message}
             isInvalid={!!errors.name}
             onChange={(e) => handleChange("name", e.target.value)}
@@ -278,7 +284,13 @@ export default function LostReports({
         <Textarea
           label="Description"
           variant="bordered"
-          {...register("description", { required: "Description is required" })}
+          {...register("description", { 
+            required: "Description is required",
+            maxLength: {
+              value: 2000,
+              message: "Description must be 2000 characters or less",
+            },
+          })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
           onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}

@@ -132,7 +132,13 @@ export default function FoundLAFModal({
                   label="Name"
                   variant="bordered"
                   isRequired
-                  {...register("name", { required: "Name is required" })}
+                  {...register("name", { 
+                    required: "Name is required",
+                    maxLength: {
+                      value: 100,
+                      message: "Name must be 100 characters or less",
+                    },
+                  })}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                 />

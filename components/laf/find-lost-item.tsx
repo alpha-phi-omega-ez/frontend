@@ -321,7 +321,12 @@ export default function LostItems({
         <Textarea
           label="Description"
           variant="bordered"
-          {...register("description")}
+          {...register("description", {
+            maxLength: {
+              value: 2000,
+              message: "Description must be 2000 characters or less",
+            },
+          })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
           onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: { field: "descriptionChange", value: e.target.value } })}

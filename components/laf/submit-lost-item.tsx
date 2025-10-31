@@ -280,7 +280,13 @@ export default function FoundItemForm({
           label="Description"
           variant="bordered"
           isRequired
-          {...register("description", { required: "Description is required" })}
+          {...register("description", { 
+            required: "Description is required",
+            maxLength: {
+              value: 2000,
+              message: "Description must be 2000 characters or less",
+            },
+          })}
           errorMessage={errors.description?.message}
           isInvalid={!!errors.description}
           onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}

@@ -187,6 +187,10 @@ export default function EditLAFModal({
                 isRequired
                 {...register("description", {
                   required: "Description is required",
+                  maxLength: {
+                    value: 2000,
+                    message: "Description must be 2000 characters or less",
+                  },
                 })}
                 errorMessage={errors.description?.message}
                 isInvalid={!!errors.description}
