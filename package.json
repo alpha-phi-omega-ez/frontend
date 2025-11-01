@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@heroui/alert": "^2.2.19",
+    "@heroui/alert": "^2.2.27",
     "@heroui/card": "^2.2.18",
     "@heroui/react": "^2.7.9",
     "@mui/lab": "^7.0.0-beta.16",
