@@ -6,3 +6,7 @@ export type LoanerTechType = {
   phone?: string;
   email?: string;
 };
+
+export type CreateLoanerTechFormData = {
+  description: string;
+};
