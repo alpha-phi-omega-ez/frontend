@@ -103,5 +103,9 @@ export const siteConfig = {
       label: "Money Tool",
       href: "https://sites.google.com/apoez.org/apoezmoneytool/home",
     },
+    {
+      label: "Loaner Tech",
+      href: "/loanertech/admin",
+    }
   ],
 };
