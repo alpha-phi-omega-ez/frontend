@@ -12,6 +12,25 @@ interface AwardImage {
 
 export const awards: Award[] = [
   {
+    name: "Dean Arno Nowotny",
+    years: "2025",
+    from: "APO National Office",
+    purpose:
+      "Conducting the most significant service program in the fraternity during 2024-2025.",
+  },
+  {
+    name: "100 Member Chapter Challenge",
+    years: "2025",
+    from: "APO National Office",
+    purpose: "Recognition for growing chapter membership to meet the challenge set for the Centennial",
+  },
+  {
+    name: "Joseph J. Scanlon National Certificate of Merit",
+    years: "2025",
+    from: "APO National Office",
+    purpose: "Recognition for significant membership growth.",
+  },
+  {
     name: "Outstanding Service Project Award",
     years: "2025",
     from: "APO Region Q",
@@ -48,7 +67,7 @@ export const awards: Award[] = [
     years: "2010",
     from: "APO National Office",
     purpose:
-      "Conducting the most significant service program in the fraternity during 2022-2023.",
+      "Conducting the most significant service program in the fraternity during 2009-2010.",
   },
   {
     name: "Rensselaer Union Volunteer Recognition Award",
