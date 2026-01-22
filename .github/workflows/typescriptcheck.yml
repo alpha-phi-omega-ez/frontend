@@ -6,8 +6,7 @@ on:
       - "**.ts"
       - "**.tsx"
 
-permissions:
-  contents: read
+permissions: read-all
 
 jobs:
   typecheck:
