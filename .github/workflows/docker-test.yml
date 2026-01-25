@@ -12,7 +12,8 @@ on:
       - "Dockerfile"
       - ".dockerignore"
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   build:

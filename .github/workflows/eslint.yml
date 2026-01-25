@@ -10,7 +10,8 @@ on:
       - ".github/workflows/eslint.yml"
       - "eslint.config.js"
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   eslint:
