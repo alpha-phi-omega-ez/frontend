@@ -1,4 +1,4 @@
 develop:
-	npm run dev
+	NEXT_PUBLIC_BACKEND_SERVER=http://localhost:9000 npm run dev
 build:
-	npm run build
+	NEXT_PUBLIC_BACKEND_SERVER=http://localhost:9000 npm run build
