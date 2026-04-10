@@ -64,7 +64,6 @@ const OvernighterImages: ImageType[] = [
   { img: overnighter + "Overnighter(5).jpg", alt: "Overnighter" },
   { img: overnighter + "Overnighter(6).jpg", alt: "Overnighter" },
   { img: overnighter + "Overnighter(7).jpg", alt: "Overnighter" },
-  // { img: overnighter + "Overnighter(8).jpg", alt: "Overnighter" }, Image too large vertically
   { img: overnighter + "Overnighter(9).jpg", alt: "Overnighter" },
   { img: overnighter + "Overnighter(18).jpg", alt: "Overnighter" },
   { img: overnighter + "Overnighter(11).jpg", alt: "Overnighter" },
@@ -109,7 +108,7 @@ export const Events: Event[] = [
     title: "Overnighter",
     description:
       'Every semester, the APOEZ chapter picks a weekend and stays "overnight" at a local camp to assist in facilities maintenance. Common activities include painting, picking up trash alongside trails, drilling, putting together beds, and cleaning.',
-    date: "Each Fall and Spring Semesters",
+    date: "Every Fall and Spring Semesters",
     timing: "Typically the Friday to Sunday",
     location: "YMCA or Scout Camp",
     images: OvernighterImages,
