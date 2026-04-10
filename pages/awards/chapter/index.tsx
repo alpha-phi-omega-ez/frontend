@@ -9,32 +9,8 @@ import {
   TimelineContent,
   TimelineDot,
 } from "@mui/lab";
-import Slider from "react-slick";
-import { Image } from "@heroui/react";
+import DefaultCarousel from "@/components/carousel";
 import { awards, award_images } from "@/data/chapter_awards";
-
-const AwardImages = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    accessibility: true,
-    autoplay: true,
-    arrows: false,
-    autoplaySpeed: 5500,
-  };
-  return (
-    <Slider {...settings}>
-      {award_images.map((item, index) => (
-        <div key={index}>
-          <Image className="w-full" src={item.img} alt={item.alt} />
-        </div>
-      ))}
-    </Slider>
-  );
-};
 
 export default function ChapterAwardsPage() {
   return (
@@ -49,7 +25,23 @@ export default function ChapterAwardsPage() {
           6 times. Below are our other notable achievements.
         </p>
       </div>
-      <AwardImages />
+      <div className="mx-auto w-full max-w-5xl">
+        <DefaultCarousel
+          images={award_images}
+          settings={{
+            dots: false,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 5500,
+            pauseOnHover: false,
+            pauseOnFocus: false,
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }}
+          aspectRatioClassName="aspect-[16/9]"
+        />
+      </div>
       <div className="mt-10">
         <h2 className="text-center text-4xl font-bold mb-4">Highlights</h2>
         {/* I have no idea how to make this part */}
