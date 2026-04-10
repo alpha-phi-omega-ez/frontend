@@ -42,7 +42,7 @@ export default function HistoryPage() {
             <div className="flex justify-center">
               <Image
                 alt={item.title}
-                className="object-cover rounded-xl w-full"
+                className="h-72 md:h-96 lg:h-[28rem] w-full object-cover object-center rounded-xl"
                 src={item.img}
               />
             </div>
