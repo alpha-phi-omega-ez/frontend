@@ -108,7 +108,7 @@ export const Events: Event[] = [
     title: "Overnighter",
     description:
       'Every semester, the APOEZ chapter picks a weekend and stays "overnight" at a local camp to assist in facilities maintenance. Common activities include painting, picking up trash alongside trails, drilling, putting together beds, and cleaning.',
-    date: "Every Fall and Spring Semesters",
+    date: "Every Fall and Spring Semester",
     timing: "Typically the Friday to Sunday",
     location: "YMCA or Scout Camp",
     images: OvernighterImages,
