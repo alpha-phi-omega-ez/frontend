@@ -1,14 +1,15 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Image } from "@heroui/react";
+import type { Settings } from "react-slick";
+import Image from "next/image";
 
 export interface ImageType {
   img: string;
   alt: string;
 }
 
-const deafultSettings = {
+const defaultSettings: Settings = {
   dots: true,
   infinite: true,
   speed: 500,
@@ -19,18 +20,32 @@ const deafultSettings = {
   arrows: true,
 };
 
-export default function DefaultCarousel({ images }: { images: ImageType[] }) {
+interface CarouselProps {
+  images: ImageType[];
+  settings?: Settings;
+  aspectRatioClassName?: string;
+}
+
+export default function DefaultCarousel({
+  images,
+  settings,
+  aspectRatioClassName = "aspect-[16/9]",
+}: CarouselProps) {
   return (
-    <Slider {...deafultSettings}>
+    <Slider {...defaultSettings} {...settings}>
       {images.map((item, index) => (
         <div key={index}>
-          <Image
-            src={item.img}
-            alt={item.alt}
-            width="100%"
-            height="100%"
-            className="object-cover"
-          />
+          <div
+            className={`relative w-full overflow-hidden rounded-lg ${aspectRatioClassName}`}
+          >
+            <Image
+              src={item.img}
+              alt={item.alt}
+              fill
+              sizes="(min-width: 1280px) 960px, (min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       ))}
     </Slider>

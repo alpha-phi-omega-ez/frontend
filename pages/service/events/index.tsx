@@ -23,7 +23,10 @@ export default function ServiceEventsPage() {
               <p className="mb-1">{item.location}</p>
             </div>
             <div>
-              <DefaultCarousel images={item.images} />
+              <DefaultCarousel
+                images={item.images}
+                aspectRatioClassName="aspect-[16/9]"
+              />
             </div>
           </div>
         ))}
