@@ -4,7 +4,7 @@ import { Image, Link } from "@heroui/react";
 
 const imageBase = "/images/";
 
-export default function IndexPage() {
+export default function HomePage() {
   return (
     <section className="justify-center pb-4 md:pb-6">
       <div className="text-center">
