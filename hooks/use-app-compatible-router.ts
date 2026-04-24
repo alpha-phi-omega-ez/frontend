@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter as useCompatRouter } from "next/compat/router";
-import { useMemo } from "react";
 
 interface CompatibleRouter {
   asPath: string;
@@ -19,20 +18,17 @@ const getBrowserPath = () => {
 export function useAppCompatibleRouter(): CompatibleRouter {
   const router = useCompatRouter();
 
-  return useMemo(
-    () => ({
-      asPath: router?.asPath ?? getBrowserPath(),
-      push: (href: string) => {
-        if (router) {
-          void router.push(href);
-          return;
-        }
+  return {
+    asPath: router?.asPath ?? getBrowserPath(),
+    push: (href: string) => {
+      if (router) {
+        void router.push(href);
+        return;
+      }
 
-        if (typeof window !== "undefined") {
-          window.location.assign(href);
-        }
-      },
-    }),
-    [router]
-  );
+      if (typeof window !== "undefined") {
+        window.location.assign(href);
+      }
+    },
+  };
 }
