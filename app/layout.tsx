@@ -5,6 +5,8 @@ import "@/styles/globals.css";
 import { fontMono, fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import { Providers } from "@/app/providers";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://apoez.org"),
@@ -54,7 +56,15 @@ export default function RootLayout({
       <body
         className={`${fontSans.variable} ${fontMono.variable} min-h-screen bg-background font-sans antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="relative flex flex-col h-screen">
+            <Navbar />
+            <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
