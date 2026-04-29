@@ -1,3 +1,5 @@
+"use client";
+
 import { title, subtitle } from "@/components/primitives";
 import { Card, CardBody } from "@heroui/card";
 import { Image, Link } from "@heroui/react";
