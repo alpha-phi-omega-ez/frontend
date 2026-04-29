@@ -13,6 +13,7 @@ export default function NotFound() {
         alt="404 Not Found, Glump on toilet"
         className="w-1/2 mx-auto"
         src="/images/glump-toilet.png"
+        loading="eager"
       />
       <div className="flex justify-center mt-12 mb-8">
         <Link
