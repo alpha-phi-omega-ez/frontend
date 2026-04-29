@@ -1,8 +1,10 @@
+"use client";
+
 import { Image, Button } from "@heroui/react";
-import { useRouter } from "next/router";
+import { useAppCompatibleRouter } from "@/hooks/use-app-compatible-router";
 
 export default function Error({ title }: { title: string }) {
-  const router = useRouter();
+  const router = useAppCompatibleRouter();
 
   return (
     <div className="mb-10">

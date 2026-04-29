@@ -1,10 +1,11 @@
 import { title, subtitle } from "@/components/primitives";
 import { Card, CardBody } from "@heroui/card";
-import { Image, Link } from "@heroui/react";
+import Image from "next/image";
+import Link from "next/link";
 
 const imageBase = "/images/";
 
-export default function IndexPage() {
+export default function AppHomePage() {
   return (
     <section className="justify-center pb-4 md:pb-6">
       <div className="text-center">
@@ -17,7 +18,9 @@ export default function IndexPage() {
               src={imageBase + "USS_Slater_Service.jpg"}
               alt="Service at the USS Slater"
               className="w-full object-cover h-[350px]"
-              width="100%"
+              width={1200}
+              height={700}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <CardBody className="p-5">
               <h3 className="text-3xl">Service</h3>
@@ -40,7 +43,9 @@ export default function IndexPage() {
               src={imageBase + "Leadership.jpg"}
               alt="USS Slater"
               className="w-full object-cover  h-[350px]"
-              width="100%"
+              width={1200}
+              height={700}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <CardBody className="p-5">
               <h3 className="text-3xl">Leadership</h3>
@@ -61,7 +66,9 @@ export default function IndexPage() {
               src={imageBase + "Friendship.jpg"}
               alt="Semiformal"
               className="w-full object-cover  h-[350px]"
-              width="100%"
+              width={1200}
+              height={700}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <CardBody className="p-5">
               <h3 className="text-3xl">Friendship</h3>
@@ -118,17 +125,37 @@ export default function IndexPage() {
               can help.
             </p>
             <p className="mt-2 text-lg">General Inquires: </p>
-            <Link href="mailto:contact@apoez.org">contact@apoez.org</Link>
+            <a className="text-primary hover:underline" href="mailto:contact@apoez.org">
+              contact@apoez.org
+            </a>
             <p className="mt-2 text-lg">Questions About Recruitment Events: </p>
-            <Link href="mailto:membership@apoez.org">membership@apoez.org</Link>
+            <a
+              className="text-primary hover:underline"
+              href="mailto:membership@apoez.org"
+            >
+              membership@apoez.org
+            </a>
             <p className="mt-2 text-lg">
               Questions About the New Member Process
             </p>
-            <Link href="mailto:nme@apoez.org">nme@apoez.org</Link>
+            <a className="text-primary hover:underline" href="mailto:nme@apoez.org">
+              nme@apoez.org
+            </a>
             <p className="mt-2 text-lg">Office Number:</p>
-            <Link href="tel:518-276-6516">+1 (518)-276-6516</Link>
+            <a className="text-primary hover:underline" href="tel:518-276-6516">
+              +1 (518)-276-6516
+            </a>
           </div>
-          <Image src={imageBase + "Crest.jpg"} alt="APO Crest" />
+          <div className="flex justify-center items-center px-6 py-4">
+            <Image
+              src={imageBase + "Crest.jpg"}
+              alt="APO Crest"
+              width={350}
+              height={450}
+              className="w-full h-auto object-cover rounded-lg shadow-md"
+              sizes="(min-width: 640px) 20vw, 80vw"
+            />
+          </div>
           <div>
             <h3 className="text-3xl font-bold">History</h3>
             <p className="mt-2">
@@ -142,7 +169,7 @@ export default function IndexPage() {
               free of charge to the community. Click below to learn more about
               our chapter&apos;s unique history.
             </p>
-            <Link className="mt-2" href="/about/history">
+            <Link className="mt-2 inline-block text-primary hover:underline" href="/about/history">
               EZ&apos;s History
             </Link>
           </div>
@@ -153,7 +180,14 @@ export default function IndexPage() {
           </h3>
           <div className="grid sm:grid-cols-3 gap-6 my-8 text-left">
             <div className="col-span-2">
-              <Image src="/images/2024_Composite.jpg" alt="Chapter Composite" />
+              <Image
+                src="/images/2024_Composite.jpg"
+                alt="Chapter Composite"
+                width={1600}
+                height={1000}
+                className="w-full h-auto object-cover"
+                sizes="(min-width: 640px) 66vw, 100vw"
+              />
             </div>
             <div>
               <div>
@@ -166,7 +200,10 @@ export default function IndexPage() {
                   you are interested in joining us, or are unsure, feel free to
                   come to some of our events (non-committal).
                 </p>
-                <Link href="/recruitment" className="mt-2">
+                <Link
+                  href="/recruitment"
+                  className="mt-2 inline-block text-primary hover:underline"
+                >
                   Our Events!
                 </Link>
               </div>
@@ -179,7 +216,10 @@ export default function IndexPage() {
                   community. Click below to donate and see more information as
                   to where your money goes!
                 </p>
-                <Link href="/donate" className="mt-2">
+                <Link
+                  href="/donate"
+                  className="mt-2 inline-block text-primary hover:underline"
+                >
                   Donate Here
                 </Link>
               </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Link,
@@ -13,13 +15,13 @@ import {
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { ChevronDown, Logo } from "@/components/icons";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useAppCompatibleRouter } from "@/hooks/use-app-compatible-router";
 
 export function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
+  const router = useAppCompatibleRouter();
   const { auth } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
