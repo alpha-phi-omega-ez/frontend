@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import "@/styles/globals.css";
 import { AuthProvider } from "../context/AuthContext";
 import { AlertProvider } from "../context/AlertContext";
+import { PagesCompatibleRouterProvider } from "@/hooks/use-app-compatible-router";
 import DefaultLayout from "@/layouts/default";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -16,11 +17,13 @@ export default function App({ Component, pageProps }: AppProps) {
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
         <AuthProvider>
-          <DefaultLayout>
-            <AlertProvider>
-              <Component {...pageProps} />
-            </AlertProvider>
-          </DefaultLayout>
+          <AlertProvider>
+            <PagesCompatibleRouterProvider>
+              <DefaultLayout>
+                <Component {...pageProps} />
+              </DefaultLayout>
+            </PagesCompatibleRouterProvider>
+          </AlertProvider>
         </AuthProvider>
       </NextThemesProvider>
     </HeroUIProvider>

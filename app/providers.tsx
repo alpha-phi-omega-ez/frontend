@@ -7,6 +7,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 import { AlertProvider } from "@/context/AlertContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { AppCompatibleRouterProvider } from "@/hooks/use-app-compatible-router";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -19,7 +20,9 @@ export function Providers({ children }: ProvidersProps) {
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
         <AuthProvider>
-          <AlertProvider>{children}</AlertProvider>
+          <AlertProvider>
+            <AppCompatibleRouterProvider>{children}</AppCompatibleRouterProvider>
+          </AlertProvider>
         </AuthProvider>
       </NextThemesProvider>
     </HeroUIProvider>
