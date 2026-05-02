@@ -1,4 +1,5 @@
 export const DSKS: string[] = [
+  "Hannah Nardini",
   "Zachary Gordon",
   "Allie Labrecque",
   "Jadyn Baidoo-Davis",
