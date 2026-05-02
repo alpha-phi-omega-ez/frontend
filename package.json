@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@heroui/alert": "^2.2.19",
     "@heroui/card": "^2.2.18",
     "@heroui/react": "^2.7.9",
