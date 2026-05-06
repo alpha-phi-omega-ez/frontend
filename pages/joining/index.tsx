@@ -35,8 +35,8 @@ export default function JoiningPage() {
         </div>
         <div>
           <Image
-            src="/images/EOBW_Party.jpg"
-            alt="Funny picture with brothers and new members"
+            src="/images/Bob_Ross.jpg"
+            alt="Bob Ross paint night with brothers and new members"
           />
           <h2 className="text-2xl mt-4 mb-4 font-bold">
             What Happens During the 8-10 Weeks?
