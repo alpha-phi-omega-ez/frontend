@@ -10,7 +10,7 @@ export default function JoiningPage() {
       <div className="grid md:grid-cols-2 gap-6 mt-8 mb-8">
         <div>
           <Image
-            src="/images/2024_Brothers_Funny.jpg"
+            src="/images/Brothers_Funny.jpg"
             alt="Funny picture with brothers and new members"
           />
           <h2 className="text-2xl mt-4 mb-4 font-bold">New Member Process</h2>
@@ -35,7 +35,7 @@ export default function JoiningPage() {
         </div>
         <div>
           <Image
-            src="/images/semiformal.jpg"
+            src="/images/EOBW_Party.jpg"
             alt="Funny picture with brothers and new members"
           />
           <h2 className="text-2xl mt-4 mb-4 font-bold">

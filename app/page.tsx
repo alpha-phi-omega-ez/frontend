@@ -15,8 +15,8 @@ export default function AppHomePage() {
         <div className="grid md:grid-cols-3 mt-10 gap-4">
           <Card shadow="sm">
             <Image
-              src={imageBase + "USS_Slater_Service.jpg"}
-              alt="Service at the USS Slater"
+              src={imageBase + "Service.jpg"}
+              alt="NM Class service event"
               className="w-full object-cover h-[350px]"
               width={1200}
               height={700}
@@ -41,7 +41,7 @@ export default function AppHomePage() {
           <Card shadow="sm">
             <Image
               src={imageBase + "Leadership.jpg"}
-              alt="USS Slater"
+              alt="Tri-Sectionals"
               className="w-full object-cover  h-[350px]"
               width={1200}
               height={700}
