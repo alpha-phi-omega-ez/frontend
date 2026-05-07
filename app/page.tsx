@@ -181,7 +181,7 @@ export default function AppHomePage() {
           <div className="grid sm:grid-cols-3 gap-6 my-8 text-left">
             <div className="col-span-2">
               <Image
-                src="/images/2024_Composite.jpg"
+                src="/images/2025_Composite.jpg"
                 alt="Chapter Composite"
                 width={1600}
                 height={1000}

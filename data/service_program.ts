@@ -37,33 +37,33 @@ export const images = [
 
 export const service_stats: ServiceStats[] = [
   {
-    title: "Fall 2024 Service Stats",
-    average: "41.01",
-    hours: "2378+",
-    events: "107",
-    organizations: "45+",
+    title: "Fall 2025 Service Stats",
+    average: "36.66",
+    hours: "2163+",
+    events: "43",
+    organizations: "20+",
   },
   {
-    title: "Spring 2024 Service Stats",
-    average: "47.7",
-    hours: "1717+",
-    events: "65",
-    organizations: "22+",
+    title: "Spring 2026 Service Stats",
+    average: "31.35",
+    hours: "1476+",
+    events: "39",
+    organizations: "15+",
   },
 ];
 
 export const community_events: CommunityEvents[] = [
   {
-    title: "RPI Service Day 2024",
+    title: "RPI Service Day 2025",
     stats: [
       {
         icon: "PersonArmsUp",
-        value: "142",
+        value: "164",
         label: "Attendees",
       },
       {
         icon: "Hourglass",
-        value: "438+",
+        value: "472+",
         label: "Service Hours",
       },
       {
@@ -73,7 +73,7 @@ export const community_events: CommunityEvents[] = [
       },
       {
         icon: "Chart",
-        value: "53%",
+        value: "7%",
         label: "Increase in Attendance from last year",
       },
     ],
@@ -119,26 +119,26 @@ export const community_events: CommunityEvents[] = [
     ],
   },
   {
-    title: "RPI Service Day 2023",
+    title: "RPI Service Day 2024",
     stats: [
       {
         icon: "PersonArmsUp",
-        value: "93",
+        value: "142",
         label: "Attendees",
       },
       {
         icon: "Hourglass",
-        value: "349+",
+        value: "438+",
         label: "Service Hours",
       },
       {
         icon: "Door",
-        value: "5",
+        value: "8",
         label: "Organizations",
       },
       {
         icon: "Chart",
-        value: "40%",
+        value: "53%",
         label: "Increase in Attendance from last year",
       },
     ],

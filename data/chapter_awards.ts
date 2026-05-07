@@ -192,6 +192,8 @@ export const awards: Award[] = [
 ];
 
 export const award_images: AwardImage[] = [
+  { img: "/images/Nationals.jpg", alt: "2025 Awards"},
+  { img: "/images/Nowotny.jpg", alt: "2025 Nowotny"},  
   { img: "/images/APO_Awards.jpg", alt: "2023 Awards" },
   { img: "/images/2004_awards.jpg", alt: "2004 Awards" },
 ];
