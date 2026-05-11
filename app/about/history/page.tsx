@@ -1,4 +1,5 @@
-import { Card, CardBody, Image } from "@heroui/react";
+import Image from "next/image";
+import { Card, CardBody } from "@heroui/card";
 import { title } from "@/components/primitives";
 
 const history = [
@@ -40,11 +41,15 @@ export default function HistoryPage() {
         <Card key={index} className="pb-4 my-4">
           <CardBody className="overflow-visible">
             <div className="flex justify-center">
-              <Image
-                alt={item.title}
-                className="h-72 md:h-96 lg:h-[28rem] w-full object-cover object-center rounded-xl"
-                src={item.img}
-              />
+              <div className="relative h-72 md:h-96 lg:h-[28rem] w-full">
+                <Image
+                  alt={item.title}
+                  src={item.img}
+                  fill
+                  className="object-cover object-center rounded-xl"
+                  sizes="100vw"
+                />
+              </div>
             </div>
             <h2 className="font-bold text-2xl px-2 pt-4">{item.title}</h2>
             <p className="text-justify px-2 pt-2">{item.description}</p>
@@ -54,3 +59,4 @@ export default function HistoryPage() {
     </section>
   );
 }
+

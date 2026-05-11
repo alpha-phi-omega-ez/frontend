@@ -1,5 +1,6 @@
 import { title } from "@/components/primitives";
-import { Card, Link } from "@heroui/react";
+import { Card } from "@heroui/card";
+import Link from "next/link";
 
 const national_policies = [
   {
@@ -60,7 +61,7 @@ export default function PoliciesPage() {
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-4">
           {national_policies.map((policy, index) => (
             <Card key={index} className="p-4">
-              <Link href={policy.link} target="_blank">
+              <Link href={policy.link} target="_blank" rel="noreferrer">
                 {policy.title}
               </Link>
             </Card>
@@ -70,3 +71,4 @@ export default function PoliciesPage() {
     </section>
   );
 }
+
