@@ -15,9 +15,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({
   auth: { isAuthenticated: false },
-  login: () => {},
-  logout: () => {},
-  checkAuthStatus: async () => {},
+  login: () => { },
+  logout: () => { },
+  checkAuthStatus: async () => { },
 });
 
 interface AuthProviderProps {
@@ -28,16 +28,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [auth, setAuth] = useState({
     isAuthenticated: false,
   });
+  const backendServer = process.env.NEXT_PUBLIC_BACKEND_SERVER;
 
   const checkAuthStatus = async () => {
+    if (!backendServer) {
+      setAuth({ isAuthenticated: false });
+      return;
+    }
+
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/auth/check`,
-        {
-          method: "GET",
-          credentials: "include", // Include the HTTP-only cookie
-        }
-      );
+      const response = await fetch(`${backendServer}/auth/check`, {
+        method: "GET",
+        credentials: "include", // Include the HTTP-only cookie
+      });
 
       if (response.ok) {
         const data = await response.json();
