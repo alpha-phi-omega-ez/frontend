@@ -20,6 +20,7 @@ export default function AppHomePage() {
               className="w-full object-cover h-[350px]"
               width={1200}
               height={700}
+              loading="eager"
               sizes="(min-width: 768px) 33vw, 100vw"
             />
             <CardBody className="p-5">

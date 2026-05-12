@@ -1,4 +1,5 @@
-import { Card, CardBody, Image } from "@heroui/react";
+import Image from "next/image";
+import { Card, CardBody } from "@heroui/card";
 import { title } from "@/components/primitives";
 import { officers } from "@/data/officers";
 
@@ -15,13 +16,17 @@ export default function OfficersPage() {
       <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-5">
         {officers.map((item, index) => (
           <Card key={index} shadow="sm">
-            <Image
-              shadow="sm"
-              width="100%"
-              alt={item.position}
-              className="w-full object-cover h-[300px] rounded-t-lg"
-              src={item.img}
-            />
+            <div className="relative w-full h-[300px]">
+              <Image
+                alt={item.position}
+                src={item.img}
+                fill
+                className="object-cover rounded-t-lg"
+                loading={index < 3 ? "eager" : "lazy"}
+
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              />
+            </div>
             <CardBody className="p-3">
               <h2 className="text-2xl">{item.position}</h2>
               <h3 className="pt-2 pb-3 text-large">{item.name}</h3>
@@ -35,3 +40,4 @@ export default function OfficersPage() {
     </section>
   );
 }
+

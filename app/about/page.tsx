@@ -1,5 +1,6 @@
 import { title } from "@/components/primitives";
-import { Card, CardBody, Link } from "@heroui/react";
+import { Card, CardBody } from "@heroui/card";
+import Link from "next/link";
 
 const pages = [
   {
@@ -58,7 +59,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
           {pages.map((item, index) => (
             <Card key={index} shadow="sm">
-              <Link href={item.link}>
+              <Link href={item.link} className="block">
                 <CardBody>
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="mt-2">{item.description}</p>
@@ -71,3 +72,4 @@ export default function AboutPage() {
     </section>
   );
 }
+
