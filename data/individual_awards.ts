@@ -1,4 +1,5 @@
 export const DSKS: string[] = [
+  "Leonela Lorenzo",
   "Hannah Nardini",
   "Zachary Gordon",
   "Allie Labrecque",
@@ -107,6 +108,8 @@ export const DSKS: string[] = [
 ];
 
 export const OLAS: string[] = [
+  "Doña Roberts",
+  "Maitri Bijur",
   "Sam Innes",
   "Sarvesh Sundaram",
   "Yashasvi Kishore",
