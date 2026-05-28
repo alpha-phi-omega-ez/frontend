@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
+
 import { title } from "@/components/primitives";
 import { DSKS, OLAS } from "@/data/individual_awards";
+
+export const metadata: Metadata = {
+  title: "Individual Awards",
+};
 
 export default function IndividualAwardsPage() {
   return (
@@ -13,7 +19,7 @@ export default function IndividualAwardsPage() {
           tell our members just how much we appreciate their hard work.
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-8 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
         <div>
           <h2 className="text-lg font-semibold mb-3">
             Chapter Distinguished Service Key

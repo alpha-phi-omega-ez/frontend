@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
 import { title } from "@/components/primitives";
-import { Card, CardBody, Link } from "@heroui/react";
+import { Card, CardBody } from "@heroui/card";
+
+export const metadata: Metadata = {
+  title: "Awards",
+};
 
 const pages = [
   {
@@ -31,7 +38,7 @@ export default function AwardsPage() {
         <div className="grid md:grid-cols-2 gap-4 mb-5">
           {pages.map((item, index) => (
             <Card key={index} shadow="sm">
-              <Link href={item.link}>
+              <Link href={item.link} className="block">
                 <CardBody>
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="mt-2">{item.description}</p>
