@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+
 import { title } from "@/components/primitives";
-import { Image } from "@heroui/react";
 import { recipients } from "@/data/scholarship_recipients";
 
-export default function ServiceProgramPage() {
+export const metadata: Metadata = {
+  title: "Freshman Service Scholarship",
+};
+
+export default function ScholarshipPage() {
   return (
     <section className="justify-center pb-4 md:pb-6">
       <div className="text-center">
@@ -37,13 +43,15 @@ export default function ServiceProgramPage() {
                 <div key={recipient.name} className="text-center my-3">
                   {"img" in recipient ? (
                     <div className="flex justify-center">
-                      <Image
-                        src={recipient.img}
-                        alt={recipient.name}
-                        width={200}
-                        height={200}
-                        className="object-cover"
-                      />
+                      <div className="relative w-[200px] h-[200px] rounded-lg overflow-hidden">
+                        <Image
+                          src={recipient.img!}
+                          alt={recipient.name}
+                          fill
+                          sizes="200px"
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   ) : (
                     <div className="flex items-center justify-center h-48">
