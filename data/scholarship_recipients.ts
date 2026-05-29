@@ -10,6 +10,20 @@ interface Year {
 
 export const recipients: Year[] = [
   {
+    year: 2025,
+    recipients: [
+      {
+        name: "Hunter Balcom",
+      },
+      {
+        name: "Tanya Bachu",
+      },
+      {
+        name: "Justin Ng",
+      },
+    ],
+  },
+  {
     year: 2024,
     recipients: [
       {
