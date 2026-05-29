@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
 import {
   Calendar,
   Chart,
@@ -8,7 +12,6 @@ import {
   PersonHandRaise,
 } from "@/components/icons";
 import { title } from "@/components/primitives";
-import { Link, Image } from "@heroui/react";
 import {
   images,
   service_stats,
@@ -16,6 +19,10 @@ import {
   other_events,
 } from "@/data/service_program";
 import { IconSvgProps } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Service Program",
+};
 
 type IconWithTextProps = {
   Icon: React.FC<IconSvgProps>;
@@ -107,14 +114,15 @@ export default function ServiceProgramPage() {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
         {images.map((item, index) => (
-          <Image
-            key={index}
-            shadow="sm"
-            width="100%"
-            alt={item.alt}
-            className="w-full object-cover rounded-t-lg"
-            src={item.img}
-          />
+          <div key={index} className="relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-sm">
+            <Image
+              alt={item.alt}
+              src={item.img}
+              fill
+              sizes="(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         ))}
       </div>
 

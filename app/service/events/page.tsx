@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
+
 import { title } from "@/components/primitives";
 import DefaultCarousel from "@/components/carousel";
 import { Events } from "@/data/service_events";
+
+export const metadata: Metadata = {
+  title: "Large Service Events",
+};
 
 export default function ServiceEventsPage() {
   return (
