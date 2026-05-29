@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+
 import { title } from "@/components/primitives";
-import { Image } from "@heroui/react";
+
+export const metadata: Metadata = {
+  title: "Fellowship",
+};
 
 const images = [
   {
@@ -49,16 +55,16 @@ export default function FellowshipPage() {
         </p>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-6">
-        {images.map((item, index) => (
-          <Image
-            key={index}
-            shadow="sm"
-            width="100%"
-            height="100%"
-            alt={item.alt}
-            className="w-full object-cover rounded-t-lg"
-            src={item.img}
-          />
+        {images.map((item) => (
+          <div key={item.alt} className="relative w-full h-64 shadow-sm">
+            <Image
+              alt={item.alt}
+              src={item.img}
+              fill
+              className="object-cover rounded-t-lg"
+              sizes="(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw"
+            />
+          </div>
         ))}
       </div>
     </section>
