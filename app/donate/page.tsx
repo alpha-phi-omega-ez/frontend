@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
 import { title } from "@/components/primitives";
-import { Image, Link } from "@heroui/react";
+
+export const metadata: Metadata = {
+  title: "Donate",
+};
 
 const images = [
   {
@@ -42,7 +49,12 @@ export default function DonatePage() {
           The chapter is creating an endowment for long term financial
           stability. We are currently raising money to establish the endowment
           donations can be made through this{" "}
-          <Link href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=488.101&bledit=1&sort=1">
+          <Link
+            href="https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=6795&cid=15861&dids=488.101&bledit=1&sort=1"
+            className="text-primary hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             link
           </Link>
           . The goal of the endowment is to reduce the financial burden of
@@ -53,24 +65,32 @@ export default function DonatePage() {
         <h2 className="text-3xl font-bold mt-10">How to Donate?</h2>
         <p className="mt-4">
           You can donate through our{" "}
-          <Link href="https://www.paypal.com/paypalme/apoez">paypal</Link> or
-          via check. If using check, make sure to make it out to &quot;Alpha Phi
-          Omega Epsilon Zeta Chapter&quot;. Our mailing address is:
+          <Link
+            href="https://www.paypal.com/paypalme/apoez"
+            className="text-primary hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            paypal
+          </Link>{" "}
+          or via check. If using check, make sure to make it out to &quot;Alpha
+          Phi Omega Epsilon Zeta Chapter&quot;. Our mailing address is:
         </p>
         <p className="mt-2">C/O Rensselaer Union</p>
         <p className="mt-2">110 8th Street</p>
         <p className="mt-2">Troy, NY, 12180</p>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8 mb-8">
-        {images.map((item, index) => (
-          <Image
-            key={index}
-            shadow="sm"
-            width="100%"
-            alt={item.alt}
-            className="w-full object-cover rounded-t-lg"
-            src={item.img}
-          />
+        {images.map((item) => (
+          <div key={item.alt} className="relative w-full h-64 shadow-sm">
+            <Image
+              alt={item.alt}
+              src={item.img}
+              fill
+              className="object-cover rounded-t-lg"
+              sizes="(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw"
+            />
+          </div>
         ))}
       </div>
     </section>

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+
 import { title } from "@/components/primitives";
-import { Image } from "@heroui/react";
+
+export const metadata: Metadata = {
+  title: "Joining",
+};
 
 export default function JoiningPage() {
   return (
@@ -9,10 +15,15 @@ export default function JoiningPage() {
       </div>
       <div className="grid md:grid-cols-2 gap-6 mt-8 mb-8">
         <div>
-          <Image
-            src="/images/Brothers_Funny.jpg"
-            alt="Funny picture with brothers and new members"
-          />
+          <div className="relative w-full aspect-[4/3]">
+            <Image
+              src="/images/Brothers_Funny.jpg"
+              alt="Funny picture with brothers and new members"
+              fill
+              className="object-cover rounded-lg"
+              sizes="(min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <h2 className="text-2xl mt-4 mb-4 font-bold">New Member Process</h2>
           <p>
             As an individual who has expressed interest in becoming a brother,
@@ -34,10 +45,16 @@ export default function JoiningPage() {
           </p>
         </div>
         <div>
-          <Image
-            src="/images/Bob_Ross.jpg"
-            alt="Bob Ross paint night with brothers and new members"
-          />
+          <div className="relative w-full aspect-[4/3]">
+            <Image
+              src="/images/Bob_Ross.jpg"
+              alt="Bob Ross paint night with brothers and new members"
+              fill
+	      loading="eager"
+              className="object-cover rounded-lg"
+              sizes="(min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <h2 className="text-2xl mt-4 mb-4 font-bold">
             What Happens During the 8-10 Weeks?
           </h2>
