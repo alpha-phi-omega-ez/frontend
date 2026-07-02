@@ -27,7 +27,7 @@
     "eslint": "^9.25.1",
     "eslint-config-next": "16.2.9",
     "eslint-plugin-react": "^7.37.5",
-    "framer-motion": "^12.23.25",
+    "framer-motion": "^12.42.2",
     "intl-messageformat": "^11.2.9",
     "next": "16.2.9",
     "next-sitemap": "^4.2.3",
