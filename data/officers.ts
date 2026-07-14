@@ -18,7 +18,7 @@ export const officers: Officer[] = [
     img: "/images/officers/vps.jpg",
     description:
       "The Vice President of Service is in charge of leading the service program. They are a resource to assist brothers in charing events. They plan, execute, and prepare reports for service events, keeping track of participation in the service program. They are in charge of overseeing the annual scholarship for incoming Freshman and execution of large-scale service events such as RPI Service Day, BMOC, and Youth Service Day.",
-    name: "TJ Javoroski",
+    name: "Jane Javoroski",
   },
   {
     position: "Vice President of Membership",
