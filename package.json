@@ -21,7 +21,7 @@
     "@types/react-dom": "19.2.3",
     "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^8.51.0",
-    "@typescript-eslint/parser": "^8.31.1",
+    "@typescript-eslint/parser": "^8.64.0",
     "autoprefixer": "10.5.0",
     "clsx": "^2.1.1",
     "eslint": "^9.25.1",
