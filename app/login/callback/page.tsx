@@ -23,11 +23,15 @@ function exchangeToken(code: string): Promise<void> {
     },
     credentials: "include",
     body: JSON.stringify({ code }),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error("Failed to login");
-    }
-  });
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+    })
+    .finally(() => {
+      tokenExchanges.delete(code);
+    });
 
   tokenExchanges.set(code, request);
   return request;
