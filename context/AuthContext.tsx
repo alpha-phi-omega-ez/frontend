@@ -4,6 +4,8 @@ import React, {
   useContext,
   ReactNode,
   useEffect,
+  useCallback,
+  useMemo,
 } from "react";
 
 interface AuthContextType {
@@ -30,9 +32,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   });
   const backendServer = process.env.NEXT_PUBLIC_BACKEND_SERVER;
 
-  const checkAuthStatus = async () => {
+  const setAuthenticated = useCallback((isAuthenticated: boolean) => {
+    setAuth((prev) =>
+      prev.isAuthenticated === isAuthenticated ? prev : { isAuthenticated },
+    );
+  }, []);
+
+  const checkAuthStatus = useCallback(async () => {
     if (!backendServer) {
-      setAuth({ isAuthenticated: false });
+      setAuthenticated(false);
       return;
     }
 
@@ -44,30 +52,35 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (response.ok) {
         const data = await response.json();
-        setAuth({ isAuthenticated: data.authenticated });
+        setAuthenticated(Boolean(data.authenticated));
       } else {
-        setAuth({ isAuthenticated: false });
+        setAuthenticated(false);
       }
     } catch (error) {
       console.error("Error checking authentication:", error);
-      setAuth({ isAuthenticated: false });
+      setAuthenticated(false);
     }
-  };
+  }, [backendServer, setAuthenticated]);
 
   useEffect(() => {
     checkAuthStatus();
-  }, []);
+  }, [checkAuthStatus]);
 
-  const login = () => {
-    setAuth({ isAuthenticated: true });
-  };
+  const login = useCallback(() => {
+    setAuthenticated(true);
+  }, [setAuthenticated]);
 
-  const logout = () => {
-    setAuth({ isAuthenticated: false });
-  };
+  const logout = useCallback(() => {
+    setAuthenticated(false);
+  }, [setAuthenticated]);
+
+  const value = useMemo(
+    () => ({ auth, login, logout, checkAuthStatus }),
+    [auth, login, logout, checkAuthStatus],
+  );
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, checkAuthStatus }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

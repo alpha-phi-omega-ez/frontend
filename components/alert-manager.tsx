@@ -1,21 +1,20 @@
 import { Alert } from "@heroui/react";
 import { AlertType } from "@/types";
 
-// AlertManager component
 interface AlertManagerProps {
   alerts: {
-    id: number;
+    id: string;
     message: string;
     type: AlertType;
   }[];
   setAlerts: React.Dispatch<
-    React.SetStateAction<{ id: number; message: string; type: AlertType }[]>
+    React.SetStateAction<{ id: string; message: string; type: AlertType }[]>
   >;
 }
 
 export default function AlertManager({ alerts, setAlerts }: AlertManagerProps) {
-  const removeAlert = (index: number) => {
-    setAlerts((prev) => prev.filter((_, i) => i !== index));
+  const removeAlert = (id: string) => {
+    setAlerts((prev) => prev.filter((alert) => alert.id !== id));
   };
 
   return (
