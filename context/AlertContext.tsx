@@ -1,41 +1,59 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react";
 import AlertManager from "@/components/alert-manager";
 import { AlertType } from "@/types";
 
-// Create a context for the alerts
+export type AlertItem = {
+  id: string;
+  message: string;
+  type: AlertType;
+};
+
 interface AlertContextType {
   newAlert: (alert: string, type: AlertType) => void;
 }
 
-// Use a dummy function to avoid "unused parameter" warning
 const noop = () => {};
 
 const AlertContext = createContext<AlertContextType>({
   newAlert: noop,
 });
 
-interface AlertProviderrProps {
+interface AlertProviderProps {
   children: ReactNode;
 }
 
-export function AlertProvider({ children }: AlertProviderrProps) {
-  const [alerts, setAlerts] = useState<
-    {
-      id: number;
-      message: string;
-      type: AlertType;
-    }[]
-  >([]);
+let alertIdCounter = 0;
 
-  const newAlert = (alert: string, type: AlertType) => {
-    setAlerts((prev) => [
-      ...prev,
-      { id: Date.now(), message: alert, type: type },
-    ]);
-  };
+function createAlertId(): string {
+  alertIdCounter += 1;
+  return `alert-${alertIdCounter}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+export function AlertProvider({ children }: AlertProviderProps) {
+  const [alerts, setAlerts] = useState<AlertItem[]>([]);
+
+  const newAlert = useCallback((message: string, type: AlertType) => {
+    const id = createAlertId();
+    setAlerts((prev) => {
+      // Avoid stacking identical alerts from effect retries / race conditions.
+      if (prev.some((alert) => alert.message === message && alert.type === type)) {
+        return prev;
+      }
+      return [...prev, { id, message, type }];
+    });
+  }, []);
+
+  const value = useMemo(() => ({ newAlert }), [newAlert]);
 
   return (
-    <AlertContext.Provider value={{ newAlert }}>
+    <AlertContext.Provider value={value}>
       <div>
         {children}
         <AlertManager alerts={alerts} setAlerts={setAlerts} />
@@ -44,5 +62,4 @@ export function AlertProvider({ children }: AlertProviderrProps) {
   );
 }
 
-// Custom hook to use the setAlerts function
 export const useAlert = () => useContext(AlertContext);

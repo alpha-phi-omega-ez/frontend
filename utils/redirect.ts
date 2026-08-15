@@ -1,15 +1,25 @@
-export function getSafeRedirectPath(path: string | null): string {
+export function getSafeRedirectPath(
+  path: string | null,
+  origin?: string,
+): string {
   if (!path) {
     return "/";
   }
 
+  const baseOrigin =
+    origin ??
+    (typeof window !== "undefined" ? window.location.origin : undefined);
+
+  if (!baseOrigin) {
+    return "/";
+  }
+
   try {
-    // Use the browser's URL parser to handle the path.
-    // We provide the current window's origin as the base.
-    const targetUrl = new URL(path, window.location.origin);
+    // Use the URL parser to handle the path, with a known origin as the base.
+    const targetUrl = new URL(path, baseOrigin);
 
     // Ensure the constructed URL's origin is the same as the app's origin.
-    if (targetUrl.origin === window.location.origin) {
+    if (targetUrl.origin === new URL(baseOrigin).origin) {
       // Return the relative path and any search params.
       return targetUrl.pathname + targetUrl.search;
     }
