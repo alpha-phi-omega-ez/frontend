@@ -57,7 +57,7 @@ export function LogoutClient({ redirectPath }: LogoutClientProps) {
         if (cancelled) {
           return;
         }
-        console.error("Error fetching token:", fetchError);
+        console.error("Error logging out:", fetchError);
         newAlert("Failed to logout", "danger");
         setError(true);
       });
