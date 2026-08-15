@@ -1,14 +1,30 @@
 import { cookies, headers } from "next/headers";
 
+function firstHeaderValue(value: string | null): string | null {
+  if (!value) {
+    return null;
+  }
+
+  return value.split(",")[0]?.trim() || null;
+}
+
 export async function getRequestOrigin(): Promise<string> {
+  const configured = process.env.SITE_URL?.trim().replace(/\/$/, "");
+  if (configured) {
+    return configured;
+  }
+
   const headersList = await headers();
-  const host = headersList.get("host");
+  const host =
+    firstHeaderValue(headersList.get("host")) ??
+    firstHeaderValue(headersList.get("x-forwarded-host"));
 
   if (!host) {
     return "https://apoez.org";
   }
 
-  const protocol = headersList.get("x-forwarded-proto") ?? "https";
+  const protocol =
+    firstHeaderValue(headersList.get("x-forwarded-proto")) ?? "https";
   return `${protocol}://${host}`;
 }
 
