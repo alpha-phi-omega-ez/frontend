@@ -19,8 +19,13 @@ async function fetchBacktestData<T>(path: string): Promise<T> {
     throw new Error(`Failed to fetch ${path}: ${response.status}`);
   }
 
-  const json = (await response.json()) as { data: T };
-  return json.data;
+  const json = (await response.json()) as { data?: unknown };
+
+  if (!Array.isArray(json.data)) {
+    throw new Error(`Invalid data for ${path}: expected an array`);
+  }
+
+  return json.data as T;
 }
 
 export async function getCourseCodes(): Promise<string[]> {
