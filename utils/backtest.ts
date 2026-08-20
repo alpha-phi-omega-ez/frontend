@@ -1,6 +1,7 @@
-import { connection } from "next/server";
-
 import type { Backtest, Course } from "@/types/backtest";
+
+/** Backend refresh runs every 2h (9, 11, 13, 15, 17, 19). Cache for 1h. */
+const BACKTEST_REVALIDATE_SECONDS = 60 * 60;
 
 function getBackendServer(): string {
   const backendServer = process.env.NEXT_PUBLIC_BACKEND_SERVER;
@@ -11,9 +12,9 @@ function getBackendServer(): string {
 }
 
 async function fetchBacktestData<T>(path: string): Promise<T> {
-  await connection();
-
-  const response = await fetch(`${getBackendServer()}${path}`);
+  const response = await fetch(`${getBackendServer()}${path}`, {
+    next: { revalidate: BACKTEST_REVALIDATE_SECONDS },
+  });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch ${path}: ${response.status}`);
