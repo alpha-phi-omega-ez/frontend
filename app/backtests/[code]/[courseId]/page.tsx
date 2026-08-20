@@ -22,39 +22,39 @@ export async function generateMetadata({
   };
 }
 
-async function BacktestsSection({
+async function BreadcrumbsSection({
   code,
   courseId,
 }: {
   code: string;
   courseId: string;
 }) {
-  const [backtests, courses] = await Promise.all([
-    getBacktests(courseId),
-    getCourses(code),
-  ]);
-  const course = courses.find((item) => item.id === courseId);
+  let courseName = "This class";
 
-  return (
-    <>
-      <BacktestsBreadcrumbs
-        code={code}
-        courseName={course?.name ?? courseId}
-      />
-      <Backtests backtests={backtests} />
-    </>
-  );
+  try {
+    const courses = await getCourses(code);
+    const course = courses.find((item) => item.id === courseId);
+    if (course?.name) {
+      courseName = course.name;
+    }
+  } catch {
+    // Keep the placeholder if courses fail; backtests can still load.
+  }
+
+  return <BacktestsBreadcrumbs code={code} courseName={courseName} />;
+}
+
+async function BacktestsSection({ courseId }: { courseId: string }) {
+  const backtests = await getBacktests(courseId);
+  return <Backtests backtests={backtests} />;
 }
 
 function BacktestsFallback() {
   return (
-    <div className="animate-pulse space-y-6">
-      <div className="h-10 w-96 rounded-md bg-default-200" />
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="h-32 rounded-lg bg-default-200" />
-        ))}
-      </div>
+    <div className="animate-pulse grid grid-cols-2 gap-5 sm:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div key={index} className="h-32 rounded-lg bg-default-200" />
+      ))}
     </div>
   );
 }
@@ -69,8 +69,15 @@ export default async function CourseBacktestsPage({
       <div className="text-center mb-6">
         <h1 className={title()}>Backtests</h1>
       </div>
+      <Suspense
+        fallback={
+          <BacktestsBreadcrumbs code={code} courseName="This class" />
+        }
+      >
+        <BreadcrumbsSection code={code} courseId={courseId} />
+      </Suspense>
       <Suspense fallback={<BacktestsFallback />}>
-        <BacktestsSection code={code} courseId={courseId} />
+        <BacktestsSection courseId={courseId} />
       </Suspense>
     </section>
   );
