@@ -1,16 +1,20 @@
+"use client";
+
+import Link from "next/link";
 import { Card, CardBody } from "@heroui/react";
 
 interface SelectableCardProps {
   title: string;
-  onPress: () => void;
+  href: string;
 }
 
-export function SelectableCard({ title, onPress }: SelectableCardProps) {
+export function SelectableCard({ title, href }: SelectableCardProps) {
   return (
     <Card
+      as={Link}
+      href={href}
       isPressable
       isHoverable
-      onPress={onPress}
       style={{ cursor: "pointer", width: "100%" }}
     >
       <CardBody>
