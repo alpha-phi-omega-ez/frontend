@@ -11,7 +11,7 @@ function getBackendServer(): string {
   return backendServer;
 }
 
-async function fetchBacktestData<T>(path: string): Promise<T> {
+async function fetchBacktestData<T extends unknown[]>(path: string): Promise<T> {
   const response = await fetch(`${getBackendServer()}${path}`, {
     next: { revalidate: BACKTEST_REVALIDATE_SECONDS },
   });
