@@ -11,13 +11,8 @@ export const metadata: Metadata = {
 };
 
 async function CourseCodesSection() {
-  try {
-    const courseCodes = await getCourseCodes();
-    return <CourseCodes courseCodes={courseCodes} />;
-  } catch (error) {
-    console.error("Failed to load course codes", error);
-    return null;
-  }
+  const courseCodes = await getCourseCodes();
+  return <CourseCodes courseCodes={courseCodes} />;
 }
 
 function CourseCodesFallback() {
