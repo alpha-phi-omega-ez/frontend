@@ -1,8 +1,10 @@
-import { title } from "@/components/primitives";
+"use client";
+
 import { useEffect, useState, useRef } from "react";
+import { useDisclosure } from "@heroui/react";
+import { title } from "@/components/primitives";
 import Error from "@/components/error";
 import { useAuth } from "@/context/AuthContext";
-import { useDisclosure } from "@heroui/react";
 import {
   fetchLoanerTech,
   checkLoanerTechAvailablility,
@@ -12,7 +14,7 @@ import CheckInCheckOutModalContent from "@/components/loanertech/modals";
 import LoanerTechSelector from "@/components/loanertech/selector";
 import { LoanerTechType } from "@/types/loanertech";
 
-export default function LoanerTechPage() {
+export default function LoanerTechClient() {
   const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
