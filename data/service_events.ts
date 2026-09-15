@@ -81,8 +81,8 @@ export const Events: Event[] = [
     title: "RPI Service Day",
     description:
       "Assist in helping out service organizations with tasks such as cleaning, organizing, and painting. We will have five different service projects, including upkeeping the Sanctuary for Independent Media facilities, can sorting with Mohawk Hudson Humane Society, painting at Northern Rivers, trail maintenance and upkeep at Frear Park, and Card Making on campus!",
-    date: "Planned for: Oct 5th, 2024",
-    timing: "9:00 am to 2:30 pm",
+    date: "Planned for: Sep 26th, 2026",
+    timing: "10:00 am to 3:00 pm",
     location: "Meet at the Union Horseshoe",
     images: ServiceDayImages,
   },
