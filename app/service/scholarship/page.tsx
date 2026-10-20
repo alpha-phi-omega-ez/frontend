@@ -16,20 +16,22 @@ export default function ScholarshipPage() {
         <p className="mt-5"></p>
       </div>
       <p className="mb-4">
-        The APO Community Service Award was started in the 1975-76 school year
-        at RPI to celebrate the Institute&apos;s 150th anniversary. The award is
-        given to incoming freshman students who had shown exemplary service and
-        extracurricular activities in High School. 1995 was the last time the
-        scholarship was awarded for almost ten years, due to the difficulty in
-        obtaining and going through hundreds or thousands of RPI Admissions
-        records. In 2003, the scholarship was started again by brother Alyssa
-        Pasquale and restructured as an essay contest. A committee of brothers
-        decide which of the four essays are the best, and each winner is awarded
-        a sum of $650.
+        Every year, RPI's chapter of Alpha Phi Omega recognizes first-year 
+        students with exemplary backgrounds in service and leadership with 
+        the Freshman Community Service Award. The award was started in the 
+        1975-76 school year at RPI to celebrate the Institute's 150th anniversary. 
+        1995 was the last time the scholarship was awarded for almost ten years, 
+        due to the difficulty in obtaining and going through hundreds or thousands 
+        of RPI Admissions records.  In 2003, the scholarship was started again by 
+        brother Alyssa Pasquale and restructured as an essay contest. A committee 
+        of brothers decide which of the four essays are the best, and each winner is awarded a sum of $875.
       </p>
       <p>
-        Our Fall 2024 applications have closed! This page will be updated when
-        details for the Fall 2025 scholarship opens.
+        Applications for the Fall 2026 Award are open! Submit here: 
+        <a href=" https://forms.gle/8obeS5FyJWxmt3Dk8" target="_blank" rel="noopener noreferrer">
+      Google Form
+    </a>
+
       </p>
       <div>
         <h2 className="text-4xl font-bold mt-10 text-center">
