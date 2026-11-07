@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalFooter,
   Button,
+  Form,
   Select,
   SelectItem,
   DatePicker,
@@ -102,9 +103,10 @@ export default function EditLAFModal({
     >
       <ModalContent>
         {(onClose) => (
-          <form
+          <Form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-1 flex-col gap-3 px-6 py-2"
+            validationBehavior="aria"
+            className="flex flex-1 flex-col items-stretch gap-3 px-6 py-2"
           >
             <ModalHeader>
               Edit LAF Item{" #"}
@@ -205,7 +207,7 @@ export default function EditLAFModal({
                 Edit
               </Button>
             </ModalFooter>
-          </form>
+          </Form>
         )}
       </ModalContent>
     </Modal>
