@@ -1,4 +1,13 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input } from "@heroui/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Form,
+  Input,
+} from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { CreateLoanerTechFormData } from "@/types/loanertech";
 import { useAlert } from "@/context/AlertContext";
@@ -57,7 +66,11 @@ export function CreateLoanerTechModal({ isOpen, onOpenChange }: CreateLoanerTech
         >
             <ModalContent>
                 {(onClose) => (
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <Form
+                        onSubmit={handleSubmit(onSubmit)}
+                        validationBehavior="aria"
+                        className="block items-stretch gap-0"
+                    >
                         <ModalHeader>
                             <h1>Create Loaner Tech</h1>
                         </ModalHeader>
@@ -81,7 +94,7 @@ export function CreateLoanerTechModal({ isOpen, onOpenChange }: CreateLoanerTech
                             </ModalFooter>
 
                         </ModalBody>
-                    </form>
+                    </Form>
                 )}
             </ModalContent>
         </Modal >
