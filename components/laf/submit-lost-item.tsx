@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import {
   Button,
+  Form,
   Select,
   SelectItem,
   Textarea,
@@ -205,9 +206,10 @@ export default function FoundItemForm({
 
   return (
     <>
-      <form
+      <Form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-1 flex-col gap-3 px-6 py-2"
+        validationBehavior="aria"
+        className="flex flex-1 flex-col items-stretch gap-3 px-6 py-2"
       >
         <div className="flex flex-row gap-3">
           {/* Type Field */}
@@ -295,7 +297,7 @@ export default function FoundItemForm({
         <Button color="primary" type="submit">
           Submit
         </Button>
-      </form>
+      </Form>
       {state.items && state.items.length > 0 && (
         <>
           <h2 className="text-center mt-5 text-3xl">

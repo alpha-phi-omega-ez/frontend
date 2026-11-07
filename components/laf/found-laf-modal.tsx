@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalFooter,
   Button,
+  Form,
   Input,
   Chip,
 } from "@heroui/react";
@@ -110,9 +111,10 @@ export default function FoundLAFModal({
     >
       <ModalContent>
         {(onClose) => (
-          <form
+          <Form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-1 flex-col gap-3 px-6 py-2"
+            validationBehavior="aria"
+            className="flex flex-1 flex-col items-stretch gap-3 px-6 py-2"
           >
             <ModalHeader>
               Found LAF Item{" #"}
@@ -174,7 +176,7 @@ export default function FoundLAFModal({
                 </Button>
               </div>
             </ModalFooter>
-          </form>
+          </Form>
         )}
       </ModalContent>
     </Modal>

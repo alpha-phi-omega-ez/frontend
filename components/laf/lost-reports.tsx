@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import {
   Chip,
+  Form,
   Select,
   SelectItem,
   Textarea,
@@ -155,7 +156,10 @@ export default function LostReports({
 
   return (
     <>
-      <form className="flex flex-1 flex-col gap-3 px-6 py-2">
+      <Form
+        validationBehavior="aria"
+        className="flex flex-1 flex-col items-stretch gap-3 px-6 py-2"
+      >
         <div className="flex flex-row gap-3">
           {/* Type Field */}
           <Select
@@ -295,7 +299,7 @@ export default function LostReports({
           isInvalid={!!errors.description}
           onChange={(e) => dispatch({ type: "SET_DEBOUNCE_VALUE", payload: e.target.value })}
         />
-      </form>
+      </Form>
       <LostReportItems
         items={state.items}
         lafTypes={lafTypes}

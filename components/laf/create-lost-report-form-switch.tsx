@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import {
   Button,
   Chip,
+  Form,
   Select,
   SelectItem,
   Input,
@@ -85,9 +86,10 @@ export default function CreateLostReportFormSwitch({
   };
 
   return (
-    <form
+    <Form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-1 flex-col gap-3 px-6 py-2"
+      validationBehavior="aria"
+      className="flex flex-1 flex-col items-stretch gap-3 px-6 py-2"
     >
       <div className="flex flex-row gap-3">
         {/* Name Field */}
@@ -225,6 +227,6 @@ export default function CreateLostReportFormSwitch({
       <Button color="primary" type="submit">
         Submit
       </Button>
-    </form>
+    </Form>
   );
 }

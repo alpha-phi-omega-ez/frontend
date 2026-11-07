@@ -1,4 +1,5 @@
-import { title } from "@/components/primitives";
+"use client";
+
 import { useState, useEffect } from "react";
 import Error from "@/components/error";
 import LAFSelector from "@/components/laf/selector";
@@ -12,24 +13,17 @@ import { useAuth } from "@/context/AuthContext";
 import { ViewState } from "@/types/laf";
 import { fetchNewLostReports } from "@/utils/laf";
 
-interface LAFPageProps {
+interface LAFClientProps {
   lafTypes: string[];
   lafLocations: string[];
 }
 
-export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
+export default function LAFClient({ lafTypes, lafLocations }: LAFClientProps) {
   const { auth, checkAuthStatus } = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
   const [view, setView] = useState<ViewState>("Submit Lost Item");
-  const [loading, setLoading] = useState(true);
   const [newLostReports, setNewLostReports] = useState(0);
-
-  useEffect(() => {
-    if (lafTypes && lafLocations) {
-      setLoading(false);
-    }
-  }, [lafTypes, lafLocations]);
 
   useEffect(() => {
     checkAuthStatus();
@@ -48,11 +42,8 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
   > | null>(null);
 
   return (
-    <section className="justify-center pb-4 md:pb-6">
-      <div className="text-center mb-6">
-        <h1 className={title()}>Lost & Found</h1>
-      </div>
-      {!loading && isAuthenticated && (
+    <>
+      {isAuthenticated && (
         <>
           <LAFSelector
             view={view}
@@ -123,7 +114,7 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
           </div>
         </>
       )}
-      {!loading && !isAuthenticated && (
+      {!isAuthenticated && (
         <>
           <p className="w-2/3 mx-auto mb-8 text-justify">
             Submit a lost report for any items you have lost and provide contact
@@ -147,18 +138,6 @@ export default function LAFPage({ lafTypes, lafLocations }: LAFPageProps) {
       >
         <Error title="Failed to load Lost and Found" />
       </div>
-    </section>
+    </>
   );
-}
-
-export async function getServerSideProps() {
-  const lafTypes = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/types/`
-  ).then((res) => res.json());
-  const lafLocations = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_SERVER}/laf/locations/`
-  ).then((res) => res.json());
-  return {
-    props: { lafTypes: lafTypes["data"], lafLocations: lafLocations["data"] },
-  };
 }
