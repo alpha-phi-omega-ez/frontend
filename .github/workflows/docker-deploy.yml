@@ -4,7 +4,7 @@ name: Deploy Docker Image
 # Runs weekly on Sunday at 4:05
 on:
   schedule:
-    - cron: '5 4 * * 0'
+    - cron: '5 4 * * 0,3'
   push:
     branches:
       - main
