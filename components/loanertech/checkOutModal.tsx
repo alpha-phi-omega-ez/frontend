@@ -1,4 +1,10 @@
-import { Modal, ModalBody, ModalContent, Input } from "@heroui/react";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  Form,
+  Input,
+} from "@heroui/react";
 import { fetchLoanerTech } from "@/utils/loanertech";
 import {
   LoanerTechModalFooter,
@@ -107,7 +113,11 @@ export default function CheckOutModalContent({
     >
       <ModalContent>
         {(onClose) => (
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            validationBehavior="aria"
+            className="block items-stretch gap-0"
+          >
             <LoanerTechModalHeader
               title="Check Out"
               selectedCards={selectedCards}
@@ -170,7 +180,7 @@ export default function CheckOutModalContent({
               />
             </ModalBody>
             <LoanerTechModalFooter onClose={onClose} />
-          </form>
+          </Form>
         )}
       </ModalContent>
     </Modal>
