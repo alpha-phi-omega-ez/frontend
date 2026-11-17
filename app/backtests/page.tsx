@@ -31,6 +31,11 @@ export default function BacktestsPage() {
       <div className="text-center mb-6">
         <h1 className={title()}>Backtests</h1>
       </div>
+      <p className="mb-6">
+        To access our backtest system, come to our office, Union 3420, Monday-Friday between 10:00 am and 5:00 pm. 
+        You may take photos of exams. Photos taken must be for personal use only. We do not allow posting, distributing, 
+        or profiting in any way from photos taken of our exam catalog.
+      </p>
       <BacktestsBreadcrumbs />
       <Suspense fallback={<CourseCodesFallback />}>
         <CourseCodesSection />
